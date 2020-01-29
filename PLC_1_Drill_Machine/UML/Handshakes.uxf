@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>133</x>
+      <y>378</y>
+      <w>126</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+fbConveyor1
+--
+
+  PartAvail_Next
+
+--
+
+  ReadyToRecieve_Next
+
+--
+
+  PartAvail_Prev
+
+--
+
+  ReadyToRecieve_Prev
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>406</y>
+      <w>98</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=[&gt;]-[&gt;]
+hoPartAv</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>252</x>
+      <y>441</y>
+      <w>98</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=[&lt;]-[&lt;]
+hiRdyToRec</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>14</x>
+      <y>483</y>
+      <w>133</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=[&gt;]-[&gt;]
+PRG_Simulator
+bAddPartOnConvIn
+</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>14</x>
+      <y>518</y>
+      <w>133</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=[&lt;]-[&lt;]
+TRUE</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>336</x>
+      <y>301</y>
+      <w>126</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+fbManipulator1
+--
+
+  PartAvail_Next
+
+--
+
+  ReadyToRecieve_Next
+
+--
+
+  PartAvail_Prev
+
+--
+
+  ReadyToRecieve_Prev
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>532</x>
+      <y>224</y>
+      <w>126</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+fbDrill
+--
+
+  PartAvail_Next
+
+--
+
+  ReadyToRecieve_Next
+
+--
+
+  PartAvail_Prev
+
+--
+
+  ReadyToRecieve_Prev
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>735</x>
+      <y>154</y>
+      <w>126</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+fbManipulator2
+--
+
+  PartAvail_Next
+
+--
+
+  ReadyToRecieve_Next
+
+--
+
+  PartAvail_Prev
+
+--
+
+  ReadyToRecieve_Prev
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>455</x>
+      <y>329</y>
+      <w>91</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=[&gt;]-[&gt;]
+hoPartAv</panel_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>455</x>
+      <y>364</y>
+      <w>91</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=[&lt;]-[&lt;]
+hiRdyToRec</panel_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>651</x>
+      <y>252</y>
+      <w>98</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=[&gt;]-[&gt;]
+hoPartAv</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>651</x>
+      <y>287</y>
+      <w>98</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=[&lt;]-[&lt;]
+hiRdyToRec</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>938</x>
+      <y>77</y>
+      <w>126</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>symbol=component
+fbConveyor2
+--
+
+  PartAvail_Next
+
+--
+
+  ReadyToRecieve_Next
+
+--
+
+  PartAvail_Prev
+
+--
+
+  ReadyToRecieve_Prev
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>854</x>
+      <y>182</y>
+      <w>98</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=[&gt;]-[&gt;]
+hoPartAv</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>854</x>
+      <y>217</y>
+      <w>98</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=[&lt;]-[&lt;]
+hiRdyToRec</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1057</x>
+      <y>140</y>
+      <w>77</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=[&lt;]-[&lt;]
+TRUE</panel_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1057</x>
+      <y>105</y>
+      <w>77</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=[&gt;]-[&gt;]
+FALSE
+</panel_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+</diagram>
