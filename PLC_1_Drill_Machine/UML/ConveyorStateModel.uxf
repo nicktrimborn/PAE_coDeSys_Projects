@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>11</zoom_level>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>451</x>
+      <y>187</y>
+      <w>165</w>
+      <h>121</h>
+    </coordinates>
+    <panel_attributes>NotAvalibleNotReady
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>341</x>
+      <y>77</y>
+      <w>22</w>
+      <h>22</h>
+    </coordinates>
+    <panel_attributes>type=initial</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>341</x>
+      <y>77</y>
+      <w>176</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>781</x>
+      <y>671</y>
+      <w>165</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>TransportFinished
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>770</x>
+      <y>418</y>
+      <w>165</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>MachineReady
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>165</x>
+      <y>418</y>
+      <w>165</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>PartAvailable
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>462</x>
+      <y>418</y>
+      <w>165</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>AvalibleAndReady
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>451</x>
+      <y>671</y>
+      <w>165</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Transporting
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>154</x>
+      <y>671</y>
+      <w>165</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>TransportStopped
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>605</x>
+      <y>264</y>
+      <w>264</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+MachineReady</panel_attributes>
+    <additional_attributes>10.0;20.0;220.0;20.0;220.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>253</x>
+      <y>264</y>
+      <w>220</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+hiPartAvail_Prev</panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>616</x>
+      <y>451</y>
+      <w>176</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+hiPartAvail_Prev</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>319</x>
+      <y>451</y>
+      <w>165</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+MachineReady</panel_attributes>
+    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>528</x>
+      <y>517</y>
+      <w>132</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+startTransport</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>308</x>
+      <y>704</y>
+      <w>165</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+StopTransport</panel_attributes>
+    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>0</x>
+      <y>198</y>
+      <w>473</w>
+      <h>561</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=TransportFinished</panel_attributes>
+    <additional_attributes>140.0;480.0;100.0;480.0;100.0;10.0;410.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>605</x>
+      <y>231</y>
+      <w>308</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+NOT bMachineReady</panel_attributes>
+    <additional_attributes>10.0;20.0;260.0;20.0;260.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>198</x>
+      <y>231</y>
+      <w>275</w>
+      <h>209</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+NOT hiPartAvail_Prev</panel_attributes>
+    <additional_attributes>230.0;20.0;10.0;20.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>605</x>
+      <y>704</y>
+      <w>198</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+PartPresent</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>605</x>
+      <y>198</y>
+      <w>506</w>
+      <h>561</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=TransportFinished</panel_attributes>
+    <additional_attributes>310.0;480.0;360.0;480.0;360.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
