@@ -1,0 +1,161 @@
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/FBs' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK FB_SimpleManager
+(*Simple manager following emergency and run/stop state. Outputs can be used to enable user's processes and programs.
+Niko Siltala niko.siltala@tuni.fi, 
+Tampere University, ENS, ATME.
+9.10.2019 v1 *)
+VAR_INPUT
+	bEmergencyClear	: BOOL;	(*Emergency cleared*)
+	bReset				: BOOL;	(*Reset signal*)
+	bStart				: BOOL;	(*Start signal*)
+	bStop				: BOOL;	(*Stop signal*)
+END_VAR
+VAR_OUTPUT
+	oEmergencyClear	: BOOL;	(*Emergency is cleared*)
+	oRun				: BOOL;	(*System can be started and running*)
+END_VAR
+VAR
+	rsEmergency	: RS;
+	rsRunning		: RS;
+	bResetRequired	: BOOL := TRUE;	(*reset is required*)
+END_VAR
+(* @END_DECLARATION := '0' *)
+(*Defaults*)
+
+(*Reset done*)
+IF bReset THEN
+	bResetRequired	:= FALSE;
+END_IF;
+
+(*Emergency active or cleared?*)
+rsEmergency(
+	SET:= bReset,
+	RESET1:= NOT bEmergencyClear,
+	Q1=> oEmergencyClear );
+
+(*Running or stop?*)
+rsRunning(
+	SET:= bStart,
+	RESET1:= (NOT oEmergencyClear) OR bStop OR bResetRequired,
+	Q1=> oRun );
+
+END_FUNCTION_BLOCK
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/FBs' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK FB_SimpleModeManager
+(*Simple manager following emergency and run/stop state. Implemented through state model.
+Includes manager for two control modes. Outputs can be used to enable user's processes and programs.
+Niko Siltala niko.siltala@tuni.fi, 
+Tampere University, ENS, ATME.
+9.10.2019 v1 *)
+VAR_INPUT
+	bEmergencyClear	: BOOL;	(*Emergency cleared*)
+	bReset				: BOOL;	(*Reset signal*)
+	bStart				: BOOL;	(*Start signal*)
+	bStop				: BOOL;	(*Stop signal*)
+	bSelectMode_Auto	: BOOL;	(*Mode select request : Auto *)
+	bSelectMode_Manu	: BOOL;	(*Mode select request : Manual *)
+END_VAR
+VAR_OUTPUT
+	oEmergencyClear	: BOOL;	(*Emergency is cleared*)
+	oRun				: BOOL;	(*System can be started and running*)
+	oModeAct_Auto		: BOOL;	(*Mode active : Auto *)
+	oModeAct_Manu	: BOOL;	(*Mode active : Manual *)
+	oModeAct			: EN_Mode;	(*Current active mode*)
+END_VAR
+VAR
+	modePrev		: EN_Mode;			(*Mode at previous PLC cycle*)
+	bModeChanged	: BOOL;			(*Mode has changed*)
+	bResetRequired	: BOOL := TRUE;	(*reset is required*)
+	iState			: INT := 0;			(*State*)
+END_VAR
+(* @END_DECLARATION := '0' *)
+(*Default values for each PLC cycle*)
+bModeChanged := FALSE;
+oModeAct_Auto := FALSE;
+oModeAct_Manu := FALSE;
+
+(****** SECTION: INPUTS PROCESSING ******)
+(*Update current control mode*)
+IF bSelectMode_Auto THEN
+	oModeAct := eMode_Auto;
+ELSIF bSelectMode_Manu THEN
+	oModeAct := eMode_Manual;
+END_IF;
+
+(*Observe mode change request*)
+IF oModeAct <> modePrev THEN
+	modePrev := oModeAct;
+	bModeChanged := TRUE;
+	bResetRequired	:= TRUE;
+END_IF;
+
+(****** SECTION: STATE MODEL ******)
+(*Emergency is active. Force state to emergency active*)
+IF NOT bEmergencyClear THEN
+	iState := 0;
+END_IF;
+
+(*State model*)
+CASE iState  OF
+0:	(*Emergency active*)
+	IF bReset AND bEmergencyClear THEN
+		iState := 10;
+	END_IF;
+
+10: (*Reset required *)
+	IF bReset THEN
+		iState := 12;
+		bResetRequired	:= FALSE;
+	END_IF;
+
+12:	(*Stopped*)
+	IF bResetRequired THEN
+		iState := 10;
+	ELSIF bStart AND NOT bStop THEN
+		iState := 20;
+	END_IF;
+
+20: (*Run / Running*)
+	IF bResetRequired OR bModeChanged THEN
+		iState := 10;
+	ELSIF bStop THEN
+		iState := 12;
+	END_IF;
+
+ELSE	(*Default state*)
+	iState := 0;
+END_CASE;
+
+(****** SECTION: OUTPUTS ******)
+(*Set manager outputs according the state*)
+oEmergencyClear := (iState>0);
+oRun := (iState>=20);
+
+(*Update binary outputs for Control Modes*)
+CASE oModeAct  OF
+eMode_Auto:
+	oModeAct_Auto:= TRUE;
+eMode_Manual:
+	oModeAct_Manu := TRUE;
+END_CASE;
+END_FUNCTION_BLOCK
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+TYPE EN_Mode :
+	(eMode_Unknown := 0,
+	eMode_Auto := 1,
+	eMode_Manual );
+END_TYPE
+(* @END_DECLARATION := '0' *)

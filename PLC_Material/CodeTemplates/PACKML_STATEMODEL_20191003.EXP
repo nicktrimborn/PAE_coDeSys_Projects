@@ -1,0 +1,2139 @@
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/Examples' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK FB_SFC_Example
+VAR_INPUT
+	bReset		: BOOL;	(*Reset Request*)
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	bLocalReset	: BOOL;	(*Performs local reset*)
+	SFCReset 	: BOOL;	(*Resets the execution of SFC to init once this SFCFlag is set true *)
+END_VAR
+(* @END_DECLARATION := '0' *)
+
+INITIAL_STEP Init:
+SFCReset := FALSE;
+bLocalReset	:= FALSE;
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+TRANSITION FROM Init TO (WaitForSFCReset,MainLoop,UpdateIOs):= 
+NOT bReset
+
+
+END_TRANSITION
+STEP WaitForSFCReset:
+
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+STEP MainLoop:
+
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+TRANSITION FROM MainLoop TO MainLoop:= 
+TRUE
+
+
+END_TRANSITION
+STEP UpdateIOs:
+
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+TRANSITION FROM UpdateIOs TO UpdateIOs:= 
+FALSE
+
+
+END_TRANSITION
+TRANSITION FROM (WaitForSFCReset) TO SFCResetStep:= 
+bLocalReset OR bReset
+
+
+END_TRANSITION
+STEP SFCResetStep:
+SFCReset := TRUE;
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+TRANSITION FROM SFCResetStep TO Init:= 
+FALSE
+
+
+END_TRANSITION
+
+END_FUNCTION_BLOCK
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/Examples' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PRG_MAIN_SAMPLE
+VAR
+(*	fbStateModel		: FB_PackMLStateModel_ST;	(*FB for executing PackML state model*)		*)
+	bBlink				: BOOL;	(*1s blinkg for CodeSys Simulation*)
+	c					: INT;	(*Support variable for blinking*)
+END_VAR
+(* @END_DECLARATION := '0' *)
+(* ****** Section 1: Initialisations and default values. Initial conditions for variables on every PLC cycle*)
+fbStateModel.bSC := FALSE;
+
+(* ****** Section 2: Grouping PackML states for calling Programs or FB instances.
+This is to avoid repetition inside case structure in Section 4. With IF clause setting lower (and upper) state limits we can filter out the states when we 
+want to call specific programs. The order of states is defined in Tab:Data types > E_PackMLState. eSt_Aborting is the lowest and eSt_Completed is 
+the highest. Here we filter out calling of the programs - we call them only when we are in higher states than Stopped. Inside IF there is again CASE 
+which process each Control Mode separately.*)
+(*Execution part. Making calls for program if we are on states above Stopped*)
+IF (fbStateModel.eState > eSt_Stopped) THEN
+	CASE fbStateModel.eMode OF
+		(*MODE: MANUAL*)
+		eMode_Manual:
+			;
+		(*MODE: AUTOMATIC*)
+		eMode_Automatic:
+			;
+	END_CASE;
+END_IF;
+
+(* ****** Section 3: Actions in your program without considering the Control Mode. I.e. actions are performed same way indenpendent on
+current Control Mode selection.*)
+(*Mode independent state actions*)
+CASE fbStateModel.eState OF
+eSt_Aborting:
+	(* One can make specific actions in case of specific Mode-State combination.
+	   One can also consider to call a specific program when in specific Mode-State combination*)
+	actAborting;
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Clearing:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Stopping:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Resetting:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Holding:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_UnHolding:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Suspending:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Unsuspending:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+END_CASE;
+
+(* ****** Section 4: Actions in your program which are Control Mode specific. Two nested case structures where outer one selects the
+control mode and inner the PackML state. In order to avoid conflicts, it would be better to process each PackML state either in Section 3 
+or Section 4, but not in both. *)
+(*Execution mode related state actions*)
+CASE fbStateModel.eMode OF
+(*MODE: MANUAL*)
+eMode_Manual:
+	(* ****** Section 4.1: PackML state based processing actions when Control Mode is Manual.*)
+	CASE fbStateModel.eState OF
+	eSt_Idle:
+		fbStateModel.bAck_Completed := FALSE;		(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Starting:
+		fbStateModel.bSC := TRUE;					(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Completing:
+		fbStateModel.bSC := TRUE;					(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Completed:
+		fbStateModel.bAck_Completed := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+	END_CASE;
+
+(*MODE: AUTOMATIC*)
+eMode_Automatic:
+	(* ****** Section 4.2: PackML state based processing actions when Control Mode is Automatic.*)
+	CASE fbStateModel.eState OF
+	eSt_Idle:
+		fbStateModel.bAck_Completed := FALSE;		(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Starting:
+		fbStateModel.bSC := TRUE;					(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Completing:
+		fbStateModel.bSC := TRUE;					(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Completed:
+		;
+		(*fbStateModel.bAck_Completed:= TRUE;*)
+	END_CASE;
+
+(*MODE: UNKNOWN*)
+ELSE	(*This is an Error branch.*)
+	; (*TODO: Make implementation*)
+END_CASE;
+
+(* ****** Section 5: Calling the fbStateModel instance.
+Here the instance of state model is called and all triggering inputs are set, but bSC (State Completed), which you control in your programs. 
+This is indication that your program has  finished certain stage.
+- Pay attention where the instance fbStateModel is defined. Do you do it in global variables or e.g. here in PRG_MAIN? Important is to use the 
+same instance in all places, so that machine state is unique and shared. Remember, if you have multiple definitions, the PRG_MAIN "hides" 
+the global one, and might lead to problems elswhere, when you think you are using the same instance, but actually are not. 
+- In case you are using the PackML visualisation (VC_PackMLStates), make sure you connect its placeholder to the very same PackML FB instance.
+- The Mask for wIgnoreState is created as following. I use binary base for the value(2#). The lowest bit in the mask corresponds the eSt_Aborting
+ in E_PackMLState. The next is eSt_Aborted, and so on. Specific state is ignored and jumped over when it is masked out i.e. ignored by having 1 
+in that position. Note that implementation allows this only for selected states. See FB_PackMLStateModel_ST code for further details.*)
+(*Calling & Updating the state model*)
+(*TODO: Evaluate and change all input conditions according your application needs*)
+fbStateModel(
+	bResetFB:= ,
+	eModeReq:= ,
+	wIgnoreState := 2#000000,		(*TODO: Which states should be ignodered. Default: 2#000000 or 2#100000*)
+	bSC:= ,		(*Must NOT be assigned ANY variable, because fb input is directly assigned above by your programs!!!*)
+	bAbort:= ,
+	bClear:= ,
+	bReset:= ,
+	bStart:= ,
+	bHold:= ,
+	bUn_Hold:= ,
+	bSuspend:= ,
+	bUn_Suspend:= ,
+	bStop:= ,
+	bComplete:= ,
+	bAck_Completed:= ,
+	eMode=> ,
+	eState=> );
+
+(* ****** Section 6: Here we update all outputs according the current state of our PackML model. This allows us to process the in single location.
+The control of outputs is bind to state, not e.g. to inputs. The inputs are the one driving the PackML model forward. Again CASE structure can be used.*)
+(*Call for HMI and UI update*)
+HMI_and_UI_Update;
+
+
+
+END_PROGRAM
+ACTION	actAborting:
+(*You can add here Aborting related actions as one central collection.
+This action can be called from multiple places, in case needed, 
+but is part of program*)
+;
+END_ACTION
+
+ACTION	HMI_and_UI_Update:
+(*HMI Update*)
+(*Calling blinking sub-program*)
+(*PRG_Blinking (bSign4Hz=> , bSign2Hz=> , bSign1Hz=> , bSign0_5Hz=> );*)
+(*Codesys simulation 1Hz blinking*)
+c:= c + 1;
+IF c > 1 THEN
+	c:=0;
+END_IF;
+bBlink := (c=0);	(*bBlink is true if c=0*)
+
+(*Init values*)
+O_Light_Stop := FALSE;	(*TODO: Change initial values according your app needs*)
+
+(*TODO: Change values according range of states *)
+(*Start light*)
+(*O_Light_Start :=  (fbStateModel.eState >= eSt_Resetting) AND (fbStateModel.eState < eSt_Completed); *)
+
+(*TODO: Change output values according states *)
+CASE fbStateModel.eState OF
+eSt_Aborting, eSt_Aborted:
+	O_Light_Stop := bBlink;					(*TODO: Change initial values according your app needs*)
+eSt_Clearing:
+	O_Light_Stop := bBlink; 					(*TODO: Change initial values according your app needs*)
+eSt_Stopping, eSt_Stopped, eSt_Completed:
+	O_Light_Stop := TRUE;					(*TODO: Change initial values according your app needs*)
+eSt_Starting:
+	;
+	(*O_Light_Start := bBlink;	*)				(*TODO: Change initial values according your app needs*)
+END_CASE;
+
+
+END_ACTION
+
+
+
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/FBs' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK FB_PackMLStateModel_ST
+(*PackML State model implementation for applications.
+Author: Niko Siltala, niko.siltala@tut.fi, Tampere University of Technology / MEI
+Date: 2016-12-12
+Version: 1.0
+*)
+VAR_INPUT
+	bResetFB	: BOOL;		(*Resets whole FB*)
+	eModeReq	: E_Mode;	(*Requested mode*)
+	wIgnoreState: DWORD;	(*Ignoring states. See bit from E_PackMLState definition. Aborting = bit0*)
+	bSC			: BOOL;		(*Step Completed acknoledgement*)
+	bAbort		: BOOL;		(*Abortting signal = EmergencyStop*)
+	bClear		: BOOL;		(*Clear signal*)
+	bReset		: BOOL;		(*Reseting signal*)
+	bStart		: BOOL;		(*Start signal*)
+	bHold		: BOOL;		(*Hold signal*)
+	bUn_Hold	: BOOL;		(*Un-Hold signal*)
+	bSuspend	: BOOL;		(*Suspend signal*)
+	bUn_Suspend	: BOOL;		(*Un-Suspend signal*)
+	bStop		: BOOL;		(*Stop signal*)
+	bComplete	: BOOL;		(*Complete signal*)
+	bAck_Completed	: BOOL;	(*Acknoledgement for Complete signal*)
+END_VAR
+VAR_OUTPUT
+	eMode	: E_Mode;		(*Current mode*)
+	eState	: E_PackMLState;(*Current state*)
+	strState : STRING(15);		(*State as String*)
+END_VAR
+VAR
+	RTrig_bSC		: R_TRIG; 		(*Rising trigger for State Completed*)
+	RTrig_StateChange : R_TRIG; 	(*Rising trigger for State signal*)
+	bResetLocal		: BOOL:=FALSE;	(*Paikallinen Reset*)
+	bInitDone		: BOOL;			(*Initialisation*)
+END_VAR
+(* @END_DECLARATION := '0' *)
+IF bResetFB THEN	(*Reseting FB*)
+	bInitDone := FALSE;
+END_IF;
+
+(*Initialisation*)
+IF NOT bInitDone THEN
+	eState:= eSt_Aborting;
+	strState:='Aborting';
+	bInitDone:=TRUE;
+END_IF;
+
+(*Rising triggers monitor*)
+RTrig_bSC(CLK:=bSC , Q=> );
+
+(*Abort signal interrupt*)
+IF bAbort AND (eState > eSt_Clearing) THEN
+	eState:=eSt_Aborting;
+END_IF;
+
+(*Stop signal interrupt*)
+IF bStop AND (eState > eSt_Stopping) THEN
+	eState:=eSt_Stopping;
+END_IF;
+
+
+(*Main case structure*)
+CASE eState OF
+eSt_Aborting:
+	strState:='Aborting';
+	IF bSC THEN
+		eState:=eSt_Aborted;
+	END_IF;
+
+eSt_Aborted:
+	strState:='Aborted';
+	eMode:=eModeReq;	(*Change Mode allowed*)
+	IF bClear AND NOT bAbort THEN
+		eState:=eSt_Clearing;
+	END_IF;
+
+eSt_Clearing:
+	strState:='Clearing';
+	IF bAbort THEN
+		eState:=eSt_Aborting;
+	ELSIF bSC THEN
+		eState:=eSt_Stopped;
+		RTrig_StateChange(CLK:=bReset , Q=> );
+	END_IF;
+
+eSt_Stopping:
+	strState:='Stopping';
+	IF bSC THEN
+		eState:=eSt_Stopped;
+		RTrig_StateChange(CLK:=bReset , Q=> );
+	END_IF;
+
+eSt_Stopped:
+	strState:='Stopped';
+	eMode:=eModeReq;	(*Change Mode allowed*)
+	RTrig_StateChange(CLK:=bReset , Q=> );
+(*	ELSIF NOT bStop AND (RTrig_StateChange.Q OR (wIgnoreState.5 AND bStart) ) THEN*)
+	IF NOT bStop THEN	(*Stop signal is not active.*)
+		IF wIgnoreState.5 AND bStart THEN	(*Reset state is ignored and going directly to start *)
+			eState:=eSt_Idle;
+(*		ELSIF RTrig_StateChange.Q THEN 	(*Rising edge for reset*)*)
+		ELSIF bReset THEN 	(*Reset*)
+			eState:=eSt_Resetting;
+		END_IF;
+	END_IF;
+
+eSt_Resetting:
+	strState:='Resetting';
+	IF bSC OR wIgnoreState.5 THEN
+		eState:=eSt_Idle;
+	END_IF;
+
+eSt_Idle:
+	strState:='Idle';
+	eMode:=eModeReq;	(*Change Mode allowed*)
+	IF bStart OR wIgnoreState.6 THEN (* IDLE state is ignoered*)
+		eState:=eSt_Starting;
+	END_IF;
+
+eSt_Starting:
+	strState:='Starting';
+	IF bSC OR wIgnoreState.7 THEN (* STARTING state is ignoered*)
+		eState:=eSt_Execute;
+	END_IF;
+
+eSt_Execute:
+	strState:='Execute';
+	IF bComplete THEN
+		eState:=eSt_Completing;
+	ELSIF bHold THEN
+		eState:=eSt_Holding;
+	ELSIF bSuspend THEN
+		eState:=eSt_Suspending;
+	END_IF;
+
+eSt_Holding:
+	strState:='Holding';
+	IF bSC THEN
+		eState:=eSt_Held;
+	END_IF;
+
+eSt_Held:
+	strState:='Held';
+	IF bUn_Hold AND NOT bHold THEN
+		eState:=eSt_UnHolding;
+	END_IF;
+
+eSt_UnHolding:
+	strState:='Un-Holding';
+	IF bSC THEN
+		eState:=eSt_Execute;
+	END_IF;
+
+eSt_Suspending:
+	strState:='Suspending';
+	IF bSC THEN
+		eState:=eSt_Suspended;
+	END_IF;
+
+eSt_Suspended:
+	strState:='Suspended';
+	IF bUn_Suspend AND NOT bSuspend THEN
+		eState:=eSt_Unsuspending;
+	END_IF;
+
+eSt_Unsuspending:
+	strState:='Un-Suspending';
+	IF bSC THEN
+		eState:=eSt_Execute;
+	END_IF;
+
+eSt_Completing:
+	strState:='Completing';
+	IF RTrig_bSC.Q THEN
+		eState:=eSt_Completed;
+	END_IF;
+
+eSt_Completed:
+	strState:='Completed';
+	IF bReset OR bAck_Completed THEN
+		eState:=eSt_Resetting;
+	END_IF;
+
+ELSE
+	(*Default error handler. Undefined state set*)
+	eState:=eSt_Aborting;
+END_CASE;
+
+
+
+END_FUNCTION_BLOCK
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/Programs' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PRG_Blinking
+(*Avustavia laskentaoperaatioita
+- vilkutussignaalit
+Author: Niko Siltala, niko.siltala@tut.fi, Tampere University of Technology / MEI
+Date: 2016-12-12
+Version: 1.0
+*)
+VAR_OUTPUT
+	bSign4Hz:BOOL;					(*4 Hz (240krt/min) taajudella vaihteleva signaali*)
+	bSign2Hz:BOOL;					(*2 Hz (120krt/min) taajudella vaihteleva signaali*)
+	bSign1Hz:BOOL;					(*1 Hz (60krt/min) taajudella vaihteleva signaali*)
+	bSign0_5Hz:BOOL;				(*0,5 Hz (30krt/min) taajudella vaihteleva signaali*)
+END_VAR
+VAR
+	bInitDone	: BOOL	:=FALSE;	(*Ohjelman initialisointi*)
+	TP_Delay:TP;				(*Nopein taajuus / 2 tuottaja*)
+	bBaseHz:BOOL:=FALSE;		(*Nopein taajuus/2*)
+	iBaseHz:UINT:=4;				(*Base taajuus (Hz)*)
+	(*RTRIG_BASE: R_TRIG;		(*Base signaali nousee*)*)
+	RTRIG_2Hz_Sign : R_TRIG;		(*2Hz signaalin generointi*)
+	RTRIG_1Hz_Sign : R_TRIG;		(*1Hz signaalin generointi*)
+	RTRIG_0_5Hz_Sign : R_TRIG;	(*0,5Hz signaalin generointi*)
+	tBaseTaajuus:TIME;			(*Base vilkutuksen timerin arvo. f/2*)
+	fPLC_CYCLE_TIME: LREAL;	(*PLC:n cycli aika. Sekunttia*)
+
+END_VAR
+(* @END_DECLARATION := '0' *)
+(*Ohjelman initialisoinnit - Suoritetaan vain kertaalleen*)
+IF NOT bInitDone THEN
+	(*fPLC_CYCLE_TIME := UDINT_TO_LREAL(SystemTaskInfoArr[1].cycleTime) / 10E6; (*[s]*)*)
+	fPLC_Cycle_Time := 1;	(*[s]*)
+	(*Base Vilkkusignaalien tuottaminen*)
+	(* 250ms - 1* cykliaika(20ms)*)
+	tBaseTaajuus := LREAL_TO_TIME( ( (1/ UINT_TO_LREAL(iBaseHz) / 2 ) - 1 * fPLC_CYCLE_TIME ) * 1000);
+	bInitDone := TRUE;
+END_IF;
+
+(*Base signaalin genrointi*)
+TP_Delay(IN:=NOT TP_Delay.Q , PT:=tBaseTaajuus);
+IF NOT TP_Delay.Q THEN
+	bBaseHz := NOT bBaseHz;
+	bSign4Hz:= bBaseHz;
+END_IF;
+
+(*2Hz signaalin genrointi*)
+RTRIG_2Hz_Sign(CLK:=bSign4Hz);
+IF RTRIG_2Hz_Sign.Q THEN
+	bSign2Hz:=NOT bSign2Hz;
+END_IF;
+
+(*1Hz signaalin genrointi*)
+RTRIG_1Hz_Sign(CLK:=bSign2Hz);
+IF RTRIG_1Hz_Sign.Q THEN
+	bSign1Hz:=NOT bSign1Hz;
+END_IF;
+
+(*0,5 Hz signaalin generointi*)
+RTRIG_0_5Hz_Sign(CLK:=bSign1Hz);
+IF (RTRIG_0_5Hz_Sign.Q) THEN
+	bSign0_5Hz:= NOT bSign0_5Hz;
+END_IF;
+END_PROGRAM
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+TYPE E_Mode :
+(*UserModes: Modes for different production states*)
+(
+	eMode_undefined := 0,
+	eMode_Automatic :=1,
+	eMode_Manual :=3,
+	eMode_Production1 :=5,
+	eMode_Production2 :=6
+);
+END_TYPE
+(* @END_DECLARATION := '0' *)
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+TYPE E_ModeProc :
+(*Procedural control modes. Can be changed in any state*)
+(
+	eModeProc_undefined := 0,
+	eModeProc_Automatic :=1,
+	eModeProc_SemiAutomatic :=2,
+	eModeProc_Manual :=3
+);
+END_TYPE
+(* @END_DECLARATION := '0' *)
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+TYPE E_PackMLState :
+(*PackML States*)
+(
+	eSt_Aborting :=0,
+	eSt_Aborted,
+	eSt_Clearing,
+	eSt_Stopped,
+	eSt_Stopping,
+	eSt_Resetting,
+	eSt_Idle,
+	eSt_Starting,
+	eSt_Execute,
+	eSt_Suspending,
+	eSt_Suspended,
+	eSt_Unsuspending,
+	eSt_Holding,
+	eSt_Held,
+	eSt_UnHolding,
+	eSt_Completing,
+	eSt_Completed
+);
+END_TYPE
+(* @END_DECLARATION := '0' *)
+
+(* @PATH := '\/Visual Components' *)
+
+VISUALISATION VC_PackMLStates _VISU_TYPES : 1,1
+_BG_BMP : ''
+_TEXT : 66
+_PAINTZOOM : 110
+
+_POLY : 7
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 0
+_POS : 331,221,0,0,720,0,720,250,440,250,440,350,0,350,0,350
+_COLORS : 8421504,0,16777215,0,0
+_VARIABLES : '','','',''
+_THRESH : '','','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,4294967295,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 5,5,716,236,360,120
+_COLORS : 16767628,0,16777215,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','','',''
+_DSP : '','',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,27,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 160,280,261,321,210,300
+_COLORS : 12632256,0,8454016,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 4','',''
+_DSP : '','Stopping',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,12,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 10,90,111,131,60,110
+_COLORS : 12632256,0,8454143,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 6','',''
+_DSP : '','Idle',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,0,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 160,170,261,211,210,190
+_COLORS : 12632256,0,8454016,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 11','',''
+_DSP : '','Un-Suspending',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,1,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 610,280,711,321,660,300
+_COLORS : 12632256,0,8454016,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 0','',''
+_DSP : '','Aborting',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,4,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 460,280,561,321,510,300
+_COLORS : 12632256,0,8454143,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 1','',''
+_DSP : '','Aborted',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,5,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 450,330,721,351,585,340
+_COLORS : 16777215,0,16777215,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','','',''
+_DSP : '$$PackML$$.strState',' State: %s',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 4,4294967283,400,0,9,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 310,280,411,321,360,300
+_COLORS : 12632256,0,8454016,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 2','',''
+_DSP : '','Clearing',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,10,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 10,280,111,321,60,300
+_COLORS : 12632256,0,8454143,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 3','',''
+_DSP : '','Stopped',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,11,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 10,170,111,211,60,190
+_COLORS : 12632256,0,8454016,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 5','',''
+_DSP : '','Resetting',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,13,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 160,90,261,131,210,110
+_COLORS : 12632256,0,8454016,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 7','',''
+_DSP : '','Starting',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,14,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 310,90,411,131,360,110
+_COLORS : 12632256,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 8','',''
+_DSP : '','Execute',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,15,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 460,90,561,131,510,110
+_COLORS : 12632256,0,8454016,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 15','',''
+_DSP : '','Completing',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,16,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 610,90,711,131,660,110
+_COLORS : 12632256,0,8454143,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 16','',''
+_DSP : '','Completed',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,17,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 310,170,411,211,360,190
+_COLORS : 12632256,0,8454143,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 10','',''
+_DSP : '','Suspended',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,18,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 460,170,561,211,510,190
+_COLORS : 12632256,0,8454016,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 9','',''
+_DSP : '','Suspending',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,19,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 460,10,561,51,510,30
+_COLORS : 12632256,0,8454016,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 12','',''
+_DSP : '','Holding',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,20,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 310,10,411,51,360,30
+_COLORS : 12632256,0,8454143,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 13','',''
+_DSP : '','Held',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,21,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 160,10,261,51,210,30
+_COLORS : 12632256,0,8454016,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.eState = 14','',''
+_DSP : '','Un-Holding',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,22,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 650,271,650,250,650,280,645,270,655,270,650,280,650,280
+_COLORS : 8421504,0,16711680,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bAbort','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,4294967295,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 635,255,676,271,655,263
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bAbort','',''
+_DSP : '','Abort',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,26,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 210,269,210,235,210,280,205,270,215,270,210,280,210,280
+_COLORS : 8421504,0,16711680,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bStop','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,28,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 190,245,231,261,210,253
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bStop','',''
+_DSP : '','Stop',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,29,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 8
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 296,143,195,170,195,155,330,155,330,130,325,140,335,140,330,130,330,130
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,4294967295,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 235,140,266,156,250,148
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_DSP : '','SC',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,31,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 8
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 296,78,195,50,195,75,330,75,330,90,325,80,335,80,330,90,330,90
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,32,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 8
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 481,63,380,90,380,75,515,75,515,50,510,60,520,60,515,50,515,50
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bHold','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,33,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 420,60,451,76,435,68
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bHold','',''
+_DSP : '','Hold',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,34,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 571,300,610,300,560,300,570,295,570,305,560,300,560,300
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,4294967295,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 50,225,50,280,50,210,55,220,45,220,50,210,50,210
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bReset','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,4294967295,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 148,110,110,110,160,110,150,105,150,115,160,110,160,110
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bStart','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,4294967295,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 11
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 178,307,310,300,290,300,290,340,145,340,145,300,110,300,120,295,120,305,110,300,160,300,160,300
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,4294967295,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 230,60,261,76,245,68
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_DSP : '','SC',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,37,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 8
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 481,158,380,130,380,155,515,155,515,170,510,160,520,160,515,170,515,170
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bSuspend','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,38,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 415,140,476,156,445,148
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bSuspend','',''
+_DSP : '','Suspend',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,39,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 120,285,151,301,135,293
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_DSP : '','SC',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,40,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 570,285,601,301,585,293
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_DSP : '','SC',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,41,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 421,300,460,300,410,300,420,295,420,305,410,300,410,300
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bClear','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,42,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 420,285,461,301,440,293
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bClear','',''
+_DSP : '','Clear',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,43,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 298,110,260,110,310,110,300,105,300,115,310,110,310,110
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,44,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 265,95,296,111,280,103
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_DSP : '','SC',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,45,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 110,95,151,111,130,103
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bStart','',''
+_DSP : '','Start',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,46,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 35,250,76,266,55,258
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bReset','',''
+_DSP : '','Reset',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,47,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 421,190,460,190,410,190,420,185,420,195,410,190,410,190
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,48,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 420,175,451,191,435,183
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_DSP : '','SC',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,49,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 421,30,460,30,410,30,420,25,420,35,410,30,410,30
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,50,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 420,15,451,31,435,23
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_DSP : '','SC',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,51,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 271,190,310,190,260,190,270,185,270,195,260,190,260,190
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bUn_Suspend','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,52,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 260,170,311,206,285,188
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bUn_Suspend','',''
+_DSP : '','Un-Sus$R$Npend',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,53,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 271,30,310,30,260,30,270,25,270,35,260,30,260,30
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bUn_Hold','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,54,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 260,15,311,31,285,23
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bUn_Hold','',''
+_DSP : '','Un-Hold',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,55,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 448,110,410,110,460,110,450,105,450,115,460,110,460,110
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bComplete','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,56,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 410,95,461,111,435,103
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bComplete','',''
+_DSP : '','Complete',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,57,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 598,110,560,110,610,110,600,105,600,115,610,110,610,110
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,58,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 565,95,596,111,580,103
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_DSP : '','SC',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,59,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 6
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 50,140,50,170,50,130,55,140,45,140,50,130,50,130
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,60,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 45,140,76,156,60,148
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bSC','',''
+_DSP : '','SC',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,61,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_POLY : 4
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POLYSORT : 1
+_POS : 360,200,670,130,670,225,50,225,50,220
+_COLORS : 16777215,0,16777215,16711680,0
+_VARIABLES : '','','',''
+_THRESH : '','$$PackML$$.bReset OR $$PackML$$.Ack_Completed','',''
+_INPUT : 0
+_DSP : '','',''
+_ZOOM : ''
+_TEXT : 5,4294967283,400,0,4294967295,0,0,0
+_FONT : ''
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 515,210,576,226,545,218
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bReset','',''
+_DSP : '','Reset OR',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,62,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 575,210,671,226,623,218
+_COLORS : 16777215,0,16744448,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','$$PackML$$.bAck_Completed','',''
+_DSP : '','Ack Completed',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,400,0,63,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 0,0
+_POS : 10,10,121,51,65,30
+_COLORS : 16777215,0,16777215,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','','',''
+_DSP : '','PackML$R$Nstate model',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 1,4294967280,700,0,65,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+_KEYINFOLIST : 0
+END_VISUALISATION
