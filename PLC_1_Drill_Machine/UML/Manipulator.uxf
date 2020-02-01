@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>11</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>605</x>
-      <y>286</y>
-      <w>121</w>
-      <h>44</h>
+      <x>108</x>
+      <y>168</y>
+      <w>66</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>ManipInit</panel_attributes>
     <additional_attributes/>
@@ -15,10 +15,10 @@
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>561</x>
-      <y>187</y>
-      <w>22</w>
-      <h>22</h>
+      <x>84</x>
+      <y>138</y>
+      <w>12</w>
+      <h>12</h>
     </coordinates>
     <panel_attributes>type=initial</panel_attributes>
     <additional_attributes/>
@@ -26,21 +26,21 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>561</x>
-      <y>187</y>
-      <w>121</w>
-      <h>121</h>
+      <x>84</x>
+      <y>138</y>
+      <w>66</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;90.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;90.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>605</x>
-      <y>495</y>
-      <w>121</w>
-      <h>44</h>
+      <x>108</x>
+      <y>306</y>
+      <w>66</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>WaitForPart</panel_attributes>
     <additional_attributes/>
@@ -48,10 +48,10 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>605</x>
-      <y>726</y>
-      <w>121</w>
-      <h>44</h>
+      <x>108</x>
+      <y>432</y>
+      <w>66</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>LoadPart</panel_attributes>
     <additional_attributes/>
@@ -59,10 +59,10 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>605</x>
-      <y>1045</y>
-      <w>121</w>
-      <h>44</h>
+      <x>108</x>
+      <y>606</y>
+      <w>66</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>Unload Part</panel_attributes>
     <additional_attributes/>
@@ -70,10 +70,10 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>605</x>
-      <y>616</y>
-      <w>121</w>
-      <h>44</h>
+      <x>108</x>
+      <y>372</y>
+      <w>66</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>ToPickLoc</panel_attributes>
     <additional_attributes/>
@@ -81,10 +81,10 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>605</x>
-      <y>836</y>
-      <w>121</w>
-      <h>44</h>
+      <x>108</x>
+      <y>492</y>
+      <w>66</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>ToPlaceWaitLoc</panel_attributes>
     <additional_attributes/>
@@ -92,22 +92,22 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>649</x>
-      <y>319</y>
-      <w>99</w>
-      <h>88</h>
+      <x>132</x>
+      <y>186</y>
+      <w>54</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 initialised</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>649</x>
-      <y>528</y>
-      <w>143</w>
-      <h>110</h>
+      <x>132</x>
+      <y>324</y>
+      <w>78</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 hiPartAvail_Prev</panel_attributes>
@@ -116,10 +116,10 @@ hiPartAvail_Prev</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>649</x>
-      <y>649</y>
-      <w>121</w>
-      <h>99</h>
+      <x>132</x>
+      <y>390</y>
+      <w>66</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 InPickposition</panel_attributes>
@@ -128,10 +128,10 @@ InPickposition</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>649</x>
-      <y>759</y>
-      <w>110</w>
-      <h>99</h>
+      <x>132</x>
+      <y>450</y>
+      <w>60</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 PartLoaded</panel_attributes>
@@ -140,10 +140,10 @@ PartLoaded</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>495</x>
-      <y>627</y>
-      <w>132</w>
-      <h>462</h>
+      <x>48</x>
+      <y>378</y>
+      <w>72</w>
+      <h>252</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 unloaded</panel_attributes>
@@ -152,10 +152,10 @@ unloaded</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>715</x>
-      <y>506</y>
-      <w>253</w>
-      <h>154</h>
+      <x>168</x>
+      <y>312</y>
+      <w>138</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 NOT hiPartAvail_Prev </panel_attributes>
@@ -164,10 +164,10 @@ NOT hiPartAvail_Prev </panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>605</x>
-      <y>946</y>
-      <w>121</w>
-      <h>44</h>
+      <x>108</x>
+      <y>552</y>
+      <w>66</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>PlacePart</panel_attributes>
     <additional_attributes/>
@@ -175,10 +175,10 @@ NOT hiPartAvail_Prev </panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>649</x>
-      <y>869</y>
-      <w>198</w>
-      <h>99</h>
+      <x>132</x>
+      <y>510</y>
+      <w>108</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 hiReadyToRecieve_Next</panel_attributes>
@@ -187,10 +187,10 @@ hiReadyToRecieve_Next</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>649</x>
-      <y>979</y>
-      <w>77</w>
-      <h>88</h>
+      <x>132</x>
+      <y>570</y>
+      <w>42</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 Placed</panel_attributes>
@@ -199,10 +199,10 @@ Placed</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>605</x>
-      <y>385</y>
-      <w>121</w>
-      <h>44</h>
+      <x>108</x>
+      <y>246</y>
+      <w>66</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>ManipStopped</panel_attributes>
     <additional_attributes/>
@@ -210,10 +210,10 @@ Placed</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>649</x>
-      <y>418</y>
-      <w>88</w>
-      <h>99</h>
+      <x>132</x>
+      <y>264</y>
+      <w>48</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 Enabled</panel_attributes>
@@ -222,13 +222,119 @@ Enabled</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>418</x>
-      <y>385</y>
-      <w>209</w>
-      <h>44</h>
+      <x>6</x>
+      <y>246</y>
+      <w>114</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 NOT Enabled</panel_attributes>
     <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>468</x>
+      <y>162</y>
+      <w>90</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>NotAvalibleNotReady</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>468</x>
+      <y>72</y>
+      <w>90</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>ManipInit</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>318</x>
+      <y>270</y>
+      <w>90</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>PartAvailable
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>630</x>
+      <y>264</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>MachineReady
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>468</x>
+      <y>264</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>AvalibleAndReady
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>468</x>
+      <y>372</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Transporting
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>318</x>
+      <y>372</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>TransportStopped
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>630</x>
+      <y>372</y>
+      <w>90</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>TransportFinished
+
+
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

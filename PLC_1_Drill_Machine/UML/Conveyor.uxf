@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>200</x>
-      <y>100</y>
-      <w>220</w>
-      <h>230</h>
+      <x>126</x>
+      <y>238</y>
+      <w>154</w>
+      <h>161</h>
     </coordinates>
     <panel_attributes>symbol=component
 Component</panel_attributes>
@@ -16,10 +16,10 @@ Component</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>20</x>
-      <y>130</y>
-      <w>200</w>
-      <h>40</h>
+      <x>0</x>
+      <y>259</y>
+      <w>140</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]
 bEnable</panel_attributes>
@@ -28,10 +28,10 @@ bEnable</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>20</x>
-      <y>190</y>
-      <w>200</w>
-      <h>40</h>
+      <x>0</x>
+      <y>301</y>
+      <w>140</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]
 </panel_attributes>
@@ -40,10 +40,10 @@ bEnable</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>130</y>
-      <w>180</w>
-      <h>40</h>
+      <x>273</x>
+      <y>259</y>
+      <w>126</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]
 hiPartAv_Next</panel_attributes>
@@ -52,10 +52,10 @@ hiPartAv_Next</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>160</y>
-      <w>180</w>
-      <h>40</h>
+      <x>273</x>
+      <y>280</y>
+      <w>126</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]
 hoRdyToRec_Next</panel_attributes>
@@ -64,10 +64,10 @@ hoRdyToRec_Next</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>220</y>
-      <w>180</w>
-      <h>40</h>
+      <x>273</x>
+      <y>322</y>
+      <w>126</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]
 O_ConvIn_MotON</panel_attributes>
@@ -76,10 +76,10 @@ O_ConvIn_MotON</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>40</x>
-      <y>220</y>
-      <w>180</w>
-      <h>40</h>
+      <x>14</x>
+      <y>322</y>
+      <w>126</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]
 </panel_attributes>
@@ -88,10 +88,10 @@ O_ConvIn_MotON</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>40</x>
-      <y>250</y>
-      <w>180</w>
-      <h>40</h>
+      <x>14</x>
+      <y>343</y>
+      <w>126</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]
 hiPartAv_Prev</panel_attributes>
@@ -100,10 +100,10 @@ hiPartAv_Prev</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>40</x>
-      <y>280</y>
-      <w>180</w>
-      <h>50</h>
+      <x>14</x>
+      <y>364</y>
+      <w>126</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]
 hoRdyToRec_Prev
@@ -113,10 +113,10 @@ hoRdyToRec_Prev
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>260</y>
-      <w>180</w>
-      <h>30</h>
+      <x>273</x>
+      <y>350</y>
+      <w>126</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]</panel_attributes>
     <additional_attributes>160.0;10.0;10.0;10.0</additional_attributes>
@@ -124,10 +124,10 @@ hoRdyToRec_Prev
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>290</y>
-      <w>180</w>
-      <h>30</h>
+      <x>273</x>
+      <y>371</y>
+      <w>126</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]</panel_attributes>
     <additional_attributes>160.0;10.0;10.0;10.0</additional_attributes>
@@ -135,10 +135,10 @@ hoRdyToRec_Prev
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>20</x>
-      <y>160</y>
-      <w>200</w>
-      <h>40</h>
+      <x>0</x>
+      <y>280</y>
+      <w>140</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]
 I_ConvIn_PartPresent</panel_attributes>
@@ -147,10 +147,10 @@ I_ConvIn_PartPresent</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>190</y>
-      <w>180</w>
-      <h>40</h>
+      <x>273</x>
+      <y>301</y>
+      <w>126</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-[&gt;]
 I_ConvIn_PartPresent</panel_attributes>

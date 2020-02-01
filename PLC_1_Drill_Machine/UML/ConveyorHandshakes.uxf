@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>920</x>
+      <y>200</y>
+      <w>80</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lw=2
+Machine B</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>256</x>
+      <y>200</y>
+      <w>88</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lw=2
+Machine A</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>904</x>
+      <y>328</y>
+      <w>120</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>NotAvalibleNotReady
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>784</x>
+      <y>248</y>
+      <w>16</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>type=initial</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>784</x>
+      <y>248</y>
+      <w>168</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>1144</x>
+      <y>496</y>
+      <w>144</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>MachineReady
+--
+hoRdyToReceive_ToLeft=T
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>664</x>
+      <y>496</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>PartAvailable
+--
+hoPartAv_ToRight = T
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>904</x>
+      <y>496</y>
+      <w>128</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>AvalibleAndReady
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>904</x>
+      <y>624</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Transfer
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1016</x>
+      <y>384</y>
+      <w>184</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+hiRdyToReceive_FromRight</panel_attributes>
+    <additional_attributes>10.0;20.0;210.0;20.0;210.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>728</x>
+      <y>384</y>
+      <w>192</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+hiPartAvail_FromLeft</panel_attributes>
+    <additional_attributes>220.0;20.0;10.0;20.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>568</y>
+      <w>152</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+NOT hiPartAvail_FromLeft</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1016</x>
+      <y>360</y>
+      <w>216</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+NOT hiRdyToReceive_FromRight</panel_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0;250.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>688</x>
+      <y>360</y>
+      <w>232</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+NOT hiPartAvail_FromLeft</panel_attributes>
+    <additional_attributes>270.0;20.0;10.0;20.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>240</x>
+      <y>328</y>
+      <w>120</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>NotAvalibleNotReady
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>160</x>
+      <y>248</y>
+      <w>16</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>type=initial</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>160</x>
+      <y>248</y>
+      <w>128</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>480</x>
+      <y>496</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>MachineReady
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>8</x>
+      <y>496</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>PartAvailable
+--
+hoPartAv_ToRight = T
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>256</x>
+      <y>496</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>AvalibleAndReady
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>256</x>
+      <y>616</y>
+      <w>120</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Tranfser
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>352</x>
+      <y>384</y>
+      <w>200</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+hiRdyToReceive_FromRight</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0;230.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>88</x>
+      <y>384</y>
+      <w>168</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+hiPartAvail_FromLeft</panel_attributes>
+    <additional_attributes>190.0;20.0;10.0;20.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>368</x>
+      <y>520</y>
+      <w>128</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+hiPartAvail_FromLeft</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>520</y>
+      <w>152</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+hiRdyToRec_FromRight</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>304</x>
+      <y>568</y>
+      <w>152</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+NOT hiPartAvail_FromLeft</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>352</x>
+      <y>360</y>
+      <w>232</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+NOT hiRdyToReceive_FromRight</panel_attributes>
+    <additional_attributes>10.0;20.0;270.0;20.0;270.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>40</x>
+      <y>360</y>
+      <w>216</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+NOT hiPartAvail_FromLeft</panel_attributes>
+    <additional_attributes>250.0;20.0;10.0;20.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>352</x>
+      <y>336</y>
+      <w>296</w>
+      <h>464</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=NOT hiRdyToReceive_FromRight</panel_attributes>
+    <additional_attributes>30.0;550.0;350.0;550.0;350.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>440</y>
+      <w>632</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+T2</panel_attributes>
+    <additional_attributes>10.0;80.0;170.0;10.0;770.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>528</x>
+      <y>464</y>
+      <w>640</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+T2</panel_attributes>
+    <additional_attributes>780.0;40.0;650.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>776</x>
+      <y>520</y>
+      <w>144</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+hiRdyToRec_FromRight</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1024</x>
+      <y>520</y>
+      <w>136</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+hiPartAvail_FromLeft</panel_attributes>
+    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>56</x>
+      <y>568</y>
+      <w>24</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>24</x>
+      <y>640</y>
+      <w>112</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Note..
+Tie To sensor for first conveyor</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>696</y>
+      <w>112</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+I_PartEndSensor</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>256</x>
+      <y>736</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Transfered
+--
+hoPartAv_ToRight = F
+Motor = F</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>304</x>
+      <y>672</y>
+      <w>112</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;
+I_PartEndSensor</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>368</x>
+      <y>584</y>
+      <w>616</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;</panel_attributes>
+    <additional_attributes>10.0;200.0;90.0;150.0;270.0;150.0;270.0;10.0;750.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>904</x>
+      <y>744</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Transfered
+--
+hoPartAv_ToRight = F
+Motor = F</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
