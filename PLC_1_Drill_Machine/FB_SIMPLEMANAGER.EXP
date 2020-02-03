@@ -1,0 +1,46 @@
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/FBs' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK FB_SimpleManager
+(*Simple manager following emergency and run/stop state. Outputs can be used to enable user's processes and programs.
+Niko Siltala niko.siltala@tuni.fi, 
+Tampere University, ENS, ATME.
+9.10.2019 v1 *)
+VAR_INPUT
+	bEmergencyClear	: BOOL;	(*Emergency cleared*)
+	bReset				: BOOL;	(*Reset signal*)
+	bStart				: BOOL;	(*Start signal*)
+	bStop				: BOOL;	(*Stop signal*)
+END_VAR
+VAR_OUTPUT
+	oEmergencyClear	: BOOL;	(*Emergency is cleared*)
+	oRun				: BOOL;	(*System can be started and running*)
+END_VAR
+VAR
+	rsEmergency	: RS;
+	rsRunning		: RS;
+	bResetRequired	: BOOL := TRUE;	(*reset is required*)
+END_VAR
+(* @END_DECLARATION := '0' *)
+(*Defaults*)
+
+(*Reset done*)
+IF bReset THEN
+	bResetRequired	:= FALSE;
+END_IF;
+
+(*Emergency active or cleared?*)
+rsEmergency(
+	SET:= bReset,
+	RESET1:= NOT bEmergencyClear,
+	Q1=> oEmergencyClear );
+
+(*Running or stop?*)
+rsRunning(
+	SET:= bStart,
+	RESET1:= (NOT oEmergencyClear) OR bStop OR bResetRequired,
+	Q1=> oRun );
+
+END_FUNCTION_BLOCK
