@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>80</x>
-      <y>80</y>
-      <w>210</w>
-      <h>80</h>
+      <x>126</x>
+      <y>91</y>
+      <w>147</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>MoveToInitialPos
 --
@@ -18,10 +18,10 @@ hoPartAvail_ToRight=F</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>80</x>
-      <y>240</y>
-      <w>210</w>
-      <h>80</h>
+      <x>126</x>
+      <y>203</y>
+      <w>147</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>WaitForCycle
 --
@@ -32,10 +32,10 @@ hoPartAvail_ToRight=F</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>80</x>
-      <y>400</y>
-      <w>210</w>
-      <h>80</h>
+      <x>126</x>
+      <y>315</y>
+      <w>147</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>CloseFixture
 --
@@ -46,10 +46,10 @@ hoPartAvail_ToRight=F</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>80</x>
-      <y>580</y>
-      <w>210</w>
-      <h>80</h>
+      <x>126</x>
+      <y>441</y>
+      <w>147</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>MoveDrillDown</panel_attributes>
     <additional_attributes/>
@@ -57,10 +57,10 @@ hoPartAvail_ToRight=F</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>80</x>
-      <y>750</y>
-      <w>210</w>
-      <h>80</h>
+      <x>126</x>
+      <y>560</y>
+      <w>147</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>EmptyWait</panel_attributes>
     <additional_attributes/>
@@ -68,10 +68,10 @@ hoPartAvail_ToRight=F</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>80</x>
-      <y>920</y>
-      <w>210</w>
-      <h>80</h>
+      <x>126</x>
+      <y>679</y>
+      <w>147</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>MoveDrillUp</panel_attributes>
     <additional_attributes/>
@@ -79,10 +79,10 @@ hoPartAvail_ToRight=F</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>80</x>
-      <y>1120</y>
-      <w>210</w>
-      <h>80</h>
+      <x>126</x>
+      <y>819</y>
+      <w>147</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>StopDrillOpenFixture
 --
@@ -92,10 +92,10 @@ hoPartAvail_ToRight=T</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>0</x>
-      <y>270</y>
-      <w>100</w>
-      <h>910</h>
+      <x>70</x>
+      <y>224</y>
+      <w>70</w>
+      <h>637</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>80.0;890.0;10.0;890.0;10.0;10.0;80.0;10.0</additional_attributes>
@@ -103,10 +103,10 @@ hoPartAvail_ToRight=T</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>40</x>
-      <y>0</y>
-      <w>20</w>
-      <h>20</h>
+      <x>98</x>
+      <y>35</y>
+      <w>14</w>
+      <h>14</h>
     </coordinates>
     <panel_attributes>type=initial</panel_attributes>
     <additional_attributes/>
@@ -114,10 +114,10 @@ hoPartAvail_ToRight=T</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>40</x>
-      <y>0</y>
-      <w>110</w>
-      <h>100</h>
+      <x>98</x>
+      <y>35</y>
+      <w>77</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;90.0;80.0</additional_attributes>
@@ -125,10 +125,10 @@ hoPartAvail_ToRight=T</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>150</y>
-      <w>30</w>
-      <h>110</h>
+      <x>189</x>
+      <y>140</y>
+      <w>21</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
@@ -136,10 +136,10 @@ hoPartAvail_ToRight=T</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>310</y>
-      <w>30</w>
-      <h>110</h>
+      <x>189</x>
+      <y>252</y>
+      <w>21</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
@@ -147,10 +147,10 @@ hoPartAvail_ToRight=T</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>470</y>
-      <w>30</w>
-      <h>130</h>
+      <x>189</x>
+      <y>364</y>
+      <w>21</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
@@ -158,10 +158,10 @@ hoPartAvail_ToRight=T</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>650</y>
-      <w>30</w>
-      <h>120</h>
+      <x>189</x>
+      <y>490</y>
+      <w>21</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
@@ -169,10 +169,10 @@ hoPartAvail_ToRight=T</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>820</y>
-      <w>30</w>
-      <h>120</h>
+      <x>189</x>
+      <y>609</y>
+      <w>21</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
@@ -180,10 +180,10 @@ hoPartAvail_ToRight=T</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>990</y>
-      <w>30</w>
-      <h>150</h>
+      <x>189</x>
+      <y>728</y>
+      <w>21</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
