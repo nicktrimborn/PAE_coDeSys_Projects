@@ -1,4 +1,5 @@
 
+
 (* @NESTEDCOMMENTS := 'Yes' *)
 (* @PATH := '\/FBs' *)
 (* @OBJECTFLAGS := '0, 8' *)
@@ -44,3 +45,534 @@ rsRunning(
 	Q1=> oRun );
 
 END_FUNCTION_BLOCK
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/FBs' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK FB_SimpleModeManager
+(*Simple manager following emergency and run/stop state. Implemented through state model.
+Includes manager for two control modes. Outputs can be used to enable user's processes and programs.
+Niko Siltala niko.siltala@tuni.fi, 
+Tampere University, ENS, ATME.
+9.10.2019 v1 *)
+VAR_INPUT
+	bEmergencyClear	: BOOL;	(*Emergency cleared*)
+	bReset				: BOOL;	(*Reset signal*)
+	bStart				: BOOL;	(*Start signal*)
+	bStop				: BOOL;	(*Stop signal*)
+	bSelectMode_Auto	: BOOL;	(*Mode select request : Auto *)
+	bSelectMode_Manu	: BOOL;	(*Mode select request : Manual *)
+END_VAR
+VAR_OUTPUT
+	oEmergencyClear	: BOOL;	(*Emergency is cleared*)
+	oRun				: BOOL;	(*System can be started and running*)
+	oModeAct_Auto		: BOOL;	(*Mode active : Auto *)
+	oModeAct_Manu	: BOOL;	(*Mode active : Manual *)
+	oModeAct			: EN_Mode;	(*Current active mode*)
+END_VAR
+VAR
+	modePrev		: EN_Mode;			(*Mode at previous PLC cycle*)
+	bModeChanged	: BOOL;			(*Mode has changed*)
+	bResetRequired	: BOOL := TRUE;	(*reset is required*)
+	iState			: INT := 0;			(*State*)
+END_VAR
+(* @END_DECLARATION := '0' *)
+(*Default values for each PLC cycle*)
+bModeChanged := FALSE;
+oModeAct_Auto := FALSE;
+oModeAct_Manu := FALSE;
+
+(****** SECTION: INPUTS PROCESSING ******)
+(*Update current control mode*)
+IF bSelectMode_Auto THEN
+	oModeAct := eMode_Auto;
+ELSIF bSelectMode_Manu THEN
+	oModeAct := eMode_Manual;
+END_IF;
+
+(*Observe mode change request*)
+IF oModeAct <> modePrev THEN
+	modePrev := oModeAct;
+	bModeChanged := TRUE;
+	bResetRequired	:= TRUE;
+END_IF;
+
+(****** SECTION: STATE MODEL ******)
+(*Emergency is active. Force state to emergency active*)
+IF NOT bEmergencyClear THEN
+	iState := 0;
+END_IF;
+
+(*State model*)
+CASE iState  OF
+0:	(*Emergency active*)
+	IF bReset AND bEmergencyClear THEN
+		iState := 10;
+	END_IF;
+
+10: (*Reset required *)
+	IF bReset THEN
+		iState := 12;
+		bResetRequired	:= FALSE;
+	END_IF;
+
+12:	(*Stopped*)
+	IF bResetRequired THEN
+		iState := 10;
+	ELSIF bStart AND NOT bStop THEN
+		iState := 20;
+	END_IF;
+
+20: (*Run / Running*)
+	IF bResetRequired OR bModeChanged THEN
+		iState := 10;
+	ELSIF bStop THEN
+		iState := 12;
+	END_IF;
+
+ELSE	(*Default state*)
+	iState := 0;
+END_CASE;
+
+(****** SECTION: OUTPUTS ******)
+(*Set manager outputs according the state*)
+oEmergencyClear := (iState>0);
+oRun := (iState>=20);
+
+(*Update binary outputs for Control Modes*)
+CASE oModeAct  OF
+eMode_Auto:
+	oModeAct_Auto:= TRUE;
+eMode_Manual:
+	oModeAct_Manu := TRUE;
+END_CASE;
+END_FUNCTION_BLOCK
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/FBs' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+FUNCTION_BLOCK FB_SimpleModeManager2
+(*Simple manager following emergency and run/stop state. Includes manager for two control modes. Implemented with FBDs.
+Outputs can be used to enable user's processes and programs.
+Niko Siltala niko.siltala@tuni.fi, 
+Tampere University, ENS, ATME.
+9.10.2019 v1 *)
+VAR_INPUT
+	bEmergencyClear	: BOOL;	(*Emergency cleared*)
+	bReset				: BOOL;	(*Reset signal*)
+	bStart				: BOOL;	(*Start signal*)
+	bStop				: BOOL;	(*Stop signal*)
+	bSelectMode_Auto	: BOOL;	(*Mode select request : Auto *)
+	bSelectMode_Manu	: BOOL;	(*Mode select request : Manual *)
+END_VAR
+VAR_OUTPUT
+	oEmergencyClear	: BOOL;	(*Emergency is cleared*)
+	oRun				: BOOL;	(*System can be started and running*)
+	oModeAct_Auto		: BOOL;	(*Mode active : Auto *)
+	oModeAct_Manu	: BOOL;	(*Mode active : Manual *)
+	oModeAct			: EN_Mode;	(*Current active mode*)
+END_VAR
+VAR
+	rsEmergency	: RS;
+	rsRunning		: RS;
+	modePrev		: EN_Mode;			(*Mode at previous PLC cycle*)
+	bModeChanged	: BOOL;			(*Mode has changed*)
+	bResetRequired	: BOOL := TRUE;	(*reset is required*)
+END_VAR
+(* @END_DECLARATION := '0' *)
+(*Default values for each PLC cycle*)
+bModeChanged := FALSE;
+oModeAct_Auto := FALSE;
+oModeAct_Manu := FALSE;
+
+(*Reset done*)
+IF bReset THEN
+	bResetRequired	:= FALSE;
+END_IF;
+
+(*Update current control mode*)
+IF bSelectMode_Auto THEN
+	oModeAct := eMode_Auto;
+ELSIF bSelectMode_Manu THEN
+	oModeAct := eMode_Manual;
+END_IF;
+
+(*Observe mode change request*)
+IF oModeAct <> modePrev THEN
+	modePrev := oModeAct;
+	bModeChanged := TRUE;
+	bResetRequired	:= TRUE;
+END_IF;
+
+(*Calling action containing FBD code for deciding emergency and run output states*)
+act_fbd_controls();
+
+(*Update binary outputs for Control Modes*)
+CASE oModeAct  OF
+eMode_Auto:
+	oModeAct_Auto:= TRUE;
+eMode_Manual:
+	oModeAct_Manu := TRUE;
+END_CASE;
+END_FUNCTION_BLOCK
+ACTION	act_fbd_controls:
+_FBD_BODY
+_NETWORKS : 2
+_NETWORK
+
+_COMMENT
+''
+_END_COMMENT
+_ASSIGN
+_FUNCTIONBLOCK
+rsEmergency
+_BOX_EXPR : 2
+_OPERAND
+_EXPRESSION
+_POSITIV
+bReset
+_OPERAND
+_EXPRESSION
+_NEGATIV
+bEmergencyClear
+_EXPRESSION
+_POSITIV
+RS
+_OUTPUTS : 0
+_EXPRESSION
+_POSITIV
+_OUTPUTS : 1
+_OUTPUT
+_POSITIV
+_NO_SET
+oEmergencyClear
+_NETWORK
+
+_COMMENT
+''
+_END_COMMENT
+_ASSIGN
+_FUNCTIONBLOCK
+rsRunning
+_BOX_EXPR : 2
+_OPERAND
+_EXPRESSION
+_POSITIV
+bStart
+_OPERATOR
+_BOX_EXPR : 4
+_OPERAND
+_EXPRESSION
+_NEGATIV
+oEmergencyClear
+_OPERAND
+_EXPRESSION
+_POSITIV
+bStop
+_OPERAND
+_EXPRESSION
+_POSITIV
+bModeChanged
+_OPERAND
+_EXPRESSION
+_POSITIV
+bResetRequired
+_EXPRESSION
+_POSITIV
+OR
+_EXPRESSION
+_POSITIV
+RS
+_OUTPUTS : 0
+_EXPRESSION
+_POSITIV
+_OUTPUTS : 1
+_OUTPUT
+_POSITIV
+_NO_SET
+oRun
+
+END_ACTION
+
+
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/Processes' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PRG_ProcessAuto
+VAR_INPUT
+	bReset	: BOOL;	(*Reset program*)
+	bEnable	: BOOL;	(*enable and run*)
+END_VAR
+VAR
+	tonDelay		: TON;
+	SFCReset		: BOOL;
+END_VAR
+VAR CONSTANT
+	tDelayTime		: TIME := t#2s;	(*Delay time for timer*)
+END_VAR
+
+(* @END_DECLARATION := '0' *)
+
+INITIAL_STEP Init:
+SFCReset := FALSE;
+
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+TRANSITION FROM Init TO (WaitReset,Process):= 
+NOT bReset
+
+
+END_TRANSITION
+STEP WaitReset:
+
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+TRANSITION FROM WaitReset TO Reseting:= 
+bReset
+
+
+END_TRANSITION
+STEP Reseting:
+SFCReset := TRUE;
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+STEP Process:
+O_Light_1 :=FALSE;
+O_Light_2 :=FALSE;
+O_Light_3 :=FALSE;
+O_Light_4 :=FALSE;
+
+tonDelay(IN:=FALSE , PT:=tDelayTime);
+
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+TRANSITION FROM Process TO Step1:= 
+bEnable
+
+
+END_TRANSITION
+STEP Step1:
+O_Light_1 := TRUE;
+
+tonDelay(IN:=TRUE);
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+EXIT_ACTION	
+tonDelay(IN:=FALSE);
+END_ACTION
+
+TRANSITION FROM Step1 TO Step2:= 
+tonDelay.Q
+
+
+END_TRANSITION
+STEP Step2:
+O_Light_2 := TRUE;
+
+tonDelay(IN:=TRUE);
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+EXIT_ACTION	
+tonDelay(IN:=FALSE);
+END_ACTION
+
+TRANSITION FROM Step2 TO Step3:= 
+tonDelay.Q
+
+
+END_TRANSITION
+STEP Step3:
+O_Light_3 := TRUE;
+
+tonDelay(IN:=TRUE);
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+EXIT_ACTION	
+tonDelay(IN:=FALSE);
+END_ACTION
+
+TRANSITION FROM Step3 TO Step4:= 
+tonDelay.Q
+
+
+END_TRANSITION
+STEP Step4:
+O_Light_4 := TRUE;
+
+tonDelay(IN:=TRUE);
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+EXIT_ACTION	
+tonDelay(IN:=FALSE);
+END_ACTION
+
+TRANSITION FROM Step4 TO Process:= 
+tonDelay.Q
+
+
+END_TRANSITION
+TRANSITION FROM (Reseting) TO Init:= 
+FALSE
+
+
+END_TRANSITION
+
+END_PROGRAM
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '\/Processes' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PRG_ProcessManual
+VAR_INPUT
+	bReset	: BOOL;	(*Reset program*)
+	bNext	: BOOL;	(*Next step*)
+END_VAR
+VAR
+	iStep	: INT;	(*Step variable*)
+	rtTrigger	: R_TRIG;	(*Trigger from button*)
+END_VAR
+(* @END_DECLARATION := '0' *)
+rtTrigger(CLK:=bNext , Q=> );
+IF  rtTrigger.Q THEN
+	iStep := iStep + 1;
+	IF iStep >= 5 THEN
+		iStep := 1;
+	END_IF
+END_IF;
+
+(*Default values*)
+	O_Light_1 := FALSE;
+	O_Light_2 := FALSE;
+	O_Light_3 := FALSE;
+	O_Light_4 := FALSE;
+
+CASE iStep OF
+0:
+	;
+1:
+	O_Light_1 := TRUE;
+2:
+	O_Light_2 := TRUE;
+3:
+	O_Light_3 := TRUE;
+4:
+	O_Light_4 := TRUE;
+ELSE
+	iStep := 0;
+END_CASE
+END_PROGRAM
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PRG_MAIN
+VAR
+	fbMngr		: FB_SimpleManager;
+	fbMdMngr	: FB_SimpleModeManager;
+END_VAR
+(* @END_DECLARATION := '0' *)
+(*Variant 1: Simple Mode manager*)
+(*
+fbMngr(
+	bEmergencyClear:= I_BtnEmergencyClear,
+	bReset:= I_BtnReset,
+	bStart:= I_BtnStart,
+	bStop:= I_BtnStop,
+	oEmergencyClear=> ,
+	oRun=> );
+*)
+
+(*Variant 2: Mode manager with two control modes*)
+fbMdMngr(
+	bEmergencyClear:= I_BtnEmergencyClear,
+	bReset:= I_BtnReset,
+	bStart:= I_BtnStart,
+	bStop:= I_BtnStop,
+	bSelectMode_Auto:= I_ModeReq_Auto,
+	bSelectMode_Manu:= I_ModeReq_Manu,
+	oEmergencyClear=> ,
+	oRun=> ,
+	oModeAct_Auto=> ,
+	oModeAct_Manu=> );
+
+(*Call emergency actions, if emergency is active*)
+IF NOT fbMdMngr.oEmergencyClear THEN
+	actEmergency();
+	RETURN;
+END_IF
+
+(* Call actions at running state*)
+IF fbMdMngr.oRun THEN
+	(* Control mode: Auto is active*)
+	IF fbMdMngr.oModeAct_Auto THEN
+		(*Calls and executes Program for automatic process*)
+		PRG_ProcessAuto(
+			bReset:=NOT fbMdMngr.oEmergencyClear ,
+			bEnable:= bHMI_Enable_Process );
+	END_IF;
+
+	(* Control mode: Manual is active*)
+	IF fbMdMngr.oModeAct_Manu THEN
+		(*Calls and executes Program for manual controls*)
+		PRG_ProcessManual(
+			bReset:=NOT fbMdMngr.oEmergencyClear ,
+			bNext:= bHMI_Manual_BtnNext );
+	END_IF;
+END_IF;
+
+END_PROGRAM
+ACTION	actEmergency:
+O_Light_1 :=FALSE;
+O_Light_2 :=FALSE;
+O_Light_3 :=FALSE;
+O_Light_4 :=FALSE;
+PRG_ProcessAuto(bReset:=TRUE , bEnable:= FALSE);
+
+END_ACTION
+
+
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+TYPE EN_Mode :
+	(eMode_Unknown := 0,
+	eMode_Auto := 1,
+	eMode_Manual );
+END_TYPE
+(* @END_DECLARATION := '0' *)

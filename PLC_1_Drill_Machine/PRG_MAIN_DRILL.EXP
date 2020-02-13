@@ -1,0 +1,380 @@
+
+(* @NESTEDCOMMENTS := 'Yes' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PRG_MAIN
+VAR
+	(* PackML Related Variables *)
+	fbStateModel			: FB_PackMLStateModel_ST;		(*FB for executing PackML state model*)
+	bBlink					: BOOL;	(*1s blinkg for CodeSys Simulation*)
+	c						: INT;	(*Support variable for blinking*)
+
+	fbMngr					: FB_SimpleManager;
+	fbLights				: FB_Lights;
+	fbConveyorLeft		: FB_Conveyor_Left;
+	fbConveyorRight		: FB_Conveyor_Right;
+	fbManipulatorLeft		: FB_Manipulator;
+	fbDrill					: FB_Drill;
+	fbManipulatorRight	: FB_Manipulator;
+
+	startTrig				: R_TRIG;
+	bStoppedOkAll		: BOOL := TRUE;
+	bAll_InitOK			: BOOL := FALSE;
+	bStopRequested		: BOOL := FALSE;
+	bE_StopRestart		: BOOL := FALSE;
+	oStopRequested		: BOOL;
+END_VAR
+(* @END_DECLARATION := '0' *)
+(* ****** Section 1: Initialisations and default values. Initial conditions for variables on every PLC cycle*)
+fbStateModel.bSC := FALSE;
+
+(* ****** Section 2: Actions in your program without considering the Control Mode. I.e. actions are performed same way indenpendent on
+current Control Mode selection.*)
+(*Mode independent state actions*)
+CASE fbStateModel.eState OF
+eSt_Aborting:
+	(* One can make specific actions in case of specific Mode-State combination.
+	   One can also consider to call a specific program when in specific Mode-State combination*)
+	actAborting;
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Clearing:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Stopping:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Resetting:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Holding:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_UnHolding:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Suspending:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+eSt_Unsuspending:
+	fbStateModel.bSC := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+END_CASE;
+
+(* ****** Section 3: Actions in your program which are Control Mode specific. Two nested case structures where outer one selects the
+control mode and inner the PackML state. In order to avoid conflicts, it would be better to process each PackML state either in Section 2 
+or Section 3, but not in both. *)
+(*Execution mode related state actions*)
+CASE fbStateModel.eMode OF
+(*MODE: MANUAL*)
+eMode_Manual:
+	(* ****** Section 3.1: PackML state based processing actions when Control Mode is Manual.*)
+	CASE fbStateModel.eState OF
+	eSt_Idle:
+		fbStateModel.bAck_Completed := FALSE;		(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Starting:
+		fbStateModel.bSC := TRUE;					(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Completing:
+		fbStateModel.bSC := TRUE;					(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Completed:
+		fbStateModel.bAck_Completed := TRUE;		(*TODO: Remove/Replace this row with desired actions*)
+	END_CASE;
+
+(*MODE: AUTOMATIC*)
+eMode_Automatic:
+	(* ****** Section 3.2: PackML state based processing actions when Control Mode is Automatic.*)
+	CASE fbStateModel.eState OF
+	eSt_Idle:
+		fbStateModel.bAck_Completed := FALSE;		(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Starting:
+		fbStateModel.bSC := TRUE;					(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Completing:
+		fbStateModel.bSC := TRUE;					(*TODO: Remove/Replace this row with desired actions*)
+	eSt_Completed:
+		;
+		(*fbStateModel.bAck_Completed:= I_Btn_Start;*)
+	END_CASE;
+
+(*MODE: UNKNOWN*)
+ELSE	(*This is an Error branch.*)
+	; (*TODO: Make implementation*)
+END_CASE;
+
+(* ****** Section 4: Grouping PackML states for calling Programs or FB instances.
+This is to avoid repetition inside case structure in Section 3. With IF clause setting lower (and upper) state limits we can filter out the states when we want to call 
+specific programs. The order of states is defined in Tab:Data types > E_PackMLState. eSt_Aborting is lowest and eSt_Completed is highest.
+Here we filter calling programs, only when we are in higher states than Stopped. Inside IF there is again CASE which process each Control Mode separately.*)
+(*Execution part. Making calls for program if we are on states above Stopped*)
+IF (fbStateModel.eState > eSt_Stopped) THEN
+	CASE fbStateModel.eMode OF
+		(*MODE: MANUAL*)
+		eMode_Manual:
+			;
+		(*MODE: AUTOMATIC*)
+		eMode_Automatic:
+			;
+	END_CASE;
+END_IF;
+
+(* ****** Section 5: Calling the fbStateModel instance.
+Here the instance of state model is called and all triggering inputs are set, but bSC (State Completed), which you control in your programs. 
+This is indication that your program has  finished certain stage.
+- Pay attention where the instance fbStateModel is defined. Do you do it in global variables or e.g. here in PRG_MAIN? Important is to use the 
+same instance in all places, so that machine state is unique and shared. Remember, if you have multiple definitions, the PRG_MAIN "hides" 
+the global one, and might lead to problems elswhere, when you think you are using the same instance, but actually are not. 
+- In case you are using the PackML visualisation (VC_PackMLStates), make sure you connect its placeholder to the very same PackML FB instance.
+- The Mask for wIgnoreState is created as following. I use binary base for the value(2#). The lowest bit in the mask corresponds the eSt_Aborting
+ in E_PackMLState. The next is eSt_Aborted, and so on. Specific state is ignored and jumped over when it is masked out i.e. ignored by having 1 
+in that position. Note that implementation allows this only for selected states. See FB_PackMLStateModel_ST code for further details.*)
+(*Calling & Updating the state model*)
+(*TODO: Evaluate and change all input conditions according your application needs*)
+fbStateModel(
+	bResetFB:= ,
+	eModeReq:= ,
+	wIgnoreState := 2#000000,		(*TODO: Which states should be ignodered. Default: 2#000000 or 2#100000*)
+	bSC:= ,		(*Must NOT be assigned ANY variable, because fb input is directly assigned above by your programs!!!*)
+	bAbort:= ,
+	bClear:= ,
+	bReset:= ,
+	bStart:= ,
+	bHold:= ,
+	bUn_Hold:= ,
+	bSuspend:= ,
+	bUn_Suspend:= ,
+	bStop:= ,
+	bComplete:= ,
+	bAck_Completed:= ,
+	eMode=> ,
+	eState=> );
+
+(* ****** Section 6: Here we update all outputs according the current state of our PackML model. This allows us to process the in single location.
+The control of outputs is bind to state, not e.g. to inputs. The inputs are the one driving the PackML model forward. Again CASE structure can be used.*)
+(*Call for HMI and UI update*)
+HMI_and_UI_Update;
+
+(*
+
+startTrig(CLK:= I_EmergencyClear);
+IF bAll_InitOK AND NOT bStopRequested THEN
+	bE_StopRestart := startTrig.Q;
+ELSE
+	bE_StopRestart := FALSE;
+END_IF
+
+fbMngr(
+	bEmergencyClear:= I_EmergencyClear,
+	bReset:= I_Btn_Reset,
+	bStart:= I_Btn_Start OR bE_StopRestart,
+	bStop:= I_Btn_Stop,
+	bStopOK_All := bStoppedOkAll,
+	oEmergencyClear=>,
+	oRun=>,
+	oStopRequested => bStopRequested );
+
+fbLights(
+	bReset:= ,
+	I_Emergency:= NOT fbMngr.oEmergencyClear,
+	I_Stopped:= bStoppedOkAll AND NOT fbMngr.oRun AND fbMngr.oEmergencyClear ,
+	I_Stopping:= fbMngr.oEmergencyClear AND NOT fbMngr.oRun AND NOT bStoppedOkAll,
+	I_Starting:=  fbMngr.oRun AND NOT bAll_InitOK,
+	I_Executing:=  fbMngr.oRun AND bAll_InitOK,
+	I_Suspend:= ,
+	I_Error:= (PRG_Simulator.wError_ManipL <> 0) OR (PRG_Simulator.wError_ManipR <> 0) OR (PRG_Simulator.wError_Drill <> 0),
+
+	O_Light_Start=> O_Light_Start ,
+	O_Light_Stop=> O_Light_Stop ,
+	O_Beacon_Red=> O_Beacon_Red,
+	O_Beacon_Yellow=> O_Beacon_Yellow,
+	O_Beacon_Green=> O_Beacon_Green );
+
+(*Call emergency actions, if emergency is active*)
+IF NOT fbMngr.oEmergencyClear THEN
+	(* bStoppedOkAll := TRUE; *)
+	(* actEmergency(); *)
+	RETURN;
+END_IF
+
+IF fbMngr.oRun OR NOT bStoppedOkAll THEN
+
+	fbConveyorLeft (
+		bRun := fbMngr.oRun ,
+		I_Reset:= NOT  fbMngr.oEmergencyClear  ,
+		O_ConvRunning=> O_ConvIn_MotON,
+		I_PartEndSensor:=  I_ConvIn_PartPresent,
+
+		hiPartAvail_FromLeft:= TRUE ,
+		hiRdyToReceive_FromRight:= fbManipulatorLeft.hoReadyToRecieve_ToLeft,
+		hoPartAvail_toRight=> ,
+		hoReadyToRecieve_ToLeft=> );
+	
+	fbManipulatorLeft(
+		I_Enable						:=  fbMngr.oRun,
+		I_Reset						:=   ,
+		b_LeftManip					:= TRUE ,
+		I_StopRequest 				:= ,
+		I_Mani_Limit_Up				:= I_ManiL_Limit_Up,
+		I_Mani_Limit_Dn				:= I_ManiL_Limit_Dn,
+		I_Mani_Limit_Home			:= I_ManiL_Limit_Home ,
+		I_Mani_Turned_Left			:= I_ManiL_Turned_Left,
+		I_Mani_Turned_Right			:= I_ManiL_Turned_Right ,
+		I_Mani_Gripper_Open		:= I_ManiL_Gripper_Open ,
+		I_fMani_axZ_CurrPos			:= fManiL_axZ_CurrPos ,
+		I_bMani_axZ_InTargetPos	:= bManiL_axZ_InTargetPos,
+	
+		hiPartAvail_FromLeft			:= fbConveyorLeft.hoPartAvail_ToRight ,
+		hiRdyToReceive_FromRight	:= fbDrill.hoReadyToRecieve_ToLeft,
+		hoReadyToRecieve_ToLeft	=> ,
+		hoPartAvail_ToRight			=> ,
+
+		O_Mani_Turn_Left			=> O_ManiL_Turn_Left ,
+		O_Mani_Turn_Right			=> O_ManiL_Turn_Right ,
+		O_Mani_Gripper_Close		=> O_ManiL_Gripper_Close ,
+		O_bMani_axZ_Enable		=> bManiL_axZ_Enable ,
+		O_bMani_axZ_Start			=> bManiL_axZ_Start ,
+		O_fMani_axZ_Velo			=> fManiL_axZ_Velo,
+		O_fMani_axZ_TargetPos		=> fManiL_axZ_TargetPos );
+	
+	fbDrill(
+		I_Enable						:= fbMngr.oRun,
+		I_Reset						:=  ,
+		I_StopRequest 				:= ,
+		I_Drill_Limit_Up				:= I_Drill_Limit_Up,
+		I_Drill_Limit_Dn				:= I_Drill_Limit_Dn ,
+		I_Drill_Limit_Home			:= I_Drill_Limit_Home,
+		I_Drill_Fixture_Open			:= I_Drill_Fixture_Open,
+		I_Drill_Fixture_Closed		:= I_Drill_Fixture_Closed,
+		fDrill_axZ_CurrPos			:= fDrill_axZ_CurrPos ,
+		bDrill_axZ_InTargetPos		:= bDrill_axZ_InTargetPos ,
+	
+		hiPartAvail_FromLeft			:= fbManipulatorLeft.hoPartAvail_ToRight ,
+		hiRdyToReceive_FromRight	:= fbManipulatorRight.hoReadyToRecieve_ToLeft ,
+		hoReadyToRecieve_ToLeft	=> ,
+		hoPartAvail_ToRight			=> ,
+	
+		O_Drill_Spindle_On			=> O_Drill_Spindle_On ,
+		O_Drill_Fixture_Close		=> O_Drill_Fixture_Close ,
+		bDrill_axZ_Enable			=> bDrill_axZ_Enable ,
+		bDrill_axZ_Start				=> bDrill_axZ_Start ,
+		fDrill_axZ_Velo				=> fDrill_axZ_Velo,
+		fDrill_axZ_TargetPos			=> fDrill_axZ_TargetPos );
+	
+	fbManipulatorRight(
+		I_Enable						:=  fbMngr.oRun,
+		I_Reset						:=   ,
+		I_StopRequest 				:= ,
+		b_LeftManip					:= FALSE ,
+		I_Mani_Limit_Up				:= I_ManiR_Limit_Up,
+		I_Mani_Limit_Dn				:= I_ManiR_Limit_Dn,
+		I_Mani_Limit_Home			:= I_ManiR_Limit_Home ,
+		I_Mani_Turned_Left			:= I_ManiR_Turned_Left,
+		I_Mani_Turned_Right			:= I_ManiR_Turned_Right ,
+		I_Mani_Gripper_Open		:= I_ManiR_Gripper_Open ,
+		I_fMani_axZ_CurrPos			:= fManiR_axZ_CurrPos ,
+		I_bMani_axZ_InTargetPos	:= bManiR_axZ_InTargetPos,
+	
+		hiPartAvail_FromLeft			:= fbDrill.hoPartAvail_ToRight,
+		hiRdyToReceive_FromRight	:= fbConveyorRight.hoReadyToRecieve_ToLeft,
+		hoReadyToRecieve_ToLeft	=> ,
+		hoPartAvail_ToRight			=> ,
+	
+		O_Mani_Turn_Left			=> O_ManiR_Turn_Left ,
+		O_Mani_Turn_Right			=> O_ManiR_Turn_Right ,
+		O_Mani_Gripper_Close		=> O_ManiR_Gripper_Close ,
+		O_bMani_axZ_Enable		=> bManiR_axZ_Enable ,
+		O_bMani_axZ_Start			=> bManiR_axZ_Start ,
+		O_fMani_axZ_Velo			=> fManiR_axZ_Velo,
+		O_fMani_axZ_TargetPos		=> fManiR_axZ_TargetPos );
+	
+	fbConveyorRight (
+		bRun := fbMngr.oRun ,
+		I_Reset:=   ,
+		O_ConvRunning=> O_ConvOut_MotON,
+		I_PartEndSensor:=  I_ConvOut_PartPresent,
+	
+		hiPartAvail_FromLeft:= fbManipulatorRight.hoPartAvail_ToRight  ,
+		hiRdyToReceive_FromRight:= TRUE ,
+		hoPartAvail_toRight=> ,
+		hoReadyToRecieve_ToLeft=> );
+END_IF
+
+IF fbConveyorLeft.bStopOk AND fbManipulatorLeft.bStopOk AND fbManipulatorRight.bStopOk AND fbDrill.bStopOk AND  fbConveyorRight.bStopOk THEN
+	bStoppedOkAll := TRUE;
+ELSE
+	bStoppedOkAll := FALSE;
+END_IF
+
+IF fbManipulatorLeft.bInitialised AND fbManipulatorRight.bInitialised AND fbDrill.bInitialised THEN
+	bAll_InitOK := TRUE;
+ELSE
+	bAll_InitOK := FALSE;
+END_IF
+
+
+
+*)
+
+END_PROGRAM
+ACTION	actAborting:
+(* Conveyors *)
+O_ConvIn_MotON					:= FALSE;
+O_ConvOut_MotON	 			:= FALSE;
+
+(* Manipulators *)
+O_ManiL_Turn_Left		 		:= FALSE;
+O_ManiL_Turn_Right		 		:= FALSE;
+O_ManiR_Turn_Left		 		:= FALSE;
+O_ManiR_Turn_Right		 		:= FALSE;
+bManiL_axZ_Start					:= FALSE;
+bManiR_axZ_Start				:= FALSE;
+
+(*  Avoid Dropping Objects *)
+IF I_ManiL_Gripper_Open THEN
+	O_ManiL_Gripper_Close 	:= FALSE;
+ELSE
+	O_ManiL_Gripper_Close		:= TRUE;
+END_IF
+(* Drill *)
+bDrill_axZ_Start 					:= FALSE;
+O_Drill_Spindle_On				:= FALSE;
+
+(*  Avoid Toggling fixture Objects *)
+IF I_Drill_Fixture_Open THEN
+	O_Drill_Fixture_Close 		:= FALSE;
+ELSE
+	O_Drill_Fixture_Close		:= TRUE;
+END_IF
+
+(*
+fbConveyorLeft(I_Reset:=TRUE, bRun := FALSE);
+fbConveyorRight(I_Reset:=TRUE, bRun := FALSE);
+fbManipulatorLeft(I_Reset:=TRUE, I_Enable := FALSE);
+fbManipulatorRight(I_Reset:=TRUE, I_Enable := FALSE);
+fbDrill(I_Reset:=TRUE, I_Enable := FALSE);
+*)
+END_ACTION
+
+ACTION	HMI_and_UI_Update:
+(*HMI Update*)
+(*Calling blinking sub-program*)
+PRG_Blinking (bSign4Hz=> , bSign2Hz=> , bSign1Hz=> , bSign0_5Hz=> );
+(*Codesys simulation 1Hz blinking *)
+c:= c + 1;
+IF c > 1 THEN
+	c:=0;
+END_IF;
+bBlink := (c=0);	(*bBlink is true if c=0*)
+
+(*Init values*)
+O_Light_Stop := FALSE;	(*TODO: Change initial values according your app needs*)
+
+(*TODO: Change values according range of states *)
+(*Start light*)
+O_Light_Start :=  (fbStateModel.eState >= eSt_Resetting) AND (fbStateModel.eState < eSt_Completed);
+
+(*TODO: Change output values according states *)
+CASE fbStateModel.eState OF
+eSt_Aborting, eSt_Aborted:
+	O_Light_Stop := bBlink;					(*TODO: Change initial values according your app needs*)
+eSt_Clearing:
+	O_Light_Stop := bBlink; 					(*TODO: Change initial values according your app needs*)
+eSt_Stopping, eSt_Stopped, eSt_Completed:
+	O_Light_Stop := TRUE;					(*TODO: Change initial values according your app needs*)
+eSt_Starting:
+	;
+	(*O_Light_Start := bBlink;	*)				(*TODO: Change initial values according your app needs*)
+END_CASE;
+END_ACTION
+

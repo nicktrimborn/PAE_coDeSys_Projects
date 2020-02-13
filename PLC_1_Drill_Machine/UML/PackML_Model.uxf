@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>50</x>
+      <y>90</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Automatic </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>50</x>
+      <y>180</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Semi-Automatic </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>50</x>
+      <y>360</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Unknown </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>340</x>
+      <y>70</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Aborting </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>340</x>
+      <y>160</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Clearing </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>690</x>
+      <y>20</y>
+      <w>170</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>OuterClass
+{innerclass
+InnerClass
+innerclass}
+{innerclass
+InnerClass
+{innerclass
+InnerInnerClass
+--
+field
+innerclass}
+innerclass}
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>300</x>
+      <y>20</y>
+      <w>180</w>
+      <h>750</h>
+    </coordinates>
+    <panel_attributes>States
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLFrame</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>170</w>
+      <h>430</h>
+    </coordinates>
+    <panel_attributes>Proceedural Mode
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>340</x>
+      <y>260</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Stopping </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>340</x>
+      <y>350</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Resetting </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>340</x>
+      <y>440</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Holding </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>340</x>
+      <y>530</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Un-Holding </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>340</x>
+      <y>620</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Suspending</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>340</x>
+      <y>710</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Un-Suspending </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>50</x>
+      <y>270</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Manual </panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
