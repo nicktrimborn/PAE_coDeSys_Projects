@@ -4,21 +4,23 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>322</x>
-      <y>273</y>
+      <x>280</x>
+      <y>224</y>
       <w>140</w>
-      <h>42</h>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>WaitForPart
+    <panel_attributes>NiceStop
 --
-hoReadyToRecieve_ToLeft:=T</panel_attributes>
+bStopOk:=T;
+O_ConvRunning:=F;
+hoPartAvail_ToRight:=F;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>329</x>
-      <y>399</y>
+      <x>273</x>
+      <y>441</y>
       <w>126</w>
       <h>42</h>
     </coordinates>
@@ -30,8 +32,8 @@ O_ConvRunning := T</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>329</x>
-      <y>511</y>
+      <x>273</x>
+      <y>553</y>
       <w>126</w>
       <h>42</h>
     </coordinates>
@@ -43,8 +45,8 @@ hoPartAvail_ToRight := T</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>322</x>
-      <y>616</y>
+      <x>266</x>
+      <y>658</y>
       <w>147</w>
       <h>42</h>
     </coordinates>
@@ -56,8 +58,8 @@ hoReadyToRecieve_ToLeft:=F</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>329</x>
-      <y>826</y>
+      <x>273</x>
+      <y>868</y>
       <w>126</w>
       <h>42</h>
     </coordinates>
@@ -67,8 +69,8 @@ hoReadyToRecieve_ToLeft:=F</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>301</x>
-      <y>175</y>
+      <x>238</x>
+      <y>168</y>
       <w>14</w>
       <h>14</h>
     </coordinates>
@@ -78,42 +80,42 @@ hoReadyToRecieve_ToLeft:=F</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>301</x>
-      <y>175</y>
-      <w>98</w>
-      <h>112</h>
+      <x>238</x>
+      <y>168</y>
+      <w>77</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;140.0</additional_attributes>
+    <additional_attributes>10.0;10.0;90.0;80.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>385</x>
-      <y>308</y>
+      <x>329</x>
+      <y>378</y>
       <w>112</w>
-      <h>105</h>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 hiPartAvail_FromLeft</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>273</x>
-      <y>287</y>
-      <w>70</w>
-      <h>574</h>
+      <x>217</x>
+      <y>266</y>
+      <w>77</w>
+      <h>637</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>80.0;800.0;10.0;800.0;10.0;10.0;70.0;10.0</additional_attributes>
+    <additional_attributes>80.0;890.0;10.0;890.0;20.0;10.0;90.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>329</x>
-      <y>721</y>
+      <x>273</x>
+      <y>763</y>
       <w>126</w>
       <h>42</h>
     </coordinates>
@@ -125,8 +127,8 @@ hoPartAvail_ToRight = F</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>385</x>
-      <y>434</y>
+      <x>329</x>
+      <y>476</y>
       <w>98</w>
       <h>91</h>
     </coordinates>
@@ -137,8 +139,8 @@ I_PartEndSensor</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>385</x>
-      <y>546</y>
+      <x>329</x>
+      <y>588</y>
       <w>140</w>
       <h>84</h>
     </coordinates>
@@ -149,8 +151,8 @@ hiRdyToReceive_FromRight</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>385</x>
-      <y>651</y>
+      <x>329</x>
+      <y>693</y>
       <w>119</w>
       <h>84</h>
     </coordinates>
@@ -161,8 +163,8 @@ NOT I_PartEndSensor</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>385</x>
-      <y>756</y>
+      <x>329</x>
+      <y>798</y>
       <w>168</w>
       <h>84</h>
     </coordinates>
@@ -173,8 +175,8 @@ NOT hiRdyToReceive_FromRight</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>679</x>
-      <y>105</y>
+      <x>623</x>
+      <y>98</y>
       <w>140</w>
       <h>42</h>
     </coordinates>
@@ -184,8 +186,8 @@ NOT hiRdyToReceive_FromRight</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>637</x>
-      <y>77</y>
+      <x>602</x>
+      <y>70</y>
       <w>14</w>
       <h>14</h>
     </coordinates>
@@ -195,78 +197,78 @@ NOT hiRdyToReceive_FromRight</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>637</x>
-      <y>77</y>
-      <w>119</w>
+      <x>602</x>
+      <y>70</y>
+      <w>98</w>
       <h>42</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;150.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;120.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>679</x>
-      <y>189</y>
+      <x>623</x>
+      <y>259</y>
       <w>140</w>
       <h>63</h>
     </coordinates>
     <panel_attributes>WaitForPart
 --
 hoReadyToRecieve_ToLeft:=T
-</panel_attributes>
+OnExit: bStopOk := F;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>511</x>
-      <y>210</y>
+      <x>455</x>
+      <y>280</y>
       <w>182</w>
-      <h>385</h>
+      <h>357</h>
     </coordinates>
     <panel_attributes>lt=.&gt;</panel_attributes>
-    <additional_attributes>240.0;10.0;10.0;530.0</additional_attributes>
+    <additional_attributes>240.0;10.0;10.0;490.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>735</x>
-      <y>140</y>
+      <x>679</x>
+      <y>133</y>
       <w>21</w>
-      <h>63</h>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>735</x>
-      <y>245</y>
+      <x>679</x>
+      <y>315</y>
       <w>112</w>
-      <h>84</h>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 hiPartAvail_FromLeft</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>448</x>
-      <y>280</y>
+      <x>392</x>
+      <y>329</y>
       <w>308</w>
-      <h>273</h>
+      <h>266</h>
     </coordinates>
     <panel_attributes>lt=.&gt;</panel_attributes>
-    <additional_attributes>10.0;370.0;180.0;30.0;420.0;10.0</additional_attributes>
+    <additional_attributes>10.0;360.0;180.0;20.0;420.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>686</x>
-      <y>343</y>
+      <x>630</x>
+      <y>385</y>
       <w>126</w>
       <h>350</h>
     </coordinates>
@@ -279,8 +281,8 @@ symbol=substate</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>672</x>
-      <y>315</y>
+      <x>616</x>
+      <y>357</y>
       <w>154</w>
       <h>385</h>
     </coordinates>
@@ -293,8 +295,8 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>707</x>
-      <y>448</y>
+      <x>651</x>
+      <y>490</y>
       <w>84</w>
       <h>28</h>
     </coordinates>
@@ -304,8 +306,8 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>707</x>
-      <y>497</y>
+      <x>651</x>
+      <y>539</y>
       <w>84</w>
       <h>28</h>
     </coordinates>
@@ -315,8 +317,8 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>707</x>
-      <y>546</y>
+      <x>651</x>
+      <y>588</y>
       <w>84</w>
       <h>28</h>
     </coordinates>
@@ -326,8 +328,8 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>707</x>
-      <y>588</y>
+      <x>651</x>
+      <y>630</y>
       <w>84</w>
       <h>28</h>
     </coordinates>
@@ -337,8 +339,8 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>707</x>
-      <y>630</y>
+      <x>651</x>
+      <y>672</y>
       <w>84</w>
       <h>28</h>
     </coordinates>
@@ -348,8 +350,8 @@ valign=top
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>679</x>
-      <y>749</y>
+      <x>623</x>
+      <y>791</y>
       <w>140</w>
       <h>42</h>
     </coordinates>
@@ -361,8 +363,8 @@ hoReadyToRecieve_ToLeft:=F</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>679</x>
-      <y>826</y>
+      <x>623</x>
+      <y>868</y>
       <w>140</w>
       <h>42</h>
     </coordinates>
@@ -372,8 +374,8 @@ hoReadyToRecieve_ToLeft:=F</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>735</x>
-      <y>693</y>
+      <x>679</x>
+      <y>735</y>
       <w>56</w>
       <h>70</h>
     </coordinates>
@@ -385,8 +387,8 @@ bPicked
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>735</x>
-      <y>784</y>
+      <x>679</x>
+      <y>826</y>
       <w>133</w>
       <h>56</h>
     </coordinates>
@@ -397,8 +399,8 @@ NOT hiPartAvail_FromLeft</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>539</x>
-      <y>770</y>
+      <x>483</x>
+      <y>812</y>
       <w>154</w>
       <h>42</h>
     </coordinates>
@@ -408,8 +410,8 @@ NOT hiPartAvail_FromLeft</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>448</x>
-      <y>735</y>
+      <x>392</x>
+      <y>777</y>
       <w>301</w>
       <h>91</h>
     </coordinates>
@@ -419,8 +421,8 @@ NOT hiPartAvail_FromLeft</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>707</x>
-      <y>371</y>
+      <x>651</x>
+      <y>413</y>
       <w>84</w>
       <h>28</h>
     </coordinates>
@@ -430,8 +432,8 @@ NOT hiPartAvail_FromLeft</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>735</x>
-      <y>861</y>
+      <x>679</x>
+      <y>903</y>
       <w>70</w>
       <h>77</h>
     </coordinates>
@@ -442,12 +444,75 @@ waitToPlace</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>707</x>
-      <y>406</y>
+      <x>651</x>
+      <y>448</y>
       <w>84</w>
       <h>28</h>
     </coordinates>
     <panel_attributes>MoveZ</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>280</x>
+      <y>329</y>
+      <w>140</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>WaitForPart
+--
+hoReadyToRecieve_ToLeft:=T
+OnExit: bStopOk := F;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>329</x>
+      <y>287</y>
+      <w>56</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+I_Enable</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>623</x>
+      <y>168</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>NiceStop
+--
+bStopOk:=T;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>679</x>
+      <y>231</y>
+      <w>21</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>756</x>
+      <y>203</y>
+      <w>147</w>
+      <h>770</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=Place Complete </panel_attributes>
+    <additional_attributes>90.0;1080.0;90.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
