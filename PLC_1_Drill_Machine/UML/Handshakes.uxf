@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>8</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>264</x>
-      <y>816</y>
-      <w>128</w>
-      <h>32</h>
+      <x>329</x>
+      <y>469</y>
+      <w>70</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=[&gt;]-[&gt;]
-I_PartEndSensor</panel_attributes>
-    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+</panel_attributes>
+    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>264</x>
-      <y>856</y>
-      <w>128</w>
-      <h>32</h>
+      <x>329</x>
+      <y>504</y>
+      <w>70</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=[&lt;]-[&lt;]
 </panel_attributes>
-    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>48</x>
-      <y>904</y>
-      <w>80</w>
-      <h>40</h>
+      <x>133</x>
+      <y>546</y>
+      <w>77</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>lt=[&gt;]-[&gt;]
 TRUE
 </panel_attributes>
-    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>48</x>
-      <y>944</y>
-      <w>80</w>
-      <h>32</h>
+      <x>133</x>
+      <y>581</y>
+      <w>77</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=[&lt;]-[&lt;]
 TRUE</panel_attributes>
-    <additional_attributes>80.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>528</x>
-      <y>728</y>
-      <w>64</w>
-      <h>32</h>
+      <x>518</x>
+      <y>392</y>
+      <w>56</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=[&gt;]-[&gt;]
 </panel_attributes>
@@ -65,10 +65,10 @@ TRUE</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>528</x>
-      <y>768</y>
-      <w>64</w>
-      <h>32</h>
+      <x>518</x>
+      <y>427</y>
+      <w>56</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=[&lt;]-[&lt;]
 </panel_attributes>
@@ -77,10 +77,10 @@ TRUE</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>728</x>
-      <y>640</y>
-      <w>64</w>
-      <h>32</h>
+      <x>693</x>
+      <y>315</y>
+      <w>56</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=[&gt;]-[&gt;]
 </panel_attributes>
@@ -89,10 +89,10 @@ TRUE</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>728</x>
-      <y>680</y>
-      <w>64</w>
-      <h>32</h>
+      <x>693</x>
+      <y>350</y>
+      <w>56</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=[&lt;]-[&lt;]
 </panel_attributes>
@@ -101,10 +101,10 @@ TRUE</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>928</x>
-      <y>552</y>
-      <w>72</w>
-      <h>32</h>
+      <x>868</x>
+      <y>238</y>
+      <w>63</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=[&gt;]-[&gt;]
 </panel_attributes>
@@ -113,10 +113,10 @@ TRUE</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>928</x>
-      <y>592</y>
-      <w>72</w>
-      <h>32</h>
+      <x>868</x>
+      <y>273</y>
+      <w>63</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=[&lt;]-[&lt;]
 TRUE</panel_attributes>
@@ -125,35 +125,35 @@ TRUE</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1136</x>
-      <y>496</y>
-      <w>72</w>
-      <h>40</h>
+      <x>1050</x>
+      <y>196</y>
+      <w>63</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=[&lt;]-[&lt;]
 TRUE</panel_attributes>
-    <additional_attributes>70.0;20.0;10.0;30.0</additional_attributes>
+    <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1136</x>
-      <y>456</y>
-      <w>72</w>
-      <h>40</h>
+      <x>1050</x>
+      <y>161</y>
+      <w>63</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>lt=[&gt;]-[&gt;]
 
 </panel_attributes>
-    <additional_attributes>70.0;20.0;10.0;30.0</additional_attributes>
+    <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>112</x>
-      <y>784</y>
-      <w>160</w>
-      <h>200</h>
+      <x>196</x>
+      <y>441</y>
+      <w>140</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>symbol=component
 fbConveyorLeft
@@ -181,10 +181,10 @@ fbConveyorLeft
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>376</x>
-      <y>696</y>
-      <w>160</w>
-      <h>200</h>
+      <x>385</x>
+      <y>364</y>
+      <w>140</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>symbol=component
 fbManipLeft
@@ -212,10 +212,10 @@ fbManipLeft
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>576</x>
-      <y>608</y>
-      <w>160</w>
-      <h>200</h>
+      <x>560</x>
+      <y>287</y>
+      <w>140</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>symbol=component
 fbDrill
@@ -243,10 +243,10 @@ fbDrill
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>776</x>
-      <y>520</y>
-      <w>160</w>
-      <h>200</h>
+      <x>735</x>
+      <y>210</y>
+      <w>140</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>symbol=component
 fbManipRight
@@ -274,10 +274,10 @@ fbManipRight
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>984</x>
-      <y>432</y>
-      <w>160</w>
-      <h>200</h>
+      <x>917</x>
+      <y>133</y>
+      <w>140</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>symbol=component
 fbConveyorRight
