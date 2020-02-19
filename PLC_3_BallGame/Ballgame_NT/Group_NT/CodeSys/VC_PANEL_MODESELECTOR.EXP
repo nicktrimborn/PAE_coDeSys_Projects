@@ -1,0 +1,83 @@
+(* @PATH := '\/Simulator\/MachineComponents' *)
+
+VISUALISATION VC_PANEL_MODESELECTOR _VISU_TYPES : 1,1
+_BG_BMP : ''
+_TEXT : 15
+_PAINTZOOM : 130
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 0,20,116,46,58,33
+_COLORS : 12632256,0,65535,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','.HMI_uModeReq=3','',''
+_DSP : '','Manual',''
+_ZOOM : ''
+_INPUT : 524288
+_TEXT : 5,4294967283,400,0,3,0,0,0
+_FONT : ''
+_EXEC : 'INTERN ASSIGN HMI_uModeReq:=(3)'
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 0
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 0,0,116,21,58,10
+_COLORS : 15132390,0,16777215,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','','',''
+_DSP : '','Mode Select',''
+_ZOOM : ''
+_INPUT : 0
+_TEXT : 5,4294967283,700,0,11,0,0,0
+_FONT : 'MS Sans Serif'
+_EXEC : ''
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+
+_SIMPLE : 1
+_LINEWIDTH : 0
+_NOCOLORS : 1,1
+_POS : 0,45,116,71,58,58
+_COLORS : 12632256,0,65535,0,0
+_VARIABLES : '','','','','','','',''
+_THRESH : '','.HMI_uModeReq=1','',''
+_DSP : '','Automatic',''
+_ZOOM : ''
+_INPUT : 524288
+_TEXT : 5,4294967283,400,0,14,0,0,0
+_FONT : ''
+_EXEC : 'INTERN ASSIGN HMI_uModeReq:=(1)'
+_TEXTVARIABLES : '','','','',''
+_COLORVARIABLES : '','','','','',''
+_ACCESSLEVELS : 2,2,2,2,2,2,2,2
+_OBJECT : 0,0
+_THRESH2 : '','','',''
+_INPUTTYPE : '','',''
+_HIDDENINPUT : 0
+_END_ELEM
+(* @TEXTSCALINGVARS := '_TEXTSCALINGVARS: $'$',$'$'' *)
+(* @EXTENDEDSIMPLESHAPE := '_SIMPLE: 0' *)
+(* @INPUTTAPFALSE := '_INPUTTAPFALSE: 0' *)
+_KEYINFOLIST : 0
+END_VISUALISATION
