@@ -1,0 +1,45 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLSpecialState</id><coordinates><x>70</x><y>87</y><w>20</w><h>20</h></coordinates><panel_attributes>type=initial</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>70</x><y>87</y><w>90</w><h>70</h></coordinates><panel_attributes>lt=-&gt;</panel_attributes><additional_attributes>10;10;70;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>37</y><w>130</w><h>30</h></coordinates><panel_attributes>lw=3
+Sorter</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>590</x><y>227</y><w>150</w><h>50</h></coordinates><panel_attributes>NiceStop
+--
+bOkToStop := T</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>590</x><y>117</y><w>150</w><h>50</h></coordinates><panel_attributes>InitLift
+--
+dest := Loading</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>167</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=-&gt;</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>377</y><w>130</w><h>90</h></coordinates><panel_attributes>lt=-&gt;
+hiBallAvail_FromUS</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>277</y><w>70</w><h>80</h></coordinates><panel_attributes>lt=-&gt;
+bEnable</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>UMLState</id><coordinates><x>130</x><y>497</y><w>180</w><h>180</h></coordinates><panel_attributes>Lift
+--
+
+valign=top
+symbol=substate</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>110</x><y>447</y><w>220</w><h>250</h></coordinates><panel_attributes>LoadBall
+--
+bOkToStop := F
+valign=top
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>140</x><y>337</y><w>150</w><h>50</h></coordinates><panel_attributes>WaitForBall</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>170</x><y>537</y><w>90</w><h>40</h></coordinates><panel_attributes>Lift
+--
+OSorterLift := T</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>170</x><y>607</y><w>90</w><h>40</h></coordinates><panel_attributes>Classify
+--
+bMetal (T or F)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>140</x><y>997</y><w>150</w><h>50</h></coordinates><panel_attributes>Handshake
+--
+hoBallAvail_ToDS := T</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>687</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=-&gt;
+</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>37</y><w>130</w><h>30</h></coordinates><panel_attributes>lw=3
+Lift</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>257</y><w>130</w><h>130</h></coordinates><panel_attributes>lt=-&gt;
+NOT bEnable</panel_attributes><additional_attributes>10;110;40;110;40;10;10;10</additional_attributes></element><element><id>UMLState</id><coordinates><x>140</x><y>127</y><w>150</w><h>50</h></coordinates><panel_attributes>InitSorter
+--
+OSorterGate := F
+OSorterLift := F</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>140</x><y>237</y><w>150</w><h>50</h></coordinates><panel_attributes>NiceStop
+--
+bOkToStop := T</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>590</x><y>337</y><w>150</w><h>50</h></coordinates><panel_attributes>WaitForBall</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>730</x><y>247</y><w>140</w><h>140</h></coordinates><panel_attributes>lt=-&gt;
+NOT bEnable</panel_attributes><additional_attributes>10;120;50;120;50;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>650</x><y>157</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=-&gt;</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>650</x><y>267</y><w>70</w><h>90</h></coordinates><panel_attributes>lt=-&gt;
+bEnable</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLState</id><coordinates><x>560</x><y>447</y><w>220</w><h>270</h></coordinates><panel_attributes>MoveToLoad
+--
+bOkToStop := F
+valign=top
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>580</x><y>507</y><w>180</w><h>180</h></coordinates><panel_attributes>Load
+--
+
+valign=top
+symbol=substate</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>650</x><y>377</y><w>130</w><h>90</h></coordinates><panel_attributes>lt=-&gt;
+hiBallAvail_FromUS</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>407</y><w>400</w><h>380</h></coordinates><panel_attributes>lt=.&gt;</panel_attributes><additional_attributes>10;360;130;360;200;10;380;10</additional_attributes></element><element><id>UMLState</id><coordinates><x>620</x><y>547</y><w>90</w><h>40</h></coordinates><panel_attributes>Check Position</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>140</x><y>737</y><w>150</w><h>50</h></coordinates><panel_attributes>BallAvailible
+--
+hoBallAvail_ToDS := T</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>140</x><y>837</y><w>160</w><h>50</h></coordinates><panel_attributes>TransferBall
+--
+hoBallAvail_ToDS := T</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>620</x><y>607</y><w>90</w><h>40</h></coordinates><panel_attributes>Check Position</panel_attributes><additional_attributes></additional_attributes></element></diagram>
