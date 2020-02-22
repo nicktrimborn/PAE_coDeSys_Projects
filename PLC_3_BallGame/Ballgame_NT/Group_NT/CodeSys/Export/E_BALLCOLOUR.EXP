@@ -1,0 +1,12 @@
+(* @NESTEDCOMMENTS := 'No' *)
+(* @PATH := '' *)
+(* @OBJECTFLAGS := '0, 8' *)
+TYPE E_BallColour :
+(
+	NoColour := 0,
+	Yellow := 1,
+	Blue := 2,
+	Red := 3
+);
+END_TYPE
+(* @END_DECLARATION := '0' *)
