@@ -1,0 +1,166 @@
+
+(* @NESTEDCOMMENTS := 'No' *)
+(* @PATH := '\/Processes' *)
+(* @OBJECTFLAGS := '0, 8' *)
+(* @SYMFILEFLAGS := '2048' *)
+PROGRAM PRG_MoveToDest
+VAR_INPUT
+	bExecute: BOOL;
+	wTarget : WORD;
+END_VAR
+VAR_INPUT
+	bDone: BOOL;
+END_VAR
+VAR
+	tonMoveDelay	: TON;
+	tonEjectDelay	: TON;
+	tonSensorDelay	: TON;
+	tMoveDelay		: TIME := T#500ms;
+	tEjectorDelay	: TIME := T#1s;
+	tSensorDelay	: TIME := T#500ms;
+END_VAR
+(* @END_DECLARATION := '0' *)
+
+INITIAL_STEP Init:
+
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+EXIT_ACTION	
+bDone := FALSE;
+END_ACTION
+
+TRANSITION FROM Init TO MoveToTarget:= 
+bExecute
+
+
+END_TRANSITION
+STEP MoveToTarget:
+(*Drive Move Delay *)
+tonMoveDelay(IN:=TRUE, PT:= T_DRIVE_DELAY);
+(* Drive To Target *)
+fbDrive(
+	bEnable:= TRUE,
+	bStart:= TRUE,
+	wTarget:= wTarget);
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+ENTRY_ACTION	
+tonMoveDelay(IN:=FALSE);
+END_ACTION
+
+EXIT_ACTION	
+fbDrive(
+	bStart:= FALSE);
+tonMoveDelay(IN:=FALSE);
+END_ACTION
+
+TRANSITION FROM MoveToTarget TO AllowToSettle:= 
+fbDrive.bMoveDone AND tonMoveDelay.Q
+
+
+END_TRANSITION
+STEP AllowToSettle:
+tonMoveDelay(IN:=TRUE , PT:= T_POS_SETTLE_DELAY);
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+EXIT_ACTION	
+tonMoveDelay(IN:=FALSE);
+END_ACTION
+
+TRANSITION FROM AllowToSettle TO TargetDecision:= 
+tonMoveDelay.Q
+
+
+END_TRANSITION
+STEP TargetDecision:
+
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+TRANSITION FROM TargetDecision TO Eject:= 
+NOT (wTarget=GPOS_COLOR_SEN OR wTarget=GPOS_LOADING)
+
+
+END_TRANSITION
+TRANSITION FROM TargetDecision TO NothingRequired:= 
+wTarget=GPOS_COLOR_SEN OR wTarget=GPOS_LOADING
+
+
+END_TRANSITION
+STEP NothingRequired:
+
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+TRANSITION FROM NothingRequired TO Done:= 
+TRUE
+
+
+END_TRANSITION
+STEP Eject:
+tonEjectDelay(IN:=TRUE , PT:= T_EJECTOR_DELAY);
+OEjector := TRUE;
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+EXIT_ACTION	
+tonEjectDelay(IN:=FALSE);
+END_ACTION
+
+TRANSITION FROM Eject TO ResetEjector:= 
+tonEjectDelay.Q
+
+
+END_TRANSITION
+STEP ResetEjector:
+(* Retract Ejector *)
+tonEjectDelay(IN:=TRUE , PT:= T_EJECTOR_DELAY);
+OEjector := FALSE;
+
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+EXIT_ACTION	
+tonEjectDelay(IN:=FALSE);
+END_ACTION
+
+TRANSITION FROM ResetEjector TO Done:= 
+tonEjectDelay.Q
+
+
+END_TRANSITION
+STEP Done:
+bDone := TRUE;
+
+END_STEP
+(* @SFCMAXTIME := '' *)
+(* @SFCMINTIME := '' *)
+(* @SFCCOMMENT := '' *)
+EXIT_ACTION	
+bDone := FALSE;
+END_ACTION
+
+TRANSITION FROM Done TO Init:= 
+NOT bExecute
+
+
+END_TRANSITION
+
+END_PROGRAM
