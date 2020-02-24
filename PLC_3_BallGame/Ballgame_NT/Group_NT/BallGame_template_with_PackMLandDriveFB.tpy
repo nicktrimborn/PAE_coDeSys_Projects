@@ -4,7 +4,7 @@
 	<ProjectInfo>
 		<Path>C:\Users\localuser\Documents\coDeSys_Projects\PLC_3_BallGame\Ballgame_NT\Group_NT\BallGame_template_with_PackMLandDriveFB.pro</Path>
 		<IsLibrary>false</IsLibrary>
-		<ChangeDate>2020-02-24T17:01:59</ChangeDate>
+		<ChangeDate>2020-02-24T17:33:54</ChangeDate>
 		<Library>
 			<Name>TcBase.lib</Name>
 			<Path>C:\TwinCAT\PLC\LIB\TcBase.lib</Path>
@@ -441,7 +441,319 @@
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="103F7A5D" Crc32="3446679524" LastChange="2020-02-24T15:06:09">FB_Sorter</Name>
+			<Name Decoration="300002FE" Crc32="0303332809" LastChange="2020-02-23T17:29:20">E_ModeCtrl</Name>
+			<Type>INT</Type>
+			<BitSize>16</BitSize>
+			<EnumInfo>
+				<Text>eMode_undefined</Text>
+				<Enum>0</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eMode_Automatic</Text>
+				<Enum>1</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eMode_XXX</Text>
+				<Enum>2</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eMode_Manual</Text>
+				<Enum>99</Enum>
+			</EnumInfo>
+		</DataType>
+		<DataType>
+			<Name Decoration="30000225" Crc32="2321183169" LastChange="2020-02-23T17:29:20">E_State</Name>
+			<Type>INT</Type>
+			<BitSize>16</BitSize>
+			<EnumInfo>
+				<Text>eSt_Aborting</Text>
+				<Enum>0</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Aborted</Text>
+				<Enum>1</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Clearing</Text>
+				<Enum>2</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Stopped</Text>
+				<Enum>3</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Stopping</Text>
+				<Enum>4</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Resetting</Text>
+				<Enum>5</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Idle</Text>
+				<Enum>6</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Starting</Text>
+				<Enum>7</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Execute</Text>
+				<Enum>8</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Suspending</Text>
+				<Enum>9</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Suspended</Text>
+				<Enum>10</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Unsuspending</Text>
+				<Enum>11</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Holding</Text>
+				<Enum>12</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Held</Text>
+				<Enum>13</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_UnHolding</Text>
+				<Enum>14</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Completing</Text>
+				<Enum>15</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Completed</Text>
+				<Enum>16</Enum>
+			</EnumInfo>
+		</DataType>
+		<DataType>
+			<Name Decoration="101514C0" Crc32="4213981199" LastChange="2020-02-23T17:29:20">FB_StateModel_ST</Name>
+			<BitSize>256</BitSize>
+			<SubItem>
+				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">RTrig_bSC</Name>
+				<Type Decoration="1003051C">R_TRIG</Type>
+				<Comment>
+					<![CDATA[Rising trigger for State Completed]]>
+				</Comment>
+				<BitSize>24</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">RTrig_StateChange</Name>
+				<Type Decoration="1003051C">R_TRIG</Type>
+				<Comment>
+					<![CDATA[Rising trigger for State signal]]>
+				</Comment>
+				<BitSize>24</BitSize>
+				<BitOffs>24</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bResetLocal</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Paikallinen Reset]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bInitDone</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Initialisation]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>56</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bResetFB</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Resets whole FB]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">eModeReq</Name>
+				<Type Decoration="300002FE">E_ModeCtrl</Type>
+				<Comment>
+					<![CDATA[Requested mode]]>
+				</Comment>
+				<BitSize>16</BitSize>
+				<BitOffs>80</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">wIgnoreState</Name>
+				<Type>DWORD</Type>
+				<Comment>
+					<![CDATA[Ignoring states. See bit from E_State definition. Aborting = bit0]]>
+				</Comment>
+				<BitSize>32</BitSize>
+				<BitOffs>96</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bSC</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Step Completed acknoledgement]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>128</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bAbort</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Abortting signal = EmergencyStop]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>136</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bClear</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Clear signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>144</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bReset</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Reseting signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>152</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bStart</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Start signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>160</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bHold</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Hold signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>168</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bUn_Hold</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Un-Hold signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>176</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bSuspend</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Suspend signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>184</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bUn_Suspend</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Un-Suspend signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>192</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bStop</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Stop signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>200</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bComplete</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Complete signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>208</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bAck_Completed</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Acknoledgement for Complete signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>216</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Output">eMode</Name>
+				<Type Decoration="300002FE">E_ModeCtrl</Type>
+				<Comment>
+					<![CDATA[Current mode]]>
+				</Comment>
+				<BitSize>16</BitSize>
+				<BitOffs>224</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Output">eState</Name>
+				<Type Decoration="30000225">E_State</Type>
+				<Comment>
+					<![CDATA[Current state]]>
+				</Comment>
+				<BitSize>16</BitSize>
+				<BitOffs>240</BitOffs>
+			</SubItem>
+			<FbInfo>
+				<CodeIndex>250</CodeIndex>
+				<InitIndex>251</InitIndex>
+			</FbInfo>
+		</DataType>
+		<DataType>
+			<Name Decoration="300002FD" Crc32="2462427557" LastChange="2020-02-23T17:29:20">E_ModeProc</Name>
+			<Type>INT</Type>
+			<BitSize>16</BitSize>
+			<EnumInfo>
+				<Text>eModeProc_undefined</Text>
+				<Enum>0</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eModeProc_Automatic</Text>
+				<Enum>1</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eModeProc_SemiAutomatic</Text>
+				<Enum>2</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eModeProc_Manual</Text>
+				<Enum>3</Enum>
+			</EnumInfo>
+		</DataType>
+		<DataType>
+			<Name Decoration="104081BF" Crc32="4226309199" LastChange="2020-02-24T17:30:24">FB_Sorter</Name>
 			<BitSize>832</BitSize>
 			<SubItem>
 				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">fbInductiveTrig</Name>
@@ -773,47 +1085,53 @@
 			<SubItem>
 				<Name FbParameter="Input">I_SorterLiftDown</Name>
 				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>744</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">I_SorterGateClosed</Name>
+				<Type>BOOL</Type>
 				<Comment>
 					<![CDATA[SMEMA Handshake Inputs]]>
 				</Comment>
 				<BitSize>8</BitSize>
-				<BitOffs>744</BitOffs>
+				<BitOffs>752</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">hiRdyToReceive_FromDS</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>752</BitOffs>
+				<BitOffs>760</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">hiBallAvail_FromUS</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>760</BitOffs>
+				<BitOffs>768</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">bStopOK</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>768</BitOffs>
+				<BitOffs>776</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">bBallLoaded</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>776</BitOffs>
+				<BitOffs>784</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">bCurBallMetal</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>784</BitOffs>
+				<BitOffs>792</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">O_SorterGate</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>792</BitOffs>
+				<BitOffs>800</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">O_SorterLift</Name>
@@ -822,19 +1140,19 @@
 					<![CDATA[SMEMA Handshake Outputs]]>
 				</Comment>
 				<BitSize>8</BitSize>
-				<BitOffs>800</BitOffs>
+				<BitOffs>808</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">hoBallAvail_ToDS</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>808</BitOffs>
+				<BitOffs>816</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">hoReadyToRecieve_ToUS</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>816</BitOffs>
+				<BitOffs>824</BitOffs>
 			</SubItem>
 			<FbInfo>
 				<CodeIndex>248</CodeIndex>
@@ -842,319 +1160,7 @@
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="300002FE" Crc32="0303332809" LastChange="2020-02-23T17:29:20">E_ModeCtrl</Name>
-			<Type>INT</Type>
-			<BitSize>16</BitSize>
-			<EnumInfo>
-				<Text>eMode_undefined</Text>
-				<Enum>0</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eMode_Automatic</Text>
-				<Enum>1</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eMode_XXX</Text>
-				<Enum>2</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eMode_Manual</Text>
-				<Enum>99</Enum>
-			</EnumInfo>
-		</DataType>
-		<DataType>
-			<Name Decoration="30000225" Crc32="2321183169" LastChange="2020-02-23T17:29:20">E_State</Name>
-			<Type>INT</Type>
-			<BitSize>16</BitSize>
-			<EnumInfo>
-				<Text>eSt_Aborting</Text>
-				<Enum>0</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Aborted</Text>
-				<Enum>1</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Clearing</Text>
-				<Enum>2</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Stopped</Text>
-				<Enum>3</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Stopping</Text>
-				<Enum>4</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Resetting</Text>
-				<Enum>5</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Idle</Text>
-				<Enum>6</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Starting</Text>
-				<Enum>7</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Execute</Text>
-				<Enum>8</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Suspending</Text>
-				<Enum>9</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Suspended</Text>
-				<Enum>10</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Unsuspending</Text>
-				<Enum>11</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Holding</Text>
-				<Enum>12</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Held</Text>
-				<Enum>13</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_UnHolding</Text>
-				<Enum>14</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Completing</Text>
-				<Enum>15</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Completed</Text>
-				<Enum>16</Enum>
-			</EnumInfo>
-		</DataType>
-		<DataType>
-			<Name Decoration="101514C0" Crc32="4213981199" LastChange="2020-02-23T17:29:20">FB_StateModel_ST</Name>
-			<BitSize>256</BitSize>
-			<SubItem>
-				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">RTrig_bSC</Name>
-				<Type Decoration="1003051C">R_TRIG</Type>
-				<Comment>
-					<![CDATA[Rising trigger for State Completed]]>
-				</Comment>
-				<BitSize>24</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">RTrig_StateChange</Name>
-				<Type Decoration="1003051C">R_TRIG</Type>
-				<Comment>
-					<![CDATA[Rising trigger for State signal]]>
-				</Comment>
-				<BitSize>24</BitSize>
-				<BitOffs>24</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>bResetLocal</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Paikallinen Reset]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>48</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>bInitDone</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Initialisation]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>56</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bResetFB</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Resets whole FB]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>64</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">eModeReq</Name>
-				<Type Decoration="300002FE">E_ModeCtrl</Type>
-				<Comment>
-					<![CDATA[Requested mode]]>
-				</Comment>
-				<BitSize>16</BitSize>
-				<BitOffs>80</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">wIgnoreState</Name>
-				<Type>DWORD</Type>
-				<Comment>
-					<![CDATA[Ignoring states. See bit from E_State definition. Aborting = bit0]]>
-				</Comment>
-				<BitSize>32</BitSize>
-				<BitOffs>96</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bSC</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Step Completed acknoledgement]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>128</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bAbort</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Abortting signal = EmergencyStop]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>136</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bClear</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Clear signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>144</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bReset</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Reseting signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>152</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bStart</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Start signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>160</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bHold</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Hold signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>168</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bUn_Hold</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Un-Hold signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>176</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bSuspend</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Suspend signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>184</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bUn_Suspend</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Un-Suspend signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>192</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bStop</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Stop signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>200</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bComplete</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Complete signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>208</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bAck_Completed</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Acknoledgement for Complete signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>216</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Output">eMode</Name>
-				<Type Decoration="300002FE">E_ModeCtrl</Type>
-				<Comment>
-					<![CDATA[Current mode]]>
-				</Comment>
-				<BitSize>16</BitSize>
-				<BitOffs>224</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Output">eState</Name>
-				<Type Decoration="30000225">E_State</Type>
-				<Comment>
-					<![CDATA[Current state]]>
-				</Comment>
-				<BitSize>16</BitSize>
-				<BitOffs>240</BitOffs>
-			</SubItem>
-			<FbInfo>
-				<CodeIndex>250</CodeIndex>
-				<InitIndex>251</InitIndex>
-			</FbInfo>
-		</DataType>
-		<DataType>
-			<Name Decoration="300002FD" Crc32="2462427557" LastChange="2020-02-23T17:29:20">E_ModeProc</Name>
-			<Type>INT</Type>
-			<BitSize>16</BitSize>
-			<EnumInfo>
-				<Text>eModeProc_undefined</Text>
-				<Enum>0</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eModeProc_Automatic</Text>
-				<Enum>1</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eModeProc_SemiAutomatic</Text>
-				<Enum>2</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eModeProc_Manual</Text>
-				<Enum>3</Enum>
-			</EnumInfo>
-		</DataType>
-		<DataType>
-			<Name Decoration="1056FEBB" Crc32="0772288755" LastChange="2020-02-24T14:39:29">FB_Lift2</Name>
+			<Name Decoration="1054F4C7" Crc32="2631379241" LastChange="2020-02-24T17:23:51">FB_Lift2</Name>
 			<BitSize>1920</BitSize>
 			<SubItem>
 				<Name>bBallRequested</Name>
@@ -1415,160 +1421,148 @@
 				<BitOffs>1544</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>WAITFORSENSOR</Name>
+				<Name>CLASSIFY</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1552</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_WAITFORSENSOR</Name>
+				<Name>_CLASSIFY</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1560</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>CLASSIFY</Name>
+				<Name>CHOOSEDEST</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1568</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_CLASSIFY</Name>
+				<Name>_CHOOSEDEST</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1576</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>CHOOSEDEST</Name>
+				<Name>DELIVERTOUP</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1584</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_CHOOSEDEST</Name>
+				<Name>_DELIVERTOUP</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1592</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>DELIVERTOUP</Name>
+				<Name>COUNTYELLOW</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1600</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_DELIVERTOUP</Name>
+				<Name>_COUNTYELLOW</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1608</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>COUNTYELLOW</Name>
+				<Name>DELIVERTOMID</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1616</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_COUNTYELLOW</Name>
+				<Name>_DELIVERTOMID</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1624</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>DELIVERTOMID</Name>
+				<Name>COUNTBLUE</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1632</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_DELIVERTOMID</Name>
+				<Name>_COUNTBLUE</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1640</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>COUNTBLUE</Name>
+				<Name>DELIVERTOGARBAGE</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1648</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_COUNTBLUE</Name>
+				<Name>_DELIVERTOGARBAGE</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1656</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>DELIVERTOGARBAGE</Name>
+				<Name>COUNTRED</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1664</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_DELIVERTOGARBAGE</Name>
+				<Name>_COUNTRED</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1672</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>COUNTRED</Name>
+				<Name>RETURNTOLOADING</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1680</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_COUNTRED</Name>
+				<Name>_RETURNTOLOADING</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1688</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>RETURNTOLOADING</Name>
+				<Name>DELIVERYDONE</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1696</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_RETURNTOLOADING</Name>
+				<Name>_DELIVERYDONE</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1704</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>DELIVERYDONE</Name>
+				<Name>UPDATEIOS</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1712</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_DELIVERYDONE</Name>
+				<Name>_UPDATEIOS</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1720</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>UPDATEIOS</Name>
+				<Name>SFCRESETSTEP</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
 				<BitOffs>1728</BitOffs>
 			</SubItem>
 			<SubItem>
-				<Name>_UPDATEIOS</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>1736</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>SFCRESETSTEP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>1744</BitOffs>
-			</SubItem>
-			<SubItem>
 				<Name>_SFCRESETSTEP</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>1752</BitOffs>
+				<BitOffs>1736</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">bReset</Name>
@@ -1577,25 +1571,25 @@
 					<![CDATA[Reset Request]]>
 				</Comment>
 				<BitSize>8</BitSize>
-				<BitOffs>1760</BitOffs>
+				<BitOffs>1744</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">bEnable</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>1768</BitOffs>
+				<BitOffs>1752</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">I_LimitUp</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>1776</BitOffs>
+				<BitOffs>1760</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">I_LimitLow</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>1784</BitOffs>
+				<BitOffs>1768</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">I_WaitingBallMetal</Name>
@@ -1604,7 +1598,7 @@
 					<![CDATA[ColourSensor]]>
 				</Comment>
 				<BitSize>8</BitSize>
-				<BitOffs>1792</BitOffs>
+				<BitOffs>1776</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">I_SenColourYellow</Name>
@@ -1613,7 +1607,7 @@
 					<![CDATA[Colour sensor In1 - Yellow]]>
 				</Comment>
 				<BitSize>8</BitSize>
-				<BitOffs>1800</BitOffs>
+				<BitOffs>1784</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">I_SenColourBlue</Name>
@@ -1622,7 +1616,7 @@
 					<![CDATA[Colour sensor In2 - Blue]]>
 				</Comment>
 				<BitSize>8</BitSize>
-				<BitOffs>1808</BitOffs>
+				<BitOffs>1792</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">I_SenColourGreen</Name>
@@ -1631,7 +1625,7 @@
 					<![CDATA[Colour sensor In3 - Green]]>
 				</Comment>
 				<BitSize>8</BitSize>
-				<BitOffs>1816</BitOffs>
+				<BitOffs>1800</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">I_SenColourRed</Name>
@@ -1640,43 +1634,43 @@
 					<![CDATA[Colour sensor In4 - Red]]>
 				</Comment>
 				<BitSize>8</BitSize>
-				<BitOffs>1824</BitOffs>
+				<BitOffs>1808</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">hiRdyToReceive_FromDS</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>1832</BitOffs>
+				<BitOffs>1816</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">hiBallAvail_FromUS</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>1840</BitOffs>
+				<BitOffs>1824</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">bStopOK</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>1848</BitOffs>
+				<BitOffs>1832</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">bBallLoaded</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>1856</BitOffs>
+				<BitOffs>1840</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">bCurBallMetal</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>1864</BitOffs>
+				<BitOffs>1848</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">bCurrentBall</Name>
 				<Type Decoration="30000393">E_BallColour</Type>
 				<BitSize>16</BitSize>
-				<BitOffs>1872</BitOffs>
+				<BitOffs>1856</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">O_Ejector</Name>
@@ -1685,19 +1679,19 @@
 					<![CDATA[SMEMA Handshake Outputs]]>
 				</Comment>
 				<BitSize>8</BitSize>
-				<BitOffs>1888</BitOffs>
+				<BitOffs>1872</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">hoBallAvail_ToDS</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>1896</BitOffs>
+				<BitOffs>1880</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">hoReadyToRecieve_ToUS</Name>
 				<Type>BOOL</Type>
 				<BitSize>8</BitSize>
-				<BitOffs>1904</BitOffs>
+				<BitOffs>1888</BitOffs>
 			</SubItem>
 			<FbInfo>
 				<CodeIndex>330</CodeIndex>
@@ -6893,51 +6887,6 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="1009BDAD" Crc32="2696179703" LastChange="2020-02-24T17:01:55">PRG_AutoSort</Name>
-			<PrgInfo>
-				<CodeIndex>261</CodeIndex>
-				<ActionInfo>
-					<Name>actCheckAllOKStop</Name>
-					<CodeIndex>262</CodeIndex>
-				</ActionInfo>
-				<ActionInfo>
-					<Name>actCountBallsProcessed</Name>
-					<CodeIndex>265</CodeIndex>
-				</ActionInfo>
-				<ActionInfo>
-					<Name>actUpdateIO</Name>
-					<CodeIndex>263</CodeIndex>
-				</ActionInfo>
-				<Symbol>
-					<Name>PRG_AutoSort.iBallsProcessed</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_AutoSort.fbSorter</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_AutoSort.fbLift</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_AutoSort.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_AutoSort.bReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_AutoSort.iBatchSize</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_AutoSort.bDone</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_AutoSort.bStopOk</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_AutoSort.bBatchComplete</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
 			<Name Decoration="100A56F9" Crc32="1504438582" LastChange="2020-02-24T14:15:52">PRG_HMI</Name>
 			<PrgInfo>
 				<CodeIndex>275</CodeIndex>
@@ -7102,6 +7051,51 @@
 				</Symbol>
 				<Symbol>
 					<Name PrgParameter="Output">PRG_Initialisation.bDone</Name>
+				</Symbol>
+			</PrgInfo>
+		</Program>
+		<Program>
+			<Name Decoration="1009BB12" Crc32="3800319808" LastChange="2020-02-24T17:13:25">PRG_AutoSort</Name>
+			<PrgInfo>
+				<CodeIndex>261</CodeIndex>
+				<ActionInfo>
+					<Name>actCheckAllOKStop</Name>
+					<CodeIndex>262</CodeIndex>
+				</ActionInfo>
+				<ActionInfo>
+					<Name>actCountBallsProcessed</Name>
+					<CodeIndex>265</CodeIndex>
+				</ActionInfo>
+				<ActionInfo>
+					<Name>actUpdateIO</Name>
+					<CodeIndex>263</CodeIndex>
+				</ActionInfo>
+				<Symbol>
+					<Name>PRG_AutoSort.iBallsProcessed</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_AutoSort.fbSorter</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_AutoSort.fbLift</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_AutoSort.bExecute</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_AutoSort.bReset</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_AutoSort.iBatchSize</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Output">PRG_AutoSort.bDone</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Output">PRG_AutoSort.bStopOk</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Output">PRG_AutoSort.bBatchComplete</Name>
 				</Symbol>
 			</PrgInfo>
 		</Program>
@@ -7410,72 +7404,6 @@
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
-			<Name TaskPrio="1">PRG_AutoSort.iBallsProcessed</Name>
-			<Type>INT</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>774</IOffset>
-			<BitSize>16</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_AutoSort.fbSorter</Name>
-			<Type Decoration="103F7A5D">FB_Sorter</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>844</IOffset>
-			<BitSize>832</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_AutoSort.fbLift</Name>
-			<Type Decoration="1056FEBB">FB_Lift2</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>3176</IOffset>
-			<BitSize>1920</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_AutoSort.bExecute</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>590</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_AutoSort.bReset</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>591</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_AutoSort.iBatchSize</Name>
-			<Type>INT</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>770</IOffset>
-			<BitSize>16</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_AutoSort.bDone</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Program operations done]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>767</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_AutoSort.bStopOk</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1092</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_AutoSort.bBatchComplete</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>511</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
 			<Name TaskPrio="1">PRG_HMI.iSorterLiftPos</Name>
 			<Type>INT</Type>
 			<Comment>
@@ -7661,6 +7589,72 @@
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
+			<Name TaskPrio="1">PRG_AutoSort.iBallsProcessed</Name>
+			<Type>INT</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>774</IOffset>
+			<BitSize>16</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_AutoSort.fbSorter</Name>
+			<Type Decoration="104081BF">FB_Sorter</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>3416</IOffset>
+			<BitSize>832</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_AutoSort.fbLift</Name>
+			<Type Decoration="1054F4C7">FB_Lift2</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>3520</IOffset>
+			<BitSize>1920</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_AutoSort.bExecute</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>590</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_AutoSort.bReset</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>591</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_AutoSort.iBatchSize</Name>
+			<Type>INT</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>770</IOffset>
+			<BitSize>16</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name>PRG_AutoSort.bDone</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Program operations done]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>767</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_AutoSort.bStopOk</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>1092</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_AutoSort.bBatchComplete</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>511</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
 			<Name Constant="1" TaskPrio="1">.GPOS_LOADING</Name>
 			<Type>WORD</Type>
 			<Comment>
@@ -7738,7 +7732,7 @@
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
-			<Name Constant="1">.T_LOADING_BALL</Name>
+			<Name Constant="1" TaskPrio="1">.T_LOADING_BALL</Name>
 			<Type>TIME</Type>
 			<Comment>
 				<![CDATA[Delay for ball to roll from Slot2 to Lifter]]>
@@ -7765,7 +7759,7 @@
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
-			<Name Constant="1">.T_ROLL_FROM_IND</Name>
+			<Name Constant="1" TaskPrio="1">.T_ROLL_FROM_IND</Name>
 			<Type>TIME</Type>
 			<Comment>
 				<![CDATA[Delay for ball to roll from Slot2 to Lifter]]>
@@ -7775,17 +7769,17 @@
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
-			<Name Constant="1">.T_GATE_ACT_DELAY</Name>
-			<Type>TIME</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>784</IOffset>
-			<BitSize>32</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name Constant="1">.T_REQ_DELAY</Name>
+			<Name Constant="1" TaskPrio="1">.T_REQ_DELAY</Name>
 			<Type>TIME</Type>
 			<IGroup>16448</IGroup>
 			<IOffset>788</IOffset>
+			<BitSize>32</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name Constant="1">.T_BALL_DEBOUNCE</Name>
+			<Type>TIME</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>784</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -7803,7 +7797,7 @@
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
-			<Name Constant="1">.T_COLOUR_SENSOR_DELAY</Name>
+			<Name Constant="1" TaskPrio="1">.T_COLOUR_SENSOR_DELAY</Name>
 			<Type>TIME</Type>
 			<IGroup>16448</IGroup>
 			<IOffset>800</IOffset>
