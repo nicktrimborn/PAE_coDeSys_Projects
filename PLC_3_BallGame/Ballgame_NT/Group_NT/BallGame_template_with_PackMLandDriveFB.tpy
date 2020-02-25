@@ -4,7 +4,7 @@
 	<ProjectInfo>
 		<Path>C:\Users\localuser\Documents\coDeSys_Projects\PLC_3_BallGame\Ballgame_NT\Group_NT\BallGame_template_with_PackMLandDriveFB.pro</Path>
 		<IsLibrary>false</IsLibrary>
-		<ChangeDate>2020-02-24T17:33:54</ChangeDate>
+		<ChangeDate>2020-02-25T15:05:16</ChangeDate>
 		<Library>
 			<Name>TcBase.lib</Name>
 			<Path>C:\TwinCAT\PLC\LIB\TcBase.lib</Path>
@@ -69,6 +69,15 @@
 				<ProgramCall>PRG_Drive_Link</ProgramCall>
 			</Calls>
 		</TaskInfo>
+		<TaskInfo>
+			<Name>Emergency</Name>
+			<Priority>2</Priority>
+			<CycleTime>5</CycleTime>
+			<CycleTimeUs>5000</CycleTimeUs>
+			<Calls>
+				<ProgramCall>PRG_SafetyProgram</ProgramCall>
+			</Calls>
+		</TaskInfo>
 	</TaskInfos>
 	<DirectoryInfos>
 		<DirectoryInfo>
@@ -82,8 +91,8 @@
 	</DirectoryInfos>
 	<DataTypes>
 		<DataType>
-			<Name Decoration="100A6270" Crc32="0778540565" LastChange="2020-02-23T17:29:20">FB_DriveMovement2</Name>
-			<BitSize>480</BitSize>
+			<Name Decoration="100B6588" Crc32="2608517682" LastChange="2020-02-25T15:04:17">FB_DriveMovement2</Name>
+			<BitSize>512</BitSize>
 			<SubItem>
 				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">TONTimer1</Name>
 				<Type Decoration="10060D24">TON</Type>
@@ -115,13 +124,19 @@
 				<BitOffs>392</BitOffs>
 			</SubItem>
 			<SubItem>
+				<Name FbParameter="Input">bReset</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>400</BitOffs>
+			</SubItem>
+			<SubItem>
 				<Name FbParameter="Input">wTarget</Name>
 				<Type>WORD</Type>
 				<Comment>
 					<![CDATA[Target destination]]>
 				</Comment>
 				<BitSize>16</BitSize>
-				<BitOffs>400</BitOffs>
+				<BitOffs>416</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Input">wDriveStatus</Name>
@@ -130,7 +145,7 @@
 					<![CDATA[Status word from Indramat Drive]]>
 				</Comment>
 				<BitSize>16</BitSize>
-				<BitOffs>416</BitOffs>
+				<BitOffs>432</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">bMoveDone</Name>
@@ -139,7 +154,7 @@
 					<![CDATA[The commanded move has been completed. Drive is at required destination]]>
 				</Comment>
 				<BitSize>8</BitSize>
-				<BitOffs>432</BitOffs>
+				<BitOffs>448</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">bHomingDone</Name>
@@ -148,7 +163,7 @@
 					<![CDATA[Drive has been homed]]>
 				</Comment>
 				<BitSize>8</BitSize>
-				<BitOffs>440</BitOffs>
+				<BitOffs>456</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">wDestination</Name>
@@ -157,7 +172,7 @@
 					<![CDATA[Current destination]]>
 				</Comment>
 				<BitSize>16</BitSize>
-				<BitOffs>448</BitOffs>
+				<BitOffs>464</BitOffs>
 			</SubItem>
 			<SubItem>
 				<Name FbParameter="Output">wDriveControl</Name>
@@ -166,15 +181,15 @@
 					<![CDATA[Control word to Indramat Drive]]>
 				</Comment>
 				<BitSize>16</BitSize>
-				<BitOffs>464</BitOffs>
+				<BitOffs>480</BitOffs>
 			</SubItem>
 			<FbInfo>
-				<CodeIndex>244</CodeIndex>
-				<InitIndex>245</InitIndex>
+				<CodeIndex>245</CodeIndex>
+				<InitIndex>246</InitIndex>
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="30000393" Crc32="1240280903" LastChange="2020-02-23T17:29:20">E_BallColour</Name>
+			<Name Decoration="30000393" Crc32="1240280903" LastChange="2020-02-25T15:04:21">E_BallColour</Name>
 			<Type>INT</Type>
 			<BitSize>16</BitSize>
 			<EnumInfo>
@@ -195,7 +210,7 @@
 			</EnumInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="10078EFC" Crc32="1093919154" LastChange="2020-02-23T17:29:20">FB_TransferBall2</Name>
+			<Name Decoration="10078EFC" Crc32="1093919154" LastChange="2020-02-25T15:04:17">FB_TransferBall2</Name>
 			<BitSize>512</BitSize>
 			<SubItem>
 				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">tonMoveDelay</Name>
@@ -243,12 +258,12 @@
 				<BitOffs>480</BitOffs>
 			</SubItem>
 			<FbInfo>
-				<CodeIndex>254</CodeIndex>
-				<InitIndex>255</InitIndex>
+				<CodeIndex>261</CodeIndex>
+				<InitIndex>262</InitIndex>
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="10043C21" Crc32="0552700981" LastChange="2020-02-23T17:29:20">FB_Wait</Name>
+			<Name Decoration="10043C21" Crc32="0552700981" LastChange="2020-02-25T15:04:17">FB_Wait</Name>
 			<BitSize>256</BitSize>
 			<SubItem>
 				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">Timer</Name>
@@ -281,886 +296,12 @@
 				<BitOffs>224</BitOffs>
 			</SubItem>
 			<FbInfo>
-				<CodeIndex>256</CodeIndex>
-				<InitIndex>257</InitIndex>
+				<CodeIndex>263</CodeIndex>
+				<InitIndex>264</InitIndex>
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="1017EFBD" Crc32="2402095631" LastChange="2020-02-23T17:29:20">FB_Pipe</Name>
-			<BitSize>1152</BitSize>
-			<SubItem>
-				<Name>iBallCount</Name>
-				<Type>INT</Type>
-				<BitSize>16</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>tBallDelay</Name>
-				<Type>TIME</Type>
-				<BitSize>32</BitSize>
-				<BitOffs>32</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>fbDelay</Name>
-				<Type Decoration="10043C21">FB_Wait</Type>
-				<BitSize>256</BitSize>
-				<BitOffs>64</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>bLocalReset</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Performs local reset]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>320</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>SFCReset</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Resets the execution of SFC to init once this SFCFlag is set true]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>328</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>INIT</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>336</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_INIT</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>344</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>WAITFORSFCRESET</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>352</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_WAITFORSFCRESET</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>360</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>MAINLOOP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>368</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_MAINLOOP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>376</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>NICESTOP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>384</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_NICESTOP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>392</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>COUNTBALL</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>400</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_COUNTBALL</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>408</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>UPDATEIOS</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>416</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_UPDATEIOS</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>424</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>SFCRESETSTEP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>432</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_SFCRESETSTEP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>440</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bReset</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Reset Request]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>448</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">str_PipeName</Name>
-				<Type Decoration="40000051">STRING(80)</Type>
-				<BitSize>648</BitSize>
-				<BitOffs>456</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">i_arrCountBallsIndex</Name>
-				<Type>INT</Type>
-				<BitSize>16</BitSize>
-				<BitOffs>1104</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">I_GateClosed</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>1120</BitOffs>
-			</SubItem>
-			<FbInfo>
-				<CodeIndex>328</CodeIndex>
-				<InitIndex>329</InitIndex>
-			</FbInfo>
-		</DataType>
-		<DataType>
-			<Name Decoration="300002FE" Crc32="0303332809" LastChange="2020-02-23T17:29:20">E_ModeCtrl</Name>
-			<Type>INT</Type>
-			<BitSize>16</BitSize>
-			<EnumInfo>
-				<Text>eMode_undefined</Text>
-				<Enum>0</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eMode_Automatic</Text>
-				<Enum>1</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eMode_XXX</Text>
-				<Enum>2</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eMode_Manual</Text>
-				<Enum>99</Enum>
-			</EnumInfo>
-		</DataType>
-		<DataType>
-			<Name Decoration="30000225" Crc32="2321183169" LastChange="2020-02-23T17:29:20">E_State</Name>
-			<Type>INT</Type>
-			<BitSize>16</BitSize>
-			<EnumInfo>
-				<Text>eSt_Aborting</Text>
-				<Enum>0</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Aborted</Text>
-				<Enum>1</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Clearing</Text>
-				<Enum>2</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Stopped</Text>
-				<Enum>3</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Stopping</Text>
-				<Enum>4</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Resetting</Text>
-				<Enum>5</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Idle</Text>
-				<Enum>6</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Starting</Text>
-				<Enum>7</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Execute</Text>
-				<Enum>8</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Suspending</Text>
-				<Enum>9</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Suspended</Text>
-				<Enum>10</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Unsuspending</Text>
-				<Enum>11</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Holding</Text>
-				<Enum>12</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Held</Text>
-				<Enum>13</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_UnHolding</Text>
-				<Enum>14</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Completing</Text>
-				<Enum>15</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eSt_Completed</Text>
-				<Enum>16</Enum>
-			</EnumInfo>
-		</DataType>
-		<DataType>
-			<Name Decoration="101514C0" Crc32="4213981199" LastChange="2020-02-23T17:29:20">FB_StateModel_ST</Name>
-			<BitSize>256</BitSize>
-			<SubItem>
-				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">RTrig_bSC</Name>
-				<Type Decoration="1003051C">R_TRIG</Type>
-				<Comment>
-					<![CDATA[Rising trigger for State Completed]]>
-				</Comment>
-				<BitSize>24</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">RTrig_StateChange</Name>
-				<Type Decoration="1003051C">R_TRIG</Type>
-				<Comment>
-					<![CDATA[Rising trigger for State signal]]>
-				</Comment>
-				<BitSize>24</BitSize>
-				<BitOffs>24</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>bResetLocal</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Paikallinen Reset]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>48</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>bInitDone</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Initialisation]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>56</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bResetFB</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Resets whole FB]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>64</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">eModeReq</Name>
-				<Type Decoration="300002FE">E_ModeCtrl</Type>
-				<Comment>
-					<![CDATA[Requested mode]]>
-				</Comment>
-				<BitSize>16</BitSize>
-				<BitOffs>80</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">wIgnoreState</Name>
-				<Type>DWORD</Type>
-				<Comment>
-					<![CDATA[Ignoring states. See bit from E_State definition. Aborting = bit0]]>
-				</Comment>
-				<BitSize>32</BitSize>
-				<BitOffs>96</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bSC</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Step Completed acknoledgement]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>128</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bAbort</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Abortting signal = EmergencyStop]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>136</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bClear</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Clear signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>144</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bReset</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Reseting signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>152</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bStart</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Start signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>160</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bHold</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Hold signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>168</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bUn_Hold</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Un-Hold signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>176</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bSuspend</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Suspend signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>184</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bUn_Suspend</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Un-Suspend signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>192</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bStop</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Stop signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>200</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bComplete</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Complete signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>208</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bAck_Completed</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Acknoledgement for Complete signal]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>216</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Output">eMode</Name>
-				<Type Decoration="300002FE">E_ModeCtrl</Type>
-				<Comment>
-					<![CDATA[Current mode]]>
-				</Comment>
-				<BitSize>16</BitSize>
-				<BitOffs>224</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Output">eState</Name>
-				<Type Decoration="30000225">E_State</Type>
-				<Comment>
-					<![CDATA[Current state]]>
-				</Comment>
-				<BitSize>16</BitSize>
-				<BitOffs>240</BitOffs>
-			</SubItem>
-			<FbInfo>
-				<CodeIndex>250</CodeIndex>
-				<InitIndex>251</InitIndex>
-			</FbInfo>
-		</DataType>
-		<DataType>
-			<Name Decoration="300002FD" Crc32="2462427557" LastChange="2020-02-23T17:29:20">E_ModeProc</Name>
-			<Type>INT</Type>
-			<BitSize>16</BitSize>
-			<EnumInfo>
-				<Text>eModeProc_undefined</Text>
-				<Enum>0</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eModeProc_Automatic</Text>
-				<Enum>1</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eModeProc_SemiAutomatic</Text>
-				<Enum>2</Enum>
-			</EnumInfo>
-			<EnumInfo>
-				<Text>eModeProc_Manual</Text>
-				<Enum>3</Enum>
-			</EnumInfo>
-		</DataType>
-		<DataType>
-			<Name Decoration="104081BF" Crc32="4226309199" LastChange="2020-02-24T17:30:24">FB_Sorter</Name>
-			<BitSize>832</BitSize>
-			<SubItem>
-				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">fbInductiveTrig</Name>
-				<Type Decoration="1003051C">F_TRIG</Type>
-				<BitSize>24</BitSize>
-				<BitOffs>0</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>tTransferDelay</Name>
-				<Type>TIME</Type>
-				<BitSize>32</BitSize>
-				<BitOffs>32</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>tMoveDelay</Name>
-				<Type>TIME</Type>
-				<BitSize>32</BitSize>
-				<BitOffs>64</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>fbDelay</Name>
-				<Type Decoration="10043C21">FB_Wait</Type>
-				<BitSize>256</BitSize>
-				<BitOffs>96</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>bLocalReset</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Performs local reset]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>352</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>SFCReset</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Resets the execution of SFC to init once this SFCFlag is set true]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>360</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>INIT</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>368</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_INIT</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>376</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>WAITFORSFCRESET</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>384</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_WAITFORSFCRESET</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>392</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>MAINLOOP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>400</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_MAINLOOP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>408</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>NICESTOP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>416</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_NICESTOP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>424</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>ROLLINBALL</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>432</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_ROLLINBALL</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>440</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>WAITFORLIFT</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>448</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_WAITFORLIFT</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>456</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>LIFTBALL</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>464</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_LIFTBALL</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>472</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>INIT_LOAD</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>480</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_INIT_LOAD</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>488</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>OPENGATE</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>496</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_OPENGATE</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>504</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>LIFT</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>512</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_LIFT</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>520</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>CLASSIFY</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>528</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_CLASSIFY</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>536</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>WOOD</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>544</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_WOOD</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>552</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>METAL</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>560</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_METAL</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>568</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>BALLLOADED</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>576</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_BALLLOADED</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>584</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>BALLAVALIBLE</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>592</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_BALLAVALIBLE</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>600</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>BALLREQUESTED</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>608</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_BALLREQUESTED</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>616</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>TRANSFERING</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>624</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_TRANSFERING</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>632</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>UNLOAD_HANDSHAKE</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>640</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_UNLOAD_HANDSHAKE</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>648</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>TRANSFERCOMPLETE</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>656</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_TRANSFERCOMPLETE</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>664</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>UPDATEIOS</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>672</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_UPDATEIOS</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>680</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>SFCRESETSTEP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>688</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name>_SFCRESETSTEP</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>696</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bReset</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[Reset Request]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>704</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">bEnable</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>712</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">I_SensorOpt</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>720</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">I_SensorInd</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>728</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">I_SorterLiftUp</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>736</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">I_SorterLiftDown</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>744</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">I_SorterGateClosed</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[SMEMA Handshake Inputs]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>752</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">hiRdyToReceive_FromDS</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>760</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Input">hiBallAvail_FromUS</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>768</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Output">bStopOK</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>776</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Output">bBallLoaded</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>784</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Output">bCurBallMetal</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>792</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Output">O_SorterGate</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>800</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Output">O_SorterLift</Name>
-				<Type>BOOL</Type>
-				<Comment>
-					<![CDATA[SMEMA Handshake Outputs]]>
-				</Comment>
-				<BitSize>8</BitSize>
-				<BitOffs>808</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Output">hoBallAvail_ToDS</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>816</BitOffs>
-			</SubItem>
-			<SubItem>
-				<Name FbParameter="Output">hoReadyToRecieve_ToUS</Name>
-				<Type>BOOL</Type>
-				<BitSize>8</BitSize>
-				<BitOffs>824</BitOffs>
-			</SubItem>
-			<FbInfo>
-				<CodeIndex>248</CodeIndex>
-				<InitIndex>249</InitIndex>
-			</FbInfo>
-		</DataType>
-		<DataType>
-			<Name Decoration="1054F4C7" Crc32="2631379241" LastChange="2020-02-24T17:23:51">FB_Lift2</Name>
+			<Name Decoration="1054F4C7" Crc32="2631379241" LastChange="2020-02-25T15:04:17">FB_Lift2</Name>
 			<BitSize>1920</BitSize>
 			<SubItem>
 				<Name>bBallRequested</Name>
@@ -1694,9 +835,883 @@
 				<BitOffs>1888</BitOffs>
 			</SubItem>
 			<FbInfo>
-				<CodeIndex>330</CodeIndex>
-				<InitIndex>331</InitIndex>
+				<CodeIndex>249</CodeIndex>
+				<InitIndex>250</InitIndex>
 			</FbInfo>
+		</DataType>
+		<DataType>
+			<Name Decoration="1017EFBD" Crc32="2402095631" LastChange="2020-02-25T15:04:17">FB_Pipe</Name>
+			<BitSize>1152</BitSize>
+			<SubItem>
+				<Name>iBallCount</Name>
+				<Type>INT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>tBallDelay</Name>
+				<Type>TIME</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>fbDelay</Name>
+				<Type Decoration="10043C21">FB_Wait</Type>
+				<BitSize>256</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bLocalReset</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Performs local reset]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>320</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>SFCReset</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Resets the execution of SFC to init once this SFCFlag is set true]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>328</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>INIT</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>336</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_INIT</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>344</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>WAITFORSFCRESET</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>352</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_WAITFORSFCRESET</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>360</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>MAINLOOP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>368</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_MAINLOOP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>376</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>NICESTOP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>384</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_NICESTOP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>392</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>COUNTBALL</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>400</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_COUNTBALL</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>408</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>UPDATEIOS</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>416</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_UPDATEIOS</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>424</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>SFCRESETSTEP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>432</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_SFCRESETSTEP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>440</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bReset</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Reset Request]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>448</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">str_PipeName</Name>
+				<Type Decoration="40000051">STRING(80)</Type>
+				<BitSize>648</BitSize>
+				<BitOffs>456</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">i_arrCountBallsIndex</Name>
+				<Type>INT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>1104</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">I_GateClosed</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>1120</BitOffs>
+			</SubItem>
+			<FbInfo>
+				<CodeIndex>253</CodeIndex>
+				<InitIndex>254</InitIndex>
+			</FbInfo>
+		</DataType>
+		<DataType>
+			<Name Decoration="104081BF" Crc32="4226309199" LastChange="2020-02-25T15:04:17">FB_Sorter</Name>
+			<BitSize>832</BitSize>
+			<SubItem>
+				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">fbInductiveTrig</Name>
+				<Type Decoration="1003051C">F_TRIG</Type>
+				<BitSize>24</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>tTransferDelay</Name>
+				<Type>TIME</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>tMoveDelay</Name>
+				<Type>TIME</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>fbDelay</Name>
+				<Type Decoration="10043C21">FB_Wait</Type>
+				<BitSize>256</BitSize>
+				<BitOffs>96</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bLocalReset</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Performs local reset]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>352</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>SFCReset</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Resets the execution of SFC to init once this SFCFlag is set true]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>360</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>INIT</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>368</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_INIT</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>376</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>WAITFORSFCRESET</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>384</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_WAITFORSFCRESET</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>392</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>MAINLOOP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>400</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_MAINLOOP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>408</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>NICESTOP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>416</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_NICESTOP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>424</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ROLLINBALL</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>432</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_ROLLINBALL</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>440</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>WAITFORLIFT</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>448</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_WAITFORLIFT</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>456</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>LIFTBALL</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>464</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_LIFTBALL</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>472</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>INIT_LOAD</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>480</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_INIT_LOAD</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>488</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>OPENGATE</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>496</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_OPENGATE</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>504</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>LIFT</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>512</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_LIFT</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>520</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>CLASSIFY</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>528</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_CLASSIFY</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>536</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>WOOD</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>544</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_WOOD</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>552</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>METAL</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>560</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_METAL</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>568</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>BALLLOADED</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>576</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_BALLLOADED</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>584</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>BALLAVALIBLE</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>592</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_BALLAVALIBLE</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>600</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>BALLREQUESTED</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>608</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_BALLREQUESTED</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>616</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>TRANSFERING</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>624</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_TRANSFERING</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>632</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>UNLOAD_HANDSHAKE</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>640</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_UNLOAD_HANDSHAKE</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>648</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>TRANSFERCOMPLETE</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>656</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_TRANSFERCOMPLETE</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>664</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>UPDATEIOS</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>672</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_UPDATEIOS</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>680</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>SFCRESETSTEP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>688</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>_SFCRESETSTEP</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>696</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bReset</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Reset Request]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>704</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bEnable</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>712</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">I_SensorOpt</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>720</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">I_SensorInd</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>728</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">I_SorterLiftUp</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>736</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">I_SorterLiftDown</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>744</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">I_SorterGateClosed</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[SMEMA Handshake Inputs]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>752</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">hiRdyToReceive_FromDS</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>760</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">hiBallAvail_FromUS</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>768</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Output">bStopOK</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>776</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Output">bBallLoaded</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>784</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Output">bCurBallMetal</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>792</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Output">O_SorterGate</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>800</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Output">O_SorterLift</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[SMEMA Handshake Outputs]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>808</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Output">hoBallAvail_ToDS</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>816</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Output">hoReadyToRecieve_ToUS</Name>
+				<Type>BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>824</BitOffs>
+			</SubItem>
+			<FbInfo>
+				<CodeIndex>255</CodeIndex>
+				<InitIndex>256</InitIndex>
+			</FbInfo>
+		</DataType>
+		<DataType>
+			<Name Decoration="300002FE" Crc32="0303332809" LastChange="2020-02-25T15:04:21">E_ModeCtrl</Name>
+			<Type>INT</Type>
+			<BitSize>16</BitSize>
+			<EnumInfo>
+				<Text>eMode_undefined</Text>
+				<Enum>0</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eMode_Automatic</Text>
+				<Enum>1</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eMode_XXX</Text>
+				<Enum>2</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eMode_Manual</Text>
+				<Enum>99</Enum>
+			</EnumInfo>
+		</DataType>
+		<DataType>
+			<Name Decoration="30000225" Crc32="2321183169" LastChange="2020-02-25T15:04:21">E_State</Name>
+			<Type>INT</Type>
+			<BitSize>16</BitSize>
+			<EnumInfo>
+				<Text>eSt_Aborting</Text>
+				<Enum>0</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Aborted</Text>
+				<Enum>1</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Clearing</Text>
+				<Enum>2</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Stopped</Text>
+				<Enum>3</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Stopping</Text>
+				<Enum>4</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Resetting</Text>
+				<Enum>5</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Idle</Text>
+				<Enum>6</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Starting</Text>
+				<Enum>7</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Execute</Text>
+				<Enum>8</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Suspending</Text>
+				<Enum>9</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Suspended</Text>
+				<Enum>10</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Unsuspending</Text>
+				<Enum>11</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Holding</Text>
+				<Enum>12</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Held</Text>
+				<Enum>13</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_UnHolding</Text>
+				<Enum>14</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Completing</Text>
+				<Enum>15</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eSt_Completed</Text>
+				<Enum>16</Enum>
+			</EnumInfo>
+		</DataType>
+		<DataType>
+			<Name Decoration="101514C0" Crc32="4213981199" LastChange="2020-02-25T15:04:17">FB_StateModel_ST</Name>
+			<BitSize>256</BitSize>
+			<SubItem>
+				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">RTrig_bSC</Name>
+				<Type Decoration="1003051C">R_TRIG</Type>
+				<Comment>
+					<![CDATA[Rising trigger for State Completed]]>
+				</Comment>
+				<BitSize>24</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">RTrig_StateChange</Name>
+				<Type Decoration="1003051C">R_TRIG</Type>
+				<Comment>
+					<![CDATA[Rising trigger for State signal]]>
+				</Comment>
+				<BitSize>24</BitSize>
+				<BitOffs>24</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bResetLocal</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Paikallinen Reset]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bInitDone</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Initialisation]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>56</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bResetFB</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Resets whole FB]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">eModeReq</Name>
+				<Type Decoration="300002FE">E_ModeCtrl</Type>
+				<Comment>
+					<![CDATA[Requested mode]]>
+				</Comment>
+				<BitSize>16</BitSize>
+				<BitOffs>80</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">wIgnoreState</Name>
+				<Type>DWORD</Type>
+				<Comment>
+					<![CDATA[Ignoring states. See bit from E_State definition. Aborting = bit0]]>
+				</Comment>
+				<BitSize>32</BitSize>
+				<BitOffs>96</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bSC</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Step Completed acknoledgement]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>128</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bAbort</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Abortting signal = EmergencyStop]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>136</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bClear</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Clear signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>144</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bReset</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Reseting signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>152</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bStart</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Start signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>160</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bHold</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Hold signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>168</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bUn_Hold</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Un-Hold signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>176</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bSuspend</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Suspend signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>184</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bUn_Suspend</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Un-Suspend signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>192</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bStop</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Stop signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>200</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bComplete</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Complete signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>208</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Input">bAck_Completed</Name>
+				<Type>BOOL</Type>
+				<Comment>
+					<![CDATA[Acknoledgement for Complete signal]]>
+				</Comment>
+				<BitSize>8</BitSize>
+				<BitOffs>216</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Output">eMode</Name>
+				<Type Decoration="300002FE">E_ModeCtrl</Type>
+				<Comment>
+					<![CDATA[Current mode]]>
+				</Comment>
+				<BitSize>16</BitSize>
+				<BitOffs>224</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name FbParameter="Output">eState</Name>
+				<Type Decoration="30000225">E_State</Type>
+				<Comment>
+					<![CDATA[Current state]]>
+				</Comment>
+				<BitSize>16</BitSize>
+				<BitOffs>240</BitOffs>
+			</SubItem>
+			<FbInfo>
+				<CodeIndex>257</CodeIndex>
+				<InitIndex>258</InitIndex>
+			</FbInfo>
+		</DataType>
+		<DataType>
+			<Name Decoration="300002FD" Crc32="2462427557" LastChange="2020-02-25T15:04:21">E_ModeProc</Name>
+			<Type>INT</Type>
+			<BitSize>16</BitSize>
+			<EnumInfo>
+				<Text>eModeProc_undefined</Text>
+				<Enum>0</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eModeProc_Automatic</Text>
+				<Enum>1</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eModeProc_SemiAutomatic</Text>
+				<Enum>2</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text>eModeProc_Manual</Text>
+				<Enum>3</Enum>
+			</EnumInfo>
 		</DataType>
 		<DataType>
 			<Name Decoration="200100F2">ARRAY [1..4] OF INT</Name>
@@ -5060,7 +5075,7 @@
 			</FunInfo>
 		</Function>
 		<Function>
-			<Name Decoration="100B85B5" IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\TcSystem.lib">F_SplitPathName</Name>
+			<Name Decoration="100B93AA" IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\TcSystem.lib">F_SplitPathName</Name>
 			<FunInfo>
 				<CodeIndex>115</CodeIndex>
 				<ReturnValue>
@@ -5751,16 +5766,16 @@
 	</Functions>
 	<Programs>
 		<Program>
-			<Name Decoration="10054ADD" Crc32="3630030838" LastChange="2020-02-24T16:59:01">MAIN</Name>
+			<Name Decoration="10069B11" Crc32="1826563180" LastChange="2020-02-25T15:04:17">MAIN</Name>
 			<PrgInfo>
-				<CodeIndex>258</CodeIndex>
+				<CodeIndex>265</CodeIndex>
 				<ActionInfo>
 					<Name>actAborting</Name>
-					<CodeIndex>259</CodeIndex>
+					<CodeIndex>266</CodeIndex>
 				</ActionInfo>
 				<ActionInfo>
 					<Name>HMI_and_UI_Update</Name>
-					<CodeIndex>260</CodeIndex>
+					<CodeIndex>267</CodeIndex>
 				</ActionInfo>
 				<Symbol>
 					<Name>MAIN.tonStarting</Name>
@@ -5777,12 +5792,60 @@
 				<Symbol>
 					<Name>MAIN.fbPipeLow</Name>
 				</Symbol>
+				<Symbol>
+					<Name>MAIN.fbDelay</Name>
+				</Symbol>
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="100D9504" Crc32="0670260906" LastChange="2020-02-23T17:29:20">PRG_Blinking</Name>
+			<Name Decoration="1009BB12" Crc32="3297092801" LastChange="2020-02-25T15:04:17">PRG_AutoSort</Name>
 			<PrgInfo>
-				<CodeIndex>264</CodeIndex>
+				<CodeIndex>268</CodeIndex>
+				<ActionInfo>
+					<Name>actCheckAllOKStop</Name>
+					<CodeIndex>269</CodeIndex>
+				</ActionInfo>
+				<ActionInfo>
+					<Name>actCountBallsProcessed</Name>
+					<CodeIndex>270</CodeIndex>
+				</ActionInfo>
+				<ActionInfo>
+					<Name>actUpdateIO</Name>
+					<CodeIndex>271</CodeIndex>
+				</ActionInfo>
+				<Symbol>
+					<Name>PRG_AutoSort.iBallsProcessed</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_AutoSort.fbSorter</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_AutoSort.fbLift</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_AutoSort.bExecute</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_AutoSort.bReset</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_AutoSort.iBatchSize</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Output">PRG_AutoSort.bDone</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Output">PRG_AutoSort.bStopOk</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Output">PRG_AutoSort.bBatchComplete</Name>
+				</Symbol>
+			</PrgInfo>
+		</Program>
+		<Program>
+			<Name Decoration="100D9504" Crc32="0670260906" LastChange="2020-02-25T15:04:17">PRG_Blinking</Name>
+			<PrgInfo>
+				<CodeIndex>272</CodeIndex>
 				<Symbol>
 					<Name>PRG_Blinking.bInitDone</Name>
 				</Symbol>
@@ -5825,9 +5888,9 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101EB396" Crc32="0903996717" LastChange="2020-02-23T17:29:20">PRG_DeliverToGarbage</Name>
+			<Name Decoration="101EB396" Crc32="0903996717" LastChange="2020-02-25T15:04:17">PRG_DeliverToGarbage</Name>
 			<PrgInfo>
-				<CodeIndex>266</CodeIndex>
+				<CodeIndex>273</CodeIndex>
 				<Symbol>
 					<Name>PRG_DeliverToGarbage.tonMoveDelay</Name>
 				</Symbol>
@@ -5921,9 +5984,9 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="10169673" Crc32="4118065507" LastChange="2020-02-23T17:29:20">PRG_DeliverToGarbage2</Name>
+			<Name Decoration="10169673" Crc32="4118065507" LastChange="2020-02-25T15:04:17">PRG_DeliverToGarbage2</Name>
 			<PrgInfo>
-				<CodeIndex>267</CodeIndex>
+				<CodeIndex>274</CodeIndex>
 				<Symbol>
 					<Name>PRG_DeliverToGarbage2.tonMoveDelay</Name>
 				</Symbol>
@@ -5993,9 +6056,9 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101EB1D8" Crc32="3987492197" LastChange="2020-02-23T17:29:20">PRG_DeliverToLow</Name>
+			<Name Decoration="101EB1D8" Crc32="3987492197" LastChange="2020-02-25T15:04:17">PRG_DeliverToLow</Name>
 			<PrgInfo>
-				<CodeIndex>268</CodeIndex>
+				<CodeIndex>275</CodeIndex>
 				<Symbol>
 					<Name>PRG_DeliverToLow.tonMoveDelay</Name>
 				</Symbol>
@@ -6089,9 +6152,9 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101694C3" Crc32="2300405452" LastChange="2020-02-23T17:29:20">PRG_DeliverToLow2</Name>
+			<Name Decoration="101694C3" Crc32="2300405452" LastChange="2020-02-25T15:04:17">PRG_DeliverToLow2</Name>
 			<PrgInfo>
-				<CodeIndex>269</CodeIndex>
+				<CodeIndex>276</CodeIndex>
 				<Symbol>
 					<Name>PRG_DeliverToLow2.tonMoveDelay</Name>
 				</Symbol>
@@ -6161,9 +6224,9 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101EB198" Crc32="4224662265" LastChange="2020-02-23T17:29:20">PRG_DeliverToMid</Name>
+			<Name Decoration="101EB198" Crc32="4224662265" LastChange="2020-02-25T15:04:17">PRG_DeliverToMid</Name>
 			<PrgInfo>
-				<CodeIndex>270</CodeIndex>
+				<CodeIndex>277</CodeIndex>
 				<Symbol>
 					<Name>PRG_DeliverToMid.tonMoveDelay</Name>
 				</Symbol>
@@ -6257,9 +6320,9 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="10169453" Crc32="2005010009" LastChange="2020-02-23T17:29:20">PRG_DeliverToMid2</Name>
+			<Name Decoration="10169453" Crc32="2005010009" LastChange="2020-02-25T15:04:17">PRG_DeliverToMid2</Name>
 			<PrgInfo>
-				<CodeIndex>271</CodeIndex>
+				<CodeIndex>278</CodeIndex>
 				<Symbol>
 					<Name>PRG_DeliverToMid2.tonMoveDelay</Name>
 				</Symbol>
@@ -6329,9 +6392,9 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101EB116" Crc32="3616172415" LastChange="2020-02-23T17:29:20">PRG_DeliverToUp</Name>
+			<Name Decoration="101EB116" Crc32="3616172415" LastChange="2020-02-25T15:04:17">PRG_DeliverToUp</Name>
 			<PrgInfo>
-				<CodeIndex>272</CodeIndex>
+				<CodeIndex>279</CodeIndex>
 				<Symbol>
 					<Name>PRG_DeliverToUp.tonMoveDelay</Name>
 				</Symbol>
@@ -6425,9 +6488,9 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="10169423" Crc32="0751391354" LastChange="2020-02-23T17:29:20">PRG_DeliverToUp2</Name>
+			<Name Decoration="10169423" Crc32="0751391354" LastChange="2020-02-25T15:04:17">PRG_DeliverToUp2</Name>
 			<PrgInfo>
-				<CodeIndex>279</CodeIndex>
+				<CodeIndex>280</CodeIndex>
 				<Symbol>
 					<Name>PRG_DeliverToUp2.tonMoveDelay</Name>
 				</Symbol>
@@ -6497,15 +6560,15 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="10000000" Crc32="4087358478" LastChange="2020-02-23T17:29:20">PRG_Drive_Link</Name>
+			<Name Decoration="10000000" Crc32="2452271451" LastChange="2020-02-25T15:04:17">PRG_Drive_Link</Name>
 			<PrgInfo>
-				<CodeIndex>273</CodeIndex>
+				<CodeIndex>281</CodeIndex>
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="100F8240" Crc32="0550406273" LastChange="2020-02-23T17:29:20">PRG_EmptyTubes</Name>
+			<Name Decoration="100F8240" Crc32="0550406273" LastChange="2020-02-25T15:04:17">PRG_EmptyTubes</Name>
 			<PrgInfo>
-				<CodeIndex>274</CodeIndex>
+				<CodeIndex>282</CodeIndex>
 				<Symbol>
 					<Name>PRG_EmptyTubes.fbDelay</Name>
 				</Symbol>
@@ -6554,168 +6617,180 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="100D3A24" Crc32="2504279245" LastChange="2020-02-23T17:29:20">PRG_Sorting</Name>
+			<Name Decoration="100A56F9" Crc32="3657473617" LastChange="2020-02-25T15:05:16">PRG_HMI</Name>
 			<PrgInfo>
-				<CodeIndex>278</CodeIndex>
+				<CodeIndex>283</CodeIndex>
 				<Symbol>
-					<Name>PRG_Sorting.bInitDone</Name>
+					<Name>PRG_HMI.iSorterLiftPos</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Sorting.SFCReset</Name>
+					<Name>PRG_HMI.iLiftPos</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Sorting.INIT</Name>
+					<Name>PRG_HMI.wTargetPos</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Sorting._INIT</Name>
+					<Name>PRG_HMI.bBall_InLift</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Sorting.WAITFORRESET</Name>
+					<Name>PRG_HMI.RS_Ball_InLift</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Sorting._WAITFORRESET</Name>
+					<Name>PRG_HMI.i</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Sorting.TODO_IMPLEMENTYOURSEQUENCE</Name>
+					<Name>PRG_HMI.ii</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Sorting._TODO_IMPLEMENTYOURSEQUENCE</Name>
+					<Name>PRG_HMI.SR_EmptyTubes</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Sorting.RESETSFC</Name>
+					<Name PrgParameter="Input">PRG_HMI.bBtnResetCounters</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Sorting._RESETSFC</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Sorting.bReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Sorting.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_Sorting.bDone</Name>
+					<Name PrgParameter="Input">PRG_HMI.bBtnEmptyPipes</Name>
 				</Symbol>
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101467B5" Crc32="0567204885" LastChange="2020-02-23T17:29:20">PRG_ToColourSensor</Name>
+			<Name Decoration="102BD216" Crc32="2654555324" LastChange="2020-02-25T15:04:17">PRG_Initialisation</Name>
 			<PrgInfo>
-				<CodeIndex>280</CodeIndex>
+				<CodeIndex>284</CodeIndex>
 				<Symbol>
-					<Name>PRG_ToColourSensor.tonMoveDelay</Name>
+					<Name>PRG_Initialisation.tonMoveDelay</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.SFCReset</Name>
+					<Name>PRG_Initialisation.tMoveDelay</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.tMoveDelay</Name>
+					<Name>PRG_Initialisation.bInitDone</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.INIT</Name>
+					<Name>PRG_Initialisation.bGatesClosed</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor._INIT</Name>
+					<Name>PRG_Initialisation.bActuRetracted</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.WAITRESET</Name>
+					<Name>PRG_Initialisation.bDriveAtLoading</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor._WAITRESET</Name>
+					<Name>PRG_Initialisation.SFCReset</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.PROCESS</Name>
+					<Name>PRG_Initialisation.bStart</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor._PROCESS</Name>
+					<Name>PRG_Initialisation.INIT</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.MOVETOCOLOUR</Name>
+					<Name>PRG_Initialisation._INIT</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor._MOVETOCOLOUR</Name>
+					<Name>PRG_Initialisation.WAITFORRESET</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.WAIT_ARRIVE</Name>
+					<Name>PRG_Initialisation._WAITFORRESET</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor._WAIT_ARRIVE</Name>
+					<Name>PRG_Initialisation.INITMACHINE</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.DONE</Name>
+					<Name>PRG_Initialisation._INITMACHINE</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor._DONE</Name>
+					<Name>PRG_Initialisation.STARTINIT</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.RESETING</Name>
+					<Name>PRG_Initialisation._STARTINIT</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor._RESETING</Name>
+					<Name>PRG_Initialisation.GATES</Name>
 				</Symbol>
 				<Symbol>
-					<Name PrgParameter="Input">PRG_ToColourSensor.bReset</Name>
+					<Name>PRG_Initialisation._GATES</Name>
 				</Symbol>
 				<Symbol>
-					<Name PrgParameter="Input">PRG_ToColourSensor.bExecute</Name>
+					<Name>PRG_Initialisation.CLOSEGATES</Name>
 				</Symbol>
 				<Symbol>
-					<Name PrgParameter="Output">PRG_ToColourSensor.bDone</Name>
+					<Name>PRG_Initialisation._CLOSEGATES</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation.GATESCLOSED</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation._GATESCLOSED</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation.ACTUATORS</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation._ACTUATORS</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation.ACTURETRACT</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation._ACTURETRACT</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation.ACTURETRACTED</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation._ACTURETRACTED</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation.LIFT</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation._LIFT</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation.STARTHOME</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation._STARTHOME</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation.DRIVEINLOADINGPOS</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation._DRIVEINLOADINGPOS</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation.INITMACHINEDONE</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation._INITMACHINEDONE</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation.IO_UPDATE</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation._IO_UPDATE</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation.RESETSFC</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_Initialisation._RESETSFC</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_Initialisation.bReset</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_Initialisation.bExecute</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Output">PRG_Initialisation.bDone</Name>
 				</Symbol>
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="100E716F" Crc32="4216748953" LastChange="2020-02-23T17:29:20">PRG_ToColourSensor2</Name>
+			<Name Decoration="1019C3A1" Crc32="0820334956" LastChange="2020-02-25T15:04:17">PRG_MoveToDest</Name>
 			<PrgInfo>
-				<CodeIndex>332</CodeIndex>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.tonMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.MOVETOCOLOUR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2._MOVETOCOLOUR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_ToColourSensor2.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_ToColourSensor2.bDone</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
-			<Name Decoration="1019C3A1" Crc32="0820334956" LastChange="2020-02-24T13:36:44">PRG_MoveToDest</Name>
-			<PrgInfo>
-				<CodeIndex>277</CodeIndex>
+				<CodeIndex>285</CodeIndex>
 				<Symbol>
 					<Name>PRG_MoveToDest.tonMoveDelay</Name>
 				</Symbol>
@@ -6794,9 +6869,9 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101DD691" Crc32="3078490089" LastChange="2020-02-24T13:36:34">PRG_MoveToDestOld</Name>
+			<Name Decoration="101DD691" Crc32="3078490089" LastChange="2020-02-25T15:04:17">PRG_MoveToDestOld</Name>
 			<PrgInfo>
-				<CodeIndex>335</CodeIndex>
+				<CodeIndex>286</CodeIndex>
 				<Symbol>
 					<Name>PRG_MoveToDestOld.tonMoveDelay</Name>
 				</Symbol>
@@ -6887,215 +6962,167 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="100A56F9" Crc32="1504438582" LastChange="2020-02-24T14:15:52">PRG_HMI</Name>
+			<Name Decoration="10000000" Crc32="2966699810" LastChange="2020-02-25T15:04:17">PRG_SafetyProgram</Name>
 			<PrgInfo>
-				<CodeIndex>275</CodeIndex>
+				<CodeIndex>287</CodeIndex>
+			</PrgInfo>
+		</Program>
+		<Program>
+			<Name Decoration="100D3A24" Crc32="2504279245" LastChange="2020-02-25T15:04:17">PRG_Sorting</Name>
+			<PrgInfo>
+				<CodeIndex>288</CodeIndex>
 				<Symbol>
-					<Name>PRG_HMI.iSorterLiftPos</Name>
+					<Name>PRG_Sorting.bInitDone</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_HMI.iLiftPos</Name>
+					<Name>PRG_Sorting.SFCReset</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_HMI.wTargetPos</Name>
+					<Name>PRG_Sorting.INIT</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_HMI.bBall_InLift</Name>
+					<Name>PRG_Sorting._INIT</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_HMI.RS_Ball_InLift</Name>
+					<Name>PRG_Sorting.WAITFORRESET</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_HMI.i</Name>
+					<Name>PRG_Sorting._WAITFORRESET</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_HMI.ii</Name>
+					<Name>PRG_Sorting.TODO_IMPLEMENTYOURSEQUENCE</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_HMI.SR_EmptyTubes</Name>
+					<Name>PRG_Sorting._TODO_IMPLEMENTYOURSEQUENCE</Name>
 				</Symbol>
 				<Symbol>
-					<Name PrgParameter="Input">PRG_HMI.bBtnResetCounters</Name>
+					<Name>PRG_Sorting.RESETSFC</Name>
 				</Symbol>
 				<Symbol>
-					<Name PrgParameter="Input">PRG_HMI.bBtnEmptyPipes</Name>
+					<Name>PRG_Sorting._RESETSFC</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_Sorting.bReset</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_Sorting.bExecute</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Output">PRG_Sorting.bDone</Name>
 				</Symbol>
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="102ACF41" Crc32="1345832420" LastChange="2020-02-24T16:35:57">PRG_Initialisation</Name>
+			<Name Decoration="101467B5" Crc32="0567204885" LastChange="2020-02-25T15:04:17">PRG_ToColourSensor</Name>
 			<PrgInfo>
-				<CodeIndex>276</CodeIndex>
+				<CodeIndex>289</CodeIndex>
 				<Symbol>
-					<Name>PRG_Initialisation.tonMoveDelay</Name>
+					<Name>PRG_ToColourSensor.tonMoveDelay</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.tMoveDelay</Name>
+					<Name>PRG_ToColourSensor.SFCReset</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.bInitDone</Name>
+					<Name>PRG_ToColourSensor.tMoveDelay</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.bGatesClosed</Name>
+					<Name>PRG_ToColourSensor.INIT</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.bActuRetracted</Name>
+					<Name>PRG_ToColourSensor._INIT</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.bDriveAtLoading</Name>
+					<Name>PRG_ToColourSensor.WAITRESET</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.SFCReset</Name>
+					<Name>PRG_ToColourSensor._WAITRESET</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.INIT</Name>
+					<Name>PRG_ToColourSensor.PROCESS</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation._INIT</Name>
+					<Name>PRG_ToColourSensor._PROCESS</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.WAITFORRESET</Name>
+					<Name>PRG_ToColourSensor.MOVETOCOLOUR</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation._WAITFORRESET</Name>
+					<Name>PRG_ToColourSensor._MOVETOCOLOUR</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.INITMACHINE</Name>
+					<Name>PRG_ToColourSensor.WAIT_ARRIVE</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation._INITMACHINE</Name>
+					<Name>PRG_ToColourSensor._WAIT_ARRIVE</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.STARTINIT</Name>
+					<Name>PRG_ToColourSensor.DONE</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation._STARTINIT</Name>
+					<Name>PRG_ToColourSensor._DONE</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.GATES</Name>
+					<Name>PRG_ToColourSensor.RESETING</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation._GATES</Name>
+					<Name>PRG_ToColourSensor._RESETING</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.CLOSEGATES</Name>
+					<Name PrgParameter="Input">PRG_ToColourSensor.bReset</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation._CLOSEGATES</Name>
+					<Name PrgParameter="Input">PRG_ToColourSensor.bExecute</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Initialisation.GATESCLOSED</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation._GATESCLOSED</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation.ACTUATORS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation._ACTUATORS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation.ACTURETRACT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation._ACTURETRACT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation.ACTURETRACTED</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation._ACTURETRACTED</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation.LIFT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation._LIFT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation.HOMELIFT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation._HOMELIFT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation.DRIVEINLOADINGPOS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation._DRIVEINLOADINGPOS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation.INITMACHINEDONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation._INITMACHINEDONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation.IO_UPDATE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation._IO_UPDATE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation.RESETSFC</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Initialisation._RESETSFC</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Initialisation.bReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Initialisation.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_Initialisation.bDone</Name>
+					<Name PrgParameter="Output">PRG_ToColourSensor.bDone</Name>
 				</Symbol>
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="1009BB12" Crc32="3800319808" LastChange="2020-02-24T17:13:25">PRG_AutoSort</Name>
+			<Name Decoration="100E716F" Crc32="4216748953" LastChange="2020-02-25T15:04:17">PRG_ToColourSensor2</Name>
 			<PrgInfo>
-				<CodeIndex>261</CodeIndex>
-				<ActionInfo>
-					<Name>actCheckAllOKStop</Name>
-					<CodeIndex>262</CodeIndex>
-				</ActionInfo>
-				<ActionInfo>
-					<Name>actCountBallsProcessed</Name>
-					<CodeIndex>265</CodeIndex>
-				</ActionInfo>
-				<ActionInfo>
-					<Name>actUpdateIO</Name>
-					<CodeIndex>263</CodeIndex>
-				</ActionInfo>
+				<CodeIndex>290</CodeIndex>
 				<Symbol>
-					<Name>PRG_AutoSort.iBallsProcessed</Name>
+					<Name>PRG_ToColourSensor2.tonMoveDelay</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_AutoSort.fbSorter</Name>
+					<Name>PRG_ToColourSensor2.tonEjectDelay</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_AutoSort.fbLift</Name>
+					<Name>PRG_ToColourSensor2.tMoveDelay</Name>
 				</Symbol>
 				<Symbol>
-					<Name PrgParameter="Input">PRG_AutoSort.bExecute</Name>
+					<Name>PRG_ToColourSensor2.tEjectorDelay</Name>
 				</Symbol>
 				<Symbol>
-					<Name PrgParameter="Input">PRG_AutoSort.bReset</Name>
+					<Name>PRG_ToColourSensor2.INIT</Name>
 				</Symbol>
 				<Symbol>
-					<Name PrgParameter="Input">PRG_AutoSort.iBatchSize</Name>
+					<Name>PRG_ToColourSensor2._INIT</Name>
 				</Symbol>
 				<Symbol>
-					<Name PrgParameter="Output">PRG_AutoSort.bDone</Name>
+					<Name>PRG_ToColourSensor2.MOVETOCOLOUR</Name>
 				</Symbol>
 				<Symbol>
-					<Name PrgParameter="Output">PRG_AutoSort.bStopOk</Name>
+					<Name>PRG_ToColourSensor2._MOVETOCOLOUR</Name>
 				</Symbol>
 				<Symbol>
-					<Name PrgParameter="Output">PRG_AutoSort.bBatchComplete</Name>
+					<Name>PRG_ToColourSensor2.WAIT_ARRIVE</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_ToColourSensor2._WAIT_ARRIVE</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_ToColourSensor2.DONE</Name>
+				</Symbol>
+				<Symbol>
+					<Name>PRG_ToColourSensor2._DONE</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_ToColourSensor2.bExecute</Name>
+				</Symbol>
+				<Symbol>
+					<Name PrgParameter="Input">PRG_ToColourSensor2.bDone</Name>
 				</Symbol>
 			</PrgInfo>
 		</Program>
@@ -7105,7 +7132,7 @@
 			<Name TaskPrio="1">MAIN.tonStarting</Name>
 			<Type Decoration="10060D24">TON</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>740</IOffset>
+			<IOffset>768</IOffset>
 			<BitSize>192</BitSize>
 		</Symbol>
 		<Symbol>
@@ -7115,519 +7142,77 @@
 				<![CDATA[RS - flip-flop for Emergency clear info]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>764</IOffset>
+			<IOffset>792</IOffset>
 			<BitSize>24</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">MAIN.fbPipeUp</Name>
 			<Type Decoration="1017EFBD">FB_Pipe</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>948</IOffset>
+			<IOffset>796</IOffset>
 			<BitSize>1152</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">MAIN.fbPipeMid</Name>
 			<Type Decoration="1017EFBD">FB_Pipe</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>2888</IOffset>
+			<IOffset>940</IOffset>
 			<BitSize>1152</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">MAIN.fbPipeLow</Name>
 			<Type Decoration="1017EFBD">FB_Pipe</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>3032</IOffset>
+			<IOffset>1084</IOffset>
 			<BitSize>1152</BitSize>
 		</Symbol>
 		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.bInitDone</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Ohjelman initialisointi]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1093</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.TP_Delay</Name>
-			<Type Decoration="10050B9B">TP</Type>
-			<Comment>
-				<![CDATA[Nopein taajuus / 2 tuottaja]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1096</IOffset>
-			<BitSize>160</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.bBaseHz</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Nopein taajuus/2]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1094</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.iBaseHz</Name>
-			<Type>UINT</Type>
-			<Comment>
-				<![CDATA[Base taajuus (Hz)]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1116</IOffset>
-			<BitSize>16</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.RTRIG_2Hz_Sign</Name>
-			<Type Decoration="1003051C">R_TRIG</Type>
-			<Comment>
-				<![CDATA[2Hz signaalin generointi]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1118</IOffset>
-			<BitSize>24</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.RTRIG_1Hz_Sign</Name>
-			<Type Decoration="1003051C">R_TRIG</Type>
-			<Comment>
-				<![CDATA[1Hz signaalin generointi]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1121</IOffset>
-			<BitSize>24</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.RTRIG_0_5Hz_Sign</Name>
-			<Type Decoration="1003051C">R_TRIG</Type>
-			<Comment>
-				<![CDATA[0,5Hz signaalin generointi]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1124</IOffset>
-			<BitSize>24</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.tBaseTaajuus</Name>
-			<Type>TIME</Type>
-			<Comment>
-				<![CDATA[Base vilkutuksen timerin arvo. f/2]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1128</IOffset>
-			<BitSize>32</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.fPLC_CYCLE_TIME</Name>
-			<Type>LREAL</Type>
-			<Comment>
-				<![CDATA[PLC:n cycli aika. Sekunttia]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1132</IOffset>
-			<BitSize>64</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.bSign4Hz</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[4 Hz (240krt/min) taajudella vaihteleva signaali]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1095</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.bSign2Hz</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[2 Hz (120krt/min) taajudella vaihteleva signaali]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1127</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.bSign1Hz</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[1 Hz (60krt/min) taajudella vaihteleva signaali]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1140</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Blinking.bSign0_5Hz</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[0,5 Hz (30krt/min) taajudella vaihteleva signaali]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1141</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_EmptyTubes.fbDelay</Name>
+			<Name TaskPrio="1">MAIN.fbDelay</Name>
 			<Type Decoration="10043C21">FB_Wait</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>1768</IOffset>
+			<IOffset>1228</IOffset>
 			<BitSize>256</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_EmptyTubes.bExecute</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1810</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_EmptyTubes.bDone</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1811</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_Sorting.bInitDone</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Initialisation done]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>2007</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Sorting.SFCReset</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[For reseting the SFC]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>2008</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Sorting.bReset</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Reseting the SFC]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>2017</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Sorting.bExecute</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Executes PRG]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>2018</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_Sorting.bDone</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Program operations done]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>2019</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_MoveToDest.tonMoveDelay</Name>
-			<Type Decoration="10060D24">TON</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1900</IOffset>
-			<BitSize>192</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_MoveToDest.tonEjectDelay</Name>
-			<Type Decoration="10060D24">TON</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1924</IOffset>
-			<BitSize>192</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_MoveToDest.tonSensorDelay</Name>
-			<Type Decoration="10060D24">TON</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1948</IOffset>
-			<BitSize>192</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_MoveToDest.tMoveDelay</Name>
-			<Type>TIME</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1972</IOffset>
-			<BitSize>32</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_MoveToDest.tEjectorDelay</Name>
-			<Type>TIME</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1976</IOffset>
-			<BitSize>32</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_MoveToDest.tSensorDelay</Name>
-			<Type>TIME</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1980</IOffset>
-			<BitSize>32</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_MoveToDest.bExecute</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>2003</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_MoveToDest.wTarget</Name>
-			<Type>WORD</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>2004</IOffset>
-			<BitSize>16</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_MoveToDest.bDone</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>2006</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_HMI.iSorterLiftPos</Name>
-			<Type>INT</Type>
-			<Comment>
-				<![CDATA[Position of Sorter Lift cylinder]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1814</IOffset>
-			<BitSize>16</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_HMI.iLiftPos</Name>
-			<Type>INT</Type>
-			<Comment>
-				<![CDATA[Position of the lift]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1816</IOffset>
-			<BitSize>16</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_HMI.wTargetPos</Name>
-			<Type>INT</Type>
-			<Comment>
-				<![CDATA[Current target position of the lift]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1818</IOffset>
-			<BitSize>16</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_HMI.bBall_InLift</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Is there a ball in lift]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1820</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_HMI.RS_Ball_InLift</Name>
-			<Type Decoration="100306C8">RS</Type>
-			<Comment>
-				<![CDATA[Flip-flop for ball in the lift]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1821</IOffset>
-			<BitSize>24</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_HMI.i</Name>
-			<Type>INT</Type>
-			<Comment>
-				<![CDATA[Counter]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1824</IOffset>
-			<BitSize>16</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_HMI.ii</Name>
-			<Type>INT</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>768</IOffset>
-			<BitSize>16</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_HMI.SR_EmptyTubes</Name>
-			<Type Decoration="100306C6">SR</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1826</IOffset>
-			<BitSize>24</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_HMI.bBtnResetCounters</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Button Reset counters]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1812</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_HMI.bBtnEmptyPipes</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Button Empty Pipes]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1813</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Initialisation.tonMoveDelay</Name>
-			<Type Decoration="10060D24">TON</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1832</IOffset>
-			<BitSize>192</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_Initialisation.tMoveDelay</Name>
-			<Type>TIME</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1856</IOffset>
-			<BitSize>32</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_Initialisation.bInitDone</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Initialisation done]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1829</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Initialisation.bGatesClosed</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Initialisation done]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1830</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Initialisation.bActuRetracted</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1831</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Initialisation.bDriveAtLoading</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[System variables. See SFC-flags: http://infosys.beckhoff.com/content/1033/tcplccontrol/html/tcplcctrl_editorsfc.htm?id=24319#SFC-Flags]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1860</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Initialisation.SFCReset</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[For reseting the SFC]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1861</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Initialisation.bReset</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Reseting the SFC]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1896</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Initialisation.bExecute</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Executes PRG]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1897</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Initialisation.bDone</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Program operations done]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1898</IOffset>
-			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">PRG_AutoSort.iBallsProcessed</Name>
 			<Type>INT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>774</IOffset>
+			<IOffset>618</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">PRG_AutoSort.fbSorter</Name>
 			<Type Decoration="104081BF">FB_Sorter</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>3416</IOffset>
+			<IOffset>1260</IOffset>
 			<BitSize>832</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">PRG_AutoSort.fbLift</Name>
 			<Type Decoration="1054F4C7">FB_Lift2</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>3520</IOffset>
+			<IOffset>1364</IOffset>
 			<BitSize>1920</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">PRG_AutoSort.bExecute</Name>
 			<Type>BOOL</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>590</IOffset>
+			<IOffset>539</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">PRG_AutoSort.bReset</Name>
 			<Type>BOOL</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>591</IOffset>
+			<IOffset>795</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">PRG_AutoSort.iBatchSize</Name>
 			<Type>INT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>770</IOffset>
+			<IOffset>1604</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -7637,21 +7222,427 @@
 				<![CDATA[Program operations done]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>767</IOffset>
+			<IOffset>1606</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">PRG_AutoSort.bStopOk</Name>
 			<Type>BOOL</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>1092</IOffset>
+			<IOffset>1607</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">PRG_AutoSort.bBatchComplete</Name>
 			<Type>BOOL</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>511</IOffset>
+			<IOffset>1608</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.bInitDone</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Ohjelman initialisointi]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1609</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.TP_Delay</Name>
+			<Type Decoration="10050B9B">TP</Type>
+			<Comment>
+				<![CDATA[Nopein taajuus / 2 tuottaja]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1612</IOffset>
+			<BitSize>160</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.bBaseHz</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Nopein taajuus/2]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1610</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.iBaseHz</Name>
+			<Type>UINT</Type>
+			<Comment>
+				<![CDATA[Base taajuus (Hz)]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1632</IOffset>
+			<BitSize>16</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.RTRIG_2Hz_Sign</Name>
+			<Type Decoration="1003051C">R_TRIG</Type>
+			<Comment>
+				<![CDATA[2Hz signaalin generointi]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1634</IOffset>
+			<BitSize>24</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.RTRIG_1Hz_Sign</Name>
+			<Type Decoration="1003051C">R_TRIG</Type>
+			<Comment>
+				<![CDATA[1Hz signaalin generointi]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1637</IOffset>
+			<BitSize>24</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.RTRIG_0_5Hz_Sign</Name>
+			<Type Decoration="1003051C">R_TRIG</Type>
+			<Comment>
+				<![CDATA[0,5Hz signaalin generointi]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1640</IOffset>
+			<BitSize>24</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.tBaseTaajuus</Name>
+			<Type>TIME</Type>
+			<Comment>
+				<![CDATA[Base vilkutuksen timerin arvo. f/2]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1644</IOffset>
+			<BitSize>32</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.fPLC_CYCLE_TIME</Name>
+			<Type>LREAL</Type>
+			<Comment>
+				<![CDATA[PLC:n cycli aika. Sekunttia]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1648</IOffset>
+			<BitSize>64</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.bSign4Hz</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[4 Hz (240krt/min) taajudella vaihteleva signaali]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1611</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.bSign2Hz</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[2 Hz (120krt/min) taajudella vaihteleva signaali]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1643</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.bSign1Hz</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[1 Hz (60krt/min) taajudella vaihteleva signaali]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1656</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Blinking.bSign0_5Hz</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[0,5 Hz (30krt/min) taajudella vaihteleva signaali]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1657</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_EmptyTubes.fbDelay</Name>
+			<Type Decoration="10043C21">FB_Wait</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2284</IOffset>
+			<BitSize>256</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_EmptyTubes.bExecute</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2326</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_EmptyTubes.bDone</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2327</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_HMI.iSorterLiftPos</Name>
+			<Type>INT</Type>
+			<Comment>
+				<![CDATA[Position of Sorter Lift cylinder]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2328</IOffset>
+			<BitSize>16</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_HMI.iLiftPos</Name>
+			<Type>INT</Type>
+			<Comment>
+				<![CDATA[Position of the lift]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2330</IOffset>
+			<BitSize>16</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_HMI.wTargetPos</Name>
+			<Type>INT</Type>
+			<Comment>
+				<![CDATA[Current target position of the lift]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2332</IOffset>
+			<BitSize>16</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_HMI.bBall_InLift</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Is there a ball in lift]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2334</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_HMI.RS_Ball_InLift</Name>
+			<Type Decoration="100306C8">RS</Type>
+			<Comment>
+				<![CDATA[Flip-flop for ball in the lift]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2335</IOffset>
+			<BitSize>24</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_HMI.i</Name>
+			<Type>INT</Type>
+			<Comment>
+				<![CDATA[Counter]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2338</IOffset>
+			<BitSize>16</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_HMI.ii</Name>
+			<Type>INT</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2340</IOffset>
+			<BitSize>16</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_HMI.SR_EmptyTubes</Name>
+			<Type Decoration="100306C6">SR</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2342</IOffset>
+			<BitSize>24</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_HMI.bBtnResetCounters</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Button Reset counters]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2345</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_HMI.bBtnEmptyPipes</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Button Empty Pipes]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2346</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Initialisation.tonMoveDelay</Name>
+			<Type Decoration="10060D24">TON</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2348</IOffset>
+			<BitSize>192</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name>PRG_Initialisation.tMoveDelay</Name>
+			<Type>TIME</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2372</IOffset>
+			<BitSize>32</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name>PRG_Initialisation.bInitDone</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Initialisation done]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2347</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Initialisation.bGatesClosed</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Initialisation done]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2376</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Initialisation.bActuRetracted</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2377</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Initialisation.bDriveAtLoading</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[System variables. See SFC-flags: http://infosys.beckhoff.com/content/1033/tcplccontrol/html/tcplcctrl_editorsfc.htm?id=24319#SFC-Flags]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2378</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Initialisation.SFCReset</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[For reseting the SFC]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2379</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name>PRG_Initialisation.bStart</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2380</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Initialisation.bReset</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Reseting the SFC]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2413</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Initialisation.bExecute</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Executes PRG]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2414</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Initialisation.bDone</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Program operations done]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>2415</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_MoveToDest.tonMoveDelay</Name>
+			<Type Decoration="10060D24">TON</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2416</IOffset>
+			<BitSize>192</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_MoveToDest.tonEjectDelay</Name>
+			<Type Decoration="10060D24">TON</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2440</IOffset>
+			<BitSize>192</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name>PRG_MoveToDest.tonSensorDelay</Name>
+			<Type Decoration="10060D24">TON</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2464</IOffset>
+			<BitSize>192</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name>PRG_MoveToDest.tMoveDelay</Name>
+			<Type>TIME</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2488</IOffset>
+			<BitSize>32</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name>PRG_MoveToDest.tEjectorDelay</Name>
+			<Type>TIME</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2492</IOffset>
+			<BitSize>32</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name>PRG_MoveToDest.tSensorDelay</Name>
+			<Type>TIME</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2496</IOffset>
+			<BitSize>32</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_MoveToDest.bExecute</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2516</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_MoveToDest.wTarget</Name>
+			<Type>WORD</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2518</IOffset>
+			<BitSize>16</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_MoveToDest.bDone</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>2517</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -7732,7 +7723,7 @@
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
-			<Name Constant="1" TaskPrio="1">.T_LOADING_BALL</Name>
+			<Name Constant="1" TaskPrio="1">.T_RESET_DRIVE_TIME</Name>
 			<Type>TIME</Type>
 			<Comment>
 				<![CDATA[Delay for ball to roll from Slot2 to Lifter]]>
@@ -7742,20 +7733,30 @@
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
-			<Name Constant="1" TaskPrio="1">.T_DRIVE_DELAY</Name>
+			<Name Constant="1" TaskPrio="1">.T_LOADING_BALL</Name>
 			<Type>TIME</Type>
 			<Comment>
-				<![CDATA[Delay for drive to start movement]]>
+				<![CDATA[Delay for ball to roll from Slot2 to Lifter]]>
 			</Comment>
 			<IGroup>16448</IGroup>
 			<IOffset>76</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
+			<Name Constant="1" TaskPrio="1">.T_DRIVE_DELAY</Name>
+			<Type>TIME</Type>
+			<Comment>
+				<![CDATA[Delay for drive to start movement]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>80</IOffset>
+			<BitSize>32</BitSize>
+		</Symbol>
+		<Symbol>
 			<Name Constant="1" TaskPrio="1">.T_TUBE_EMPTY_DELAY</Name>
 			<Type>TIME</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>80</IOffset>
+			<IOffset>84</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -7765,56 +7766,56 @@
 				<![CDATA[Delay for ball to roll from Slot2 to Lifter]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>780</IOffset>
+			<IOffset>88</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" TaskPrio="1">.T_REQ_DELAY</Name>
 			<Type>TIME</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>788</IOffset>
+			<IOffset>92</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1">.T_BALL_DEBOUNCE</Name>
 			<Type>TIME</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>784</IOffset>
+			<IOffset>96</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" TaskPrio="1">.T_POS_SETTLE_DELAY</Name>
 			<Type>TIME</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>792</IOffset>
+			<IOffset>100</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" TaskPrio="1">.T_EJECTOR_DELAY</Name>
 			<Type>TIME</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>796</IOffset>
+			<IOffset>104</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" TaskPrio="1">.T_COLOUR_SENSOR_DELAY</Name>
 			<Type>TIME</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>800</IOffset>
+			<IOffset>108</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_LOGGER</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>178</IOffset>
+			<IOffset>206</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_EVENTLOG</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>180</IOffset>
+			<IOffset>208</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -7824,7 +7825,7 @@
 				<![CDATA[R0 Real time]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>182</IOffset>
+			<IOffset>210</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -7834,98 +7835,98 @@
 				<![CDATA[I/O Driver]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>184</IOffset>
+			<IOffset>212</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_NC</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>186</IOffset>
+			<IOffset>214</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_NCSAF</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>188</IOffset>
+			<IOffset>216</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_NCSVB</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>190</IOffset>
+			<IOffset>218</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_ISG</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>192</IOffset>
+			<IOffset>220</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_CNC</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>194</IOffset>
+			<IOffset>222</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_LINE</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>196</IOffset>
+			<IOffset>224</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_PLC</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>198</IOffset>
+			<IOffset>226</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_PLC_RTS1</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>200</IOffset>
+			<IOffset>228</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_PLC_RTS2</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>202</IOffset>
+			<IOffset>230</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_PLC_RTS3</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>204</IOffset>
+			<IOffset>232</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_PLC_RTS4</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>206</IOffset>
+			<IOffset>234</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_CAM</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>208</IOffset>
+			<IOffset>236</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.AMSPORT_R0_CAMTOOL</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>210</IOffset>
+			<IOffset>238</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -7935,7 +7936,7 @@
 				<![CDATA[System Service]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>212</IOffset>
+			<IOffset>240</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -7945,126 +7946,126 @@
 				<![CDATA[Ads states]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>214</IOffset>
+			<IOffset>242</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_INVALID</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>216</IOffset>
+			<IOffset>244</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_IDLE</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>218</IOffset>
+			<IOffset>246</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_RESET</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>220</IOffset>
+			<IOffset>248</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_INIT</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>222</IOffset>
+			<IOffset>250</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_START</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>224</IOffset>
+			<IOffset>252</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_RUN</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>226</IOffset>
+			<IOffset>254</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_STOP</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>228</IOffset>
+			<IOffset>256</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_SAVECFG</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>230</IOffset>
+			<IOffset>258</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_LOADCFG</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>232</IOffset>
+			<IOffset>260</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_POWERFAILURE</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>234</IOffset>
+			<IOffset>262</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_POWERGOOD</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>236</IOffset>
+			<IOffset>264</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_ERROR</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>238</IOffset>
+			<IOffset>266</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_SHUTDOWN</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>240</IOffset>
+			<IOffset>268</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_SUSPEND</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>242</IOffset>
+			<IOffset>270</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_RESUME</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>244</IOffset>
+			<IOffset>272</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_CONFIG</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>246</IOffset>
+			<IOffset>274</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSSTATE_RECONFIG</Name>
 			<Type>UINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>248</IOffset>
+			<IOffset>276</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8074,98 +8075,98 @@
 				<![CDATA[max. number of available ads states]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>250</IOffset>
+			<IOffset>278</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYMTAB</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>252</IOffset>
+			<IOffset>280</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYMNAME</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>256</IOffset>
+			<IOffset>284</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYMVAL</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>260</IOffset>
+			<IOffset>288</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYM_HNDBYNAME</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>264</IOffset>
+			<IOffset>292</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYM_VALBYNAME</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>268</IOffset>
+			<IOffset>296</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYM_VALBYHND</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>272</IOffset>
+			<IOffset>300</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYM_RELEASEHND</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>276</IOffset>
+			<IOffset>304</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYM_INFOBYNAME</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>280</IOffset>
+			<IOffset>308</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYM_VERSION</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>284</IOffset>
+			<IOffset>312</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYM_INFOBYNAMEEX</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>288</IOffset>
+			<IOffset>316</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYM_DOWNLOAD</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>292</IOffset>
+			<IOffset>320</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYM_UPLOAD</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>296</IOffset>
+			<IOffset>324</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSIGRP_SYM_UPLOADINFO</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>300</IOffset>
+			<IOffset>328</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8175,7 +8176,7 @@
 				<![CDATA[notification OF named handle]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>304</IOffset>
+			<IOffset>332</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8185,7 +8186,7 @@
 				<![CDATA[read/write input BYTE(S)]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>308</IOffset>
+			<IOffset>336</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8195,7 +8196,7 @@
 				<![CDATA[read/write input bit]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>312</IOffset>
+			<IOffset>340</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8205,7 +8206,7 @@
 				<![CDATA[read input size (in BYTE)]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>316</IOffset>
+			<IOffset>344</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8215,7 +8216,7 @@
 				<![CDATA[read/write output BYTE(S)]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>320</IOffset>
+			<IOffset>348</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8225,7 +8226,7 @@
 				<![CDATA[read/write output bit]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>324</IOffset>
+			<IOffset>352</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8235,7 +8236,7 @@
 				<![CDATA[read/write output bit]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>328</IOffset>
+			<IOffset>356</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8245,7 +8246,7 @@
 				<![CDATA[write inputs TO null]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>332</IOffset>
+			<IOffset>360</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8255,7 +8256,7 @@
 				<![CDATA[write outputs TO null]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>336</IOffset>
+			<IOffset>364</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8265,7 +8266,7 @@
 				<![CDATA[read input AND write output BYTE(S)  ADS-READWRITE]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>340</IOffset>
+			<IOffset>368</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8275,7 +8276,7 @@
 				<![CDATA[state, name, etc...]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>344</IOffset>
+			<IOffset>372</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8285,7 +8286,7 @@
 				<![CDATA[ads state OF device]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>348</IOffset>
+			<IOffset>376</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8295,175 +8296,175 @@
 				<![CDATA[device state]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>352</IOffset>
+			<IOffset>380</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_OPENCREATE</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>356</IOffset>
+			<IOffset>384</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_OPENREAD</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>360</IOffset>
+			<IOffset>388</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_OPENWRITE</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>364</IOffset>
+			<IOffset>392</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_CREATEFILE</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>368</IOffset>
+			<IOffset>396</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_CLOSEHANDLE</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>372</IOffset>
+			<IOffset>400</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FOPEN</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>376</IOffset>
+			<IOffset>404</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FCLOSE</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>380</IOffset>
+			<IOffset>408</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FREAD</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>384</IOffset>
+			<IOffset>412</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FWRITE</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>388</IOffset>
+			<IOffset>416</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FSEEK</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>392</IOffset>
+			<IOffset>420</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FTELL</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>396</IOffset>
+			<IOffset>424</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FGETS</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>400</IOffset>
+			<IOffset>428</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FPUTS</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>404</IOffset>
+			<IOffset>432</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FSCANF</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>408</IOffset>
+			<IOffset>436</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FPRINTF</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>412</IOffset>
+			<IOffset>440</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FEOF</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>416</IOffset>
+			<IOffset>444</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FDELETE</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>420</IOffset>
+			<IOffset>448</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_FRENAME</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>424</IOffset>
+			<IOffset>452</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_MKDIR</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>428</IOffset>
+			<IOffset>456</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_RMDIR</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>432</IOffset>
+			<IOffset>460</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_REG_HKEYLOCALMACHINE</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>436</IOffset>
+			<IOffset>464</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_SENDEMAIL</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>440</IOffset>
+			<IOffset>468</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_TIMESERVICES</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>444</IOffset>
+			<IOffset>472</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.SYSTEMSERVICE_STARTPROCESS</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>448</IOffset>
+			<IOffset>476</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8473,35 +8474,35 @@
 				<![CDATA[System service index offsets: SYSTEMSERVICE_TIMESERVICES]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>452</IOffset>
+			<IOffset>480</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.TIMESERVICE_DATEANDTIME</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>456</IOffset>
+			<IOffset>484</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.TIMESERVICE_SYSTEMTIMES</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>460</IOffset>
+			<IOffset>488</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.TIMESERVICE_RTCTIMEDIFF</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>464</IOffset>
+			<IOffset>492</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.TIMESERVICE_ADJUSTTIMETORTC</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>468</IOffset>
+			<IOffset>496</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8511,49 +8512,49 @@
 				<![CDATA[ADSLOGxxx log control mask types]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>472</IOffset>
+			<IOffset>500</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSLOG_MSGTYPE_HINT</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>476</IOffset>
+			<IOffset>504</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSLOG_MSGTYPE_WARN</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>480</IOffset>
+			<IOffset>508</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSLOG_MSGTYPE_ERROR</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>484</IOffset>
+			<IOffset>512</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSLOG_MSGTYPE_LOG</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>488</IOffset>
+			<IOffset>516</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSLOG_MSGTYPE_MSGBOX</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>492</IOffset>
+			<IOffset>520</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.ADSLOG_MSGTYPE_RESOURCE</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>496</IOffset>
+			<IOffset>524</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8563,35 +8564,35 @@
 				<![CDATA[boot data constants (-> SYSTEMINFOTYPE.bootDataFlags)]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>500</IOffset>
+			<IOffset>528</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.BOOTDATAFLAGS_RETAIN_LOADED</Name>
 			<Type>BYTE</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>504</IOffset>
+			<IOffset>532</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.BOOTDATAFLAGS_RETAIN_INVALID</Name>
 			<Type>BYTE</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>505</IOffset>
+			<IOffset>533</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.BOOTDATAFLAGS_RETAIN_REQUESTED</Name>
 			<Type>BYTE</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>506</IOffset>
+			<IOffset>534</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.BOOTDATAFLAGS_PERSISTENT_LOADED</Name>
 			<Type>BYTE</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>507</IOffset>
+			<IOffset>535</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8601,7 +8602,7 @@
 				<![CDATA[system state constants (-> SYSTEMINFOTYPE.systemStateFlags)]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>508</IOffset>
+			<IOffset>536</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8611,7 +8612,7 @@
 				<![CDATA[blue screen of death]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>509</IOffset>
+			<IOffset>537</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8621,7 +8622,7 @@
 				<![CDATA[realtime violation - latency time]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>510</IOffset>
+			<IOffset>538</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8631,7 +8632,7 @@
 				<![CDATA["r": Opens for reading. If the file does not exist or cannot be found, the call fails.]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>512</IOffset>
+			<IOffset>540</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8641,7 +8642,7 @@
 				<![CDATA["w": Opens an empty file for writing. If the given file exists, its contents are destroyed.]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>516</IOffset>
+			<IOffset>544</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8651,7 +8652,7 @@
 				<![CDATA["a": Opens for writing at the end of the file (appending) without removing the EOF marker before writing new data to the file; creates the file first if it doesn’t exist.]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>520</IOffset>
+			<IOffset>548</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8661,7 +8662,7 @@
 				<![CDATA["+": Opens for reading and writing]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>524</IOffset>
+			<IOffset>552</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8671,7 +8672,7 @@
 				<![CDATA["b": Open in binary (untranslated) mode.]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>528</IOffset>
+			<IOffset>556</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8681,49 +8682,49 @@
 				<![CDATA["t": Open in text (translated) mode.]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>532</IOffset>
+			<IOffset>560</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.FILE_OPENCREATE</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>536</IOffset>
+			<IOffset>564</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.FILE_OPENREAD</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>540</IOffset>
+			<IOffset>568</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.FILE_OPENWRITE</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>544</IOffset>
+			<IOffset>572</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.FILE_READ</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>548</IOffset>
+			<IOffset>576</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.FILE_WRITE</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>552</IOffset>
+			<IOffset>580</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.FILE_SEEKBEGIN</Name>
 			<Type>DWORD</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>556</IOffset>
+			<IOffset>584</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8733,7 +8734,7 @@
 				<![CDATA[END OF OBSOLETE FILE OPERATION CONSTANTS]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>560</IOffset>
+			<IOffset>588</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8743,7 +8744,7 @@
 				<![CDATA[event class/priority	through textformatter]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>564</IOffset>
+			<IOffset>592</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8753,7 +8754,7 @@
 				<![CDATA[format in message]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>566</IOffset>
+			<IOffset>594</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8763,7 +8764,7 @@
 				<![CDATA[write to log file]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>568</IOffset>
+			<IOffset>596</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8773,7 +8774,7 @@
 				<![CDATA[display message box]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>570</IOffset>
+			<IOffset>598</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8783,7 +8784,7 @@
 				<![CDATA[src id instead of source name]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>572</IOffset>
+			<IOffset>600</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8793,7 +8794,7 @@
 				<![CDATA[event states]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>574</IOffset>
+			<IOffset>602</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8803,7 +8804,7 @@
 				<![CDATA[event object is not initialized]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>576</IOffset>
+			<IOffset>604</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8813,7 +8814,7 @@
 				<![CDATA[event object is in a signaled state]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>578</IOffset>
+			<IOffset>606</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8823,7 +8824,7 @@
 				<![CDATA[event object is in a reset state]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>580</IOffset>
+			<IOffset>608</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8833,7 +8834,7 @@
 				<![CDATA[event object is confirmed but not reset]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>582</IOffset>
+			<IOffset>610</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8843,49 +8844,49 @@
 				<![CDATA[event object is confirmed and reset]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>584</IOffset>
+			<IOffset>612</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.TCEVENT_SRCNAMESIZE</Name>
 			<Type>INT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>586</IOffset>
+			<IOffset>614</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.TCEVENT_FMTPRGSIZE</Name>
 			<Type>INT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>588</IOffset>
+			<IOffset>616</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.PI</Name>
 			<Type>LREAL</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>592</IOffset>
+			<IOffset>620</IOffset>
 			<BitSize>64</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.DEFAULT_ADS_TIMEOUT</Name>
 			<Type>TIME</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>600</IOffset>
+			<IOffset>628</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name Constant="1" IsDefinedInLibrary="1">.MAX_STRING_LENGTH</Name>
 			<Type>UDINT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>604</IOffset>
+			<IOffset>632</IOffset>
 			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name>.TONMove_Ball_Delay</Name>
 			<Type Decoration="10060D24">TON</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>2172</IOffset>
+			<IOffset>2792</IOffset>
 			<BitSize>192</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8895,7 +8896,7 @@
 				<![CDATA[-----------------------COUNTERS----------------------------]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2196</IOffset>
+			<IOffset>2816</IOffset>
 			<BitSize>192</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8905,7 +8906,7 @@
 				<![CDATA[Balls sorted: Metal]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2170</IOffset>
+			<IOffset>2840</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8915,7 +8916,7 @@
 				<![CDATA[Balls sorted: Wood]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2220</IOffset>
+			<IOffset>2842</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8925,7 +8926,7 @@
 				<![CDATA[Balls sorted: Wood, Yellow]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2222</IOffset>
+			<IOffset>2844</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8935,7 +8936,7 @@
 				<![CDATA[Balls sorted: Wood, Red]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2224</IOffset>
+			<IOffset>2846</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8945,7 +8946,7 @@
 				<![CDATA[Balls sorted: Wood, Blue]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2226</IOffset>
+			<IOffset>2848</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8955,7 +8956,7 @@
 				<![CDATA[Balls sorted: Unknown]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2228</IOffset>
+			<IOffset>2850</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8965,18 +8966,18 @@
 				<![CDATA[Balls on tubes: 1=lower, 2=middle, 3=upper, 4=garbage]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2230</IOffset>
+			<IOffset>2852</IOffset>
 			<BitSize>64</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="3">.fbDrive</Name>
-			<Type Decoration="100A6270">FB_DriveMovement2</Type>
+			<Type Decoration="100B6588">FB_DriveMovement2</Type>
 			<Comment>
 				<![CDATA[FB for executing the motion]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2240</IOffset>
-			<BitSize>480</BitSize>
+			<IOffset>2860</IOffset>
+			<BitSize>512</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">.fbStateModel</Name>
@@ -8985,7 +8986,7 @@
 				<![CDATA[FB for executing state model]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2300</IOffset>
+			<IOffset>2924</IOffset>
 			<BitSize>256</BitSize>
 		</Symbol>
 		<Symbol>
@@ -8995,7 +8996,7 @@
 				<![CDATA[Start button on HMI]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2238</IOffset>
+			<IOffset>2755</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9005,7 +9006,7 @@
 				<![CDATA[Start button Light on HMI]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>1988</IOffset>
+			<IOffset>2956</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9015,7 +9016,7 @@
 				<![CDATA[Stop button on HMI]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2239</IOffset>
+			<IOffset>2957</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9025,7 +9026,7 @@
 				<![CDATA[Stop button Light on HMI]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>1991</IOffset>
+			<IOffset>2958</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9035,7 +9036,7 @@
 				<![CDATA[Reset button on HMI]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2332</IOffset>
+			<IOffset>2959</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9045,7 +9046,7 @@
 				<![CDATA[Ack button on HMI]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>1987</IOffset>
+			<IOffset>2960</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9055,7 +9056,7 @@
 				<![CDATA[-------------HMI OUTPUTS (from PLC to HMI) -------------------]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2334</IOffset>
+			<IOffset>2962</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9065,7 +9066,7 @@
 				<![CDATA[Current Mode]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2336</IOffset>
+			<IOffset>2964</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9075,7 +9076,7 @@
 				<![CDATA[Current State]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2338</IOffset>
+			<IOffset>2966</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9085,28 +9086,28 @@
 				<![CDATA[Light beacon: Red]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2333</IOffset>
+			<IOffset>2961</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">.bInitCompleted</Name>
 			<Type>BOOL</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>2340</IOffset>
+			<IOffset>2968</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">.iBatchSize</Name>
 			<Type>INT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>772</IOffset>
+			<IOffset>2970</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">.iBatchRemaining</Name>
 			<Type>INT</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>776</IOffset>
+			<IOffset>2972</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9160,7 +9161,7 @@
 			</Properties>
 		</Symbol>
 		<Symbol>
-			<Name Static="Input" TaskPrio="1">.IEmergencyClear</Name>
+			<Name Static="Input" TaskPrio="5">.IEmergencyClear</Name>
 			<Type>BOOL</Type>
 			<Comment>
 				<![CDATA[Emergency stop is cleared]]>
@@ -9196,7 +9197,7 @@
 			</Properties>
 		</Symbol>
 		<Symbol>
-			<Name Static="Input" TaskPrio="1">.ILimitUp</Name>
+			<Name Static="Input" TaskPrio="5">.ILimitUp</Name>
 			<Type>BOOL</Type>
 			<Comment>
 				<![CDATA[Lift's limit switch is activated - Up]]>
@@ -9214,7 +9215,7 @@
 			</Properties>
 		</Symbol>
 		<Symbol>
-			<Name Static="Input" TaskPrio="1">.ILimitLow</Name>
+			<Name Static="Input" TaskPrio="5">.ILimitLow</Name>
 			<Type>BOOL</Type>
 			<Comment>
 				<![CDATA[Lift's limit switch is activated - Low]]>
@@ -9549,7 +9550,7 @@
 			</Properties>
 		</Symbol>
 		<Symbol>
-			<Name Static="Output" TaskPrio="2">.ODriveControl</Name>
+			<Name Static="Output" TaskPrio="6">.ODriveControl</Name>
 			<Type>WORD</Type>
 			<Comment>
 				<![CDATA[To lift drive control information]]>
@@ -9573,7 +9574,7 @@
 				<![CDATA[Button: Reset]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2728</IOffset>
+			<IOffset>3360</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9583,7 +9584,7 @@
 				<![CDATA[Button: Start]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2729</IOffset>
+			<IOffset>3361</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9593,7 +9594,7 @@
 				<![CDATA[Button: Stop]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2730</IOffset>
+			<IOffset>3362</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9603,21 +9604,21 @@
 				<![CDATA[Button: Reset]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2731</IOffset>
+			<IOffset>3363</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
-			<Name TaskPrio="1">.bDriveEnabled</Name>
+			<Name>.bDriveEnabled</Name>
 			<Type>BOOL</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>2732</IOffset>
+			<IOffset>3364</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name IsDefinedInLibrary="1">.eWatchdogConfig</Name>
 			<Type Decoration="30000698">E_WATCHDOG_TIME_CONFIG</Type>
 			<IGroup>16448</IGroup>
-			<IOffset>2744</IOffset>
+			<IOffset>3376</IOffset>
 			<BitSize>16</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9627,7 +9628,7 @@
 				<![CDATA[Watchdog time. Depending of eWatchdogConfig : seconds or minutes]]>
 			</Comment>
 			<IGroup>16448</IGroup>
-			<IOffset>2743</IOffset>
+			<IOffset>3375</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 	</Symbols>
