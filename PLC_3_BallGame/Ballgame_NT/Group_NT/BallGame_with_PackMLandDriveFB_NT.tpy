@@ -4,7 +4,7 @@
 	<ProjectInfo>
 		<Path>C:\Users\localuser\Documents\PAE_coDeSys_Projects\PLC_3_BallGame\Ballgame_NT\Group_NT\BallGame_with_PackMLandDriveFB_NT.pro</Path>
 		<IsLibrary>false</IsLibrary>
-		<ChangeDate>2020-03-03T16:55:33</ChangeDate>
+		<ChangeDate>2020-03-03T17:21:31</ChangeDate>
 		<Library>
 			<Name>TcBase.lib</Name>
 			<Path>C:\TwinCAT\PLC\LIB\TcBase.lib</Path>
@@ -91,7 +91,7 @@
 	</DirectoryInfos>
 	<DataTypes>
 		<DataType>
-			<Name Decoration="10062264" Crc32="1682399573" LastChange="2020-03-03T15:10:02">FB_Actuator</Name>
+			<Name Decoration="10062264" Crc32="1682399573" LastChange="2020-03-03T17:20:35">FB_Actuator</Name>
 			<BitSize>48</BitSize>
 			<SubItem>
 				<Name FbParameter="Input">I_ActuatorUp</Name>
@@ -135,7 +135,7 @@
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="100B6588" Crc32="3155771703" LastChange="2020-03-03T15:10:02">FB_DriveMovement2</Name>
+			<Name Decoration="100B6588" Crc32="3155771703" LastChange="2020-03-03T17:20:35">FB_DriveMovement2</Name>
 			<BitSize>512</BitSize>
 			<SubItem>
 				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">TONTimer1</Name>
@@ -233,7 +233,7 @@
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="10043C21" Crc32="0552700981" LastChange="2020-03-03T15:10:02">FB_Wait</Name>
+			<Name Decoration="10043C21" Crc32="0552700981" LastChange="2020-03-03T17:20:35">FB_Wait</Name>
 			<BitSize>256</BitSize>
 			<SubItem>
 				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">Timer</Name>
@@ -271,7 +271,7 @@
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="30000393" Crc32="1240280903" LastChange="2020-03-03T15:10:02">E_BallColour</Name>
+			<Name Decoration="30000393" Crc32="1240280903" LastChange="2020-03-03T17:20:35">E_BallColour</Name>
 			<Type>INT</Type>
 			<BitSize>16</BitSize>
 			<EnumInfo>
@@ -292,7 +292,7 @@
 			</EnumInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="104F2679" Crc32="3583879651" LastChange="2020-03-03T15:10:02">FB_Lift</Name>
+			<Name Decoration="104F2679" Crc32="3583879651" LastChange="2020-03-03T17:20:35">FB_Lift</Name>
 			<BitSize>1120</BitSize>
 			<SubItem>
 				<Name>bBallRequested</Name>
@@ -831,7 +831,7 @@
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="101B379C" Crc32="0819207039" LastChange="2020-03-03T15:10:02">FB_Pipe</Name>
+			<Name Decoration="101B379C" Crc32="0819207039" LastChange="2020-03-03T17:20:35">FB_Pipe</Name>
 			<BitSize>1184</BitSize>
 			<SubItem>
 				<Name>fbGateStopper</Name>
@@ -1025,7 +1025,7 @@
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="103E77A0" Crc32="3277342542" LastChange="2020-03-03T15:10:02">FB_SorterLift</Name>
+			<Name Decoration="103E77A0" Crc32="3277342542" LastChange="2020-03-03T17:20:35">FB_SorterLift</Name>
 			<BitSize>768</BitSize>
 			<SubItem>
 				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">fbInductiveTrig</Name>
@@ -1450,7 +1450,7 @@
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="300002FE" Crc32="2538442767" LastChange="2020-03-03T15:10:02">E_ModeCtrl</Name>
+			<Name Decoration="300002FE" Crc32="2538442767" LastChange="2020-03-03T17:20:35">E_ModeCtrl</Name>
 			<Type>INT</Type>
 			<BitSize>16</BitSize>
 			<EnumInfo>
@@ -1479,7 +1479,7 @@
 			</EnumInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="30000225" Crc32="2321183169" LastChange="2020-03-03T15:10:02">E_State</Name>
+			<Name Decoration="30000225" Crc32="2321183169" LastChange="2020-03-03T17:20:35">E_State</Name>
 			<Type>INT</Type>
 			<BitSize>16</BitSize>
 			<EnumInfo>
@@ -1552,7 +1552,7 @@
 			</EnumInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="101514C0" Crc32="4213981199" LastChange="2020-03-03T15:10:02">FB_StateModel_ST</Name>
+			<Name Decoration="101514C0" Crc32="4213981199" LastChange="2020-03-03T17:20:35">FB_StateModel_ST</Name>
 			<BitSize>256</BitSize>
 			<SubItem>
 				<Name IsDefinedInLibrary="1" Library="C:\TwinCAT\PLC\LIB\STANDARD.LIB">RTrig_bSC</Name>
@@ -1749,7 +1749,7 @@
 			</FbInfo>
 		</DataType>
 		<DataType>
-			<Name Decoration="300002FD" Crc32="2462427557" LastChange="2020-03-03T15:10:02">E_ModeProc</Name>
+			<Name Decoration="300002FD" Crc32="2462427557" LastChange="2020-03-03T17:20:35">E_ModeProc</Name>
 			<Type>INT</Type>
 			<BitSize>16</BitSize>
 			<EnumInfo>
@@ -5822,7 +5822,7 @@
 	</Functions>
 	<Programs>
 		<Program>
-			<Name Decoration="1006C64C" Crc32="1973906268" LastChange="2020-03-03T16:55:11">MAIN</Name>
+			<Name Decoration="1006C64C" Crc32="1973906268" LastChange="2020-03-03T17:20:35">MAIN</Name>
 			<PrgInfo>
 				<CodeIndex>267</CodeIndex>
 				<ActionInfo>
@@ -5854,7 +5854,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="100D9504" Crc32="2572919705" LastChange="2020-03-03T15:10:02">PRG_Blinking</Name>
+			<Name Decoration="100D9504" Crc32="2572919705" LastChange="2020-03-03T17:20:35">PRG_Blinking</Name>
 			<PrgInfo>
 				<CodeIndex>270</CodeIndex>
 				<Symbol>
@@ -5899,7 +5899,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101EB396" Crc32="0903996717" LastChange="2020-03-03T15:10:02">PRG_DeliverToGarbage</Name>
+			<Name Decoration="101EB396" Crc32="0903996717" LastChange="2020-03-03T17:20:35">PRG_DeliverToGarbage</Name>
 			<PrgInfo>
 				<CodeIndex>271</CodeIndex>
 				<Symbol>
@@ -5995,7 +5995,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="10169673" Crc32="4118065507" LastChange="2020-03-03T15:10:02">PRG_DeliverToGarbage2</Name>
+			<Name Decoration="10169673" Crc32="4118065507" LastChange="2020-03-03T17:20:35">PRG_DeliverToGarbage2</Name>
 			<PrgInfo>
 				<CodeIndex>272</CodeIndex>
 				<Symbol>
@@ -6067,7 +6067,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101EB1D8" Crc32="3987492197" LastChange="2020-03-03T15:10:02">PRG_DeliverToLow</Name>
+			<Name Decoration="101EB1D8" Crc32="3987492197" LastChange="2020-03-03T17:20:35">PRG_DeliverToLow</Name>
 			<PrgInfo>
 				<CodeIndex>273</CodeIndex>
 				<Symbol>
@@ -6163,7 +6163,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101694C3" Crc32="2300405452" LastChange="2020-03-03T15:10:02">PRG_DeliverToLow2</Name>
+			<Name Decoration="101694C3" Crc32="2300405452" LastChange="2020-03-03T17:20:35">PRG_DeliverToLow2</Name>
 			<PrgInfo>
 				<CodeIndex>274</CodeIndex>
 				<Symbol>
@@ -6235,7 +6235,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101EB198" Crc32="4224662265" LastChange="2020-03-03T15:10:02">PRG_DeliverToMid</Name>
+			<Name Decoration="101EB198" Crc32="4224662265" LastChange="2020-03-03T17:20:35">PRG_DeliverToMid</Name>
 			<PrgInfo>
 				<CodeIndex>275</CodeIndex>
 				<Symbol>
@@ -6331,7 +6331,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="10169453" Crc32="2005010009" LastChange="2020-03-03T15:10:02">PRG_DeliverToMid2</Name>
+			<Name Decoration="10169453" Crc32="2005010009" LastChange="2020-03-03T17:20:35">PRG_DeliverToMid2</Name>
 			<PrgInfo>
 				<CodeIndex>276</CodeIndex>
 				<Symbol>
@@ -6403,7 +6403,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101EB116" Crc32="3616172415" LastChange="2020-03-03T15:10:02">PRG_DeliverToUp</Name>
+			<Name Decoration="101EB116" Crc32="3616172415" LastChange="2020-03-03T17:20:35">PRG_DeliverToUp</Name>
 			<PrgInfo>
 				<CodeIndex>277</CodeIndex>
 				<Symbol>
@@ -6499,7 +6499,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="10169423" Crc32="0751391354" LastChange="2020-03-03T15:10:02">PRG_DeliverToUp2</Name>
+			<Name Decoration="10169423" Crc32="0751391354" LastChange="2020-03-03T17:20:35">PRG_DeliverToUp2</Name>
 			<PrgInfo>
 				<CodeIndex>278</CodeIndex>
 				<Symbol>
@@ -6571,13 +6571,13 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="10000000" Crc32="0054880302" LastChange="2020-03-03T15:10:02">PRG_Drive_Link</Name>
+			<Name Decoration="10000000" Crc32="0054880302" LastChange="2020-03-03T17:20:35">PRG_Drive_Link</Name>
 			<PrgInfo>
 				<CodeIndex>279</CodeIndex>
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="100308F3" Crc32="1844036393" LastChange="2020-03-03T15:10:02">PRG_Emptying</Name>
+			<Name Decoration="100308F3" Crc32="1844036393" LastChange="2020-03-03T17:20:35">PRG_Emptying</Name>
 			<PrgInfo>
 				<CodeIndex>280</CodeIndex>
 				<Symbol>
@@ -6592,7 +6592,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="10108590" Crc32="3751222933" LastChange="2020-03-03T15:10:02">PRG_EmptyTubes</Name>
+			<Name Decoration="10108590" Crc32="3751222933" LastChange="2020-03-03T17:20:35">PRG_EmptyTubes</Name>
 			<PrgInfo>
 				<CodeIndex>281</CodeIndex>
 				<Symbol>
@@ -6646,7 +6646,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="100A56F9" Crc32="4166789317" LastChange="2020-03-03T16:29:34">PRG_HMI</Name>
+			<Name Decoration="100A56F9" Crc32="4166789317" LastChange="2020-03-03T17:20:35">PRG_HMI</Name>
 			<PrgInfo>
 				<CodeIndex>282</CodeIndex>
 				<Symbol>
@@ -6682,7 +6682,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="1040B347" Crc32="1307057299" LastChange="2020-03-03T15:10:02">PRG_Initialisation</Name>
+			<Name Decoration="1040B347" Crc32="3045754356" LastChange="2020-03-03T17:20:35">PRG_Initialisation</Name>
 			<PrgInfo>
 				<CodeIndex>283</CodeIndex>
 				<Symbol>
@@ -6880,7 +6880,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="1009277B" Crc32="4053769329" LastChange="2020-03-03T15:10:02">PRG_Manual</Name>
+			<Name Decoration="1009277B" Crc32="4053769329" LastChange="2020-03-03T17:20:35">PRG_Manual</Name>
 			<PrgInfo>
 				<CodeIndex>284</CodeIndex>
 				<ActionInfo>
@@ -6917,7 +6917,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="1019C3A1" Crc32="0681639303" LastChange="2020-03-03T15:10:02">PRG_MoveToDest</Name>
+			<Name Decoration="10159283" Crc32="2678770748" LastChange="2020-03-03T17:21:31">PRG_MoveToDest</Name>
 			<PrgInfo>
 				<CodeIndex>286</CodeIndex>
 				<Symbol>
@@ -6925,18 +6925,6 @@
 				</Symbol>
 				<Symbol>
 					<Name>PRG_MoveToDest.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDest.tonSensorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDest.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDest.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDest.tSensorDelay</Name>
 				</Symbol>
 				<Symbol>
 					<Name>PRG_MoveToDest.INIT</Name>
@@ -6998,7 +6986,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101DD691" Crc32="3078490089" LastChange="2020-03-03T15:10:02">PRG_MoveToDestOld</Name>
+			<Name Decoration="101DD691" Crc32="3078490089" LastChange="2020-03-03T17:20:35">PRG_MoveToDestOld</Name>
 			<PrgInfo>
 				<CodeIndex>287</CodeIndex>
 				<Symbol>
@@ -7091,13 +7079,13 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="10000000" Crc32="2767018831" LastChange="2020-03-03T15:10:02">PRG_SafetyProgram</Name>
+			<Name Decoration="10000000" Crc32="2767018831" LastChange="2020-03-03T17:20:35">PRG_SafetyProgram</Name>
 			<PrgInfo>
 				<CodeIndex>288</CodeIndex>
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="1008E00E" Crc32="2668549809" LastChange="2020-03-03T15:10:02">PRG_Sorting</Name>
+			<Name Decoration="1008E00E" Crc32="2668549809" LastChange="2020-03-03T17:20:35">PRG_Sorting</Name>
 			<PrgInfo>
 				<CodeIndex>289</CodeIndex>
 				<ActionInfo>
@@ -7139,7 +7127,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="100D3A24" Crc32="1546275024" LastChange="2020-03-03T15:10:02">PRG_Sorting_example</Name>
+			<Name Decoration="100D3A24" Crc32="1546275024" LastChange="2020-03-03T17:20:35">PRG_Sorting_example</Name>
 			<PrgInfo>
 				<CodeIndex>293</CodeIndex>
 				<Symbol>
@@ -7184,7 +7172,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101467B5" Crc32="0567204885" LastChange="2020-03-03T15:10:02">PRG_ToColourSensor</Name>
+			<Name Decoration="101467B5" Crc32="0567204885" LastChange="2020-03-03T17:20:35">PRG_ToColourSensor</Name>
 			<PrgInfo>
 				<CodeIndex>294</CodeIndex>
 				<Symbol>
@@ -7250,7 +7238,7 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="100E716F" Crc32="4216748953" LastChange="2020-03-03T15:10:02">PRG_ToColourSensor2</Name>
+			<Name Decoration="100E716F" Crc32="4216748953" LastChange="2020-03-03T17:20:35">PRG_ToColourSensor2</Name>
 			<PrgInfo>
 				<CodeIndex>295</CodeIndex>
 				<Symbol>
@@ -7810,34 +7798,6 @@
 			<IGroup>16448</IGroup>
 			<IOffset>1764</IOffset>
 			<BitSize>192</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_MoveToDest.tonSensorDelay</Name>
-			<Type Decoration="10060D24">TON</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1788</IOffset>
-			<BitSize>192</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_MoveToDest.tMoveDelay</Name>
-			<Type>TIME</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1812</IOffset>
-			<BitSize>32</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_MoveToDest.tEjectorDelay</Name>
-			<Type>TIME</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1816</IOffset>
-			<BitSize>32</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name>PRG_MoveToDest.tSensorDelay</Name>
-			<Type>TIME</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1820</IOffset>
-			<BitSize>32</BitSize>
 		</Symbol>
 		<Symbol>
 			<Name TaskPrio="1">PRG_MoveToDest.bExecute</Name>
