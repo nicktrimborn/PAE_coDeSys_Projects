@@ -4,7 +4,7 @@
 	<ProjectInfo>
 		<Path>C:\Users\localuser\Documents\PAE_coDeSys_Projects\PLC_3_BallGame\Ballgame_NT\Group_NT\BallGame_with_PackMLandDriveFB_NT.pro</Path>
 		<IsLibrary>false</IsLibrary>
-		<ChangeDate>2020-03-03T17:21:31</ChangeDate>
+		<ChangeDate>2020-03-03T17:40:15</ChangeDate>
 		<Library>
 			<Name>TcBase.lib</Name>
 			<Path>C:\TwinCAT\PLC\LIB\TcBase.lib</Path>
@@ -5822,7 +5822,7 @@
 	</Functions>
 	<Programs>
 		<Program>
-			<Name Decoration="1006C64C" Crc32="1973906268" LastChange="2020-03-03T17:20:35">MAIN</Name>
+			<Name Decoration="1006C64C" Crc32="3409285550" LastChange="2020-03-03T17:32:00">MAIN</Name>
 			<PrgInfo>
 				<CodeIndex>267</CodeIndex>
 				<ActionInfo>
@@ -5899,696 +5899,9 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101EB396" Crc32="0903996717" LastChange="2020-03-03T17:20:35">PRG_DeliverToGarbage</Name>
-			<PrgInfo>
-				<CodeIndex>271</CodeIndex>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.tonMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.SFCReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.WAITRESET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage._WAITRESET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.PROCESS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage._PROCESS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.MOVETOGARBAGE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage._MOVETOGARBAGE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage._EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage._RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage._RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage._WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage.RESETING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage._RESETING</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToGarbage.bReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToGarbage.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_DeliverToGarbage.bDone</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
-			<Name Decoration="10169673" Crc32="4118065507" LastChange="2020-03-03T17:20:35">PRG_DeliverToGarbage2</Name>
-			<PrgInfo>
-				<CodeIndex>272</CodeIndex>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.tonMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.MOVETOGARBAGE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2._MOVETOGARBAGE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2._EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2._RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2._RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2._WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToGarbage2._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToGarbage2.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToGarbage2.bDone</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
-			<Name Decoration="101EB1D8" Crc32="3987492197" LastChange="2020-03-03T17:20:35">PRG_DeliverToLow</Name>
-			<PrgInfo>
-				<CodeIndex>273</CodeIndex>
-				<Symbol>
-					<Name>PRG_DeliverToLow.tonMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.SFCReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.WAITRESET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow._WAITRESET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.PROCESS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow._PROCESS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.MOVETOLOW</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow._MOVETOLOW</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow._EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow._RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow._RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow._WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow.RESETING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow._RESETING</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToLow.bReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToLow.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_DeliverToLow.bDone</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
-			<Name Decoration="101694C3" Crc32="2300405452" LastChange="2020-03-03T17:20:35">PRG_DeliverToLow2</Name>
-			<PrgInfo>
-				<CodeIndex>274</CodeIndex>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.tonMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.MOVETOLOW</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2._MOVETOLOW</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2._EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2._RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2._RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2._WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToLow2._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToLow2.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToLow2.bDone</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
-			<Name Decoration="101EB198" Crc32="4224662265" LastChange="2020-03-03T17:20:35">PRG_DeliverToMid</Name>
-			<PrgInfo>
-				<CodeIndex>275</CodeIndex>
-				<Symbol>
-					<Name>PRG_DeliverToMid.tonMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.SFCReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.WAITRESET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid._WAITRESET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.PROCESS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid._PROCESS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.MOVETOMID</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid._MOVETOMID</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid._EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid._RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid._RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid._WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid.RESETING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid._RESETING</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToMid.bReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToMid.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_DeliverToMid.bDone</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
-			<Name Decoration="10169453" Crc32="2005010009" LastChange="2020-03-03T17:20:35">PRG_DeliverToMid2</Name>
-			<PrgInfo>
-				<CodeIndex>276</CodeIndex>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.tonMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.MOVETOMID</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2._MOVETOMID</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2._EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2._RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2._RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2._WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToMid2._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToMid2.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToMid2.bDone</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
-			<Name Decoration="101EB116" Crc32="3616172415" LastChange="2020-03-03T17:20:35">PRG_DeliverToUp</Name>
-			<PrgInfo>
-				<CodeIndex>277</CodeIndex>
-				<Symbol>
-					<Name>PRG_DeliverToUp.tonMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.SFCReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.WAITRESET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp._WAITRESET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.PROCESS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp._PROCESS</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.MOVETOUP</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp._MOVETOUP</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp._EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp._RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp._RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp._WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp.RESETING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp._RESETING</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToUp.bReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToUp.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_DeliverToUp.bDone</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
-			<Name Decoration="10169423" Crc32="0751391354" LastChange="2020-03-03T17:20:35">PRG_DeliverToUp2</Name>
-			<PrgInfo>
-				<CodeIndex>278</CodeIndex>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.tonMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.MOVETOUP</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2._MOVETOUP</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2._EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2._RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2._RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2._WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_DeliverToUp2._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToUp2.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_DeliverToUp2.bDone</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
 			<Name Decoration="10000000" Crc32="0054880302" LastChange="2020-03-03T17:20:35">PRG_Drive_Link</Name>
 			<PrgInfo>
 				<CodeIndex>279</CodeIndex>
-			</PrgInfo>
-		</Program>
-		<Program>
-			<Name Decoration="100308F3" Crc32="1844036393" LastChange="2020-03-03T17:20:35">PRG_Emptying</Name>
-			<PrgInfo>
-				<CodeIndex>280</CodeIndex>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Emptying.bReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_Emptying.bStopOK</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_Emptying.bDone</Name>
-				</Symbol>
 			</PrgInfo>
 		</Program>
 		<Program>
@@ -6880,43 +6193,6 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="1009277B" Crc32="4053769329" LastChange="2020-03-03T17:20:35">PRG_Manual</Name>
-			<PrgInfo>
-				<CodeIndex>284</CodeIndex>
-				<ActionInfo>
-					<Name>actUpdateIO</Name>
-					<CodeIndex>285</CodeIndex>
-				</ActionInfo>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Manual.bReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Manual.bUpPipe_Req</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Manual.bMidPipe_Req</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Manual.bLowPipe_Req</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Manual.bSorterGate_Req</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Manual.bSorterLift_Req</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Manual.bEjector_Req</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_Manual.bDone</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_Manual.bStopOk</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
 			<Name Decoration="10159283" Crc32="2678770748" LastChange="2020-03-03T17:21:31">PRG_MoveToDest</Name>
 			<PrgInfo>
 				<CodeIndex>286</CodeIndex>
@@ -6986,106 +6262,13 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101DD691" Crc32="3078490089" LastChange="2020-03-03T17:20:35">PRG_MoveToDestOld</Name>
-			<PrgInfo>
-				<CodeIndex>287</CodeIndex>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.tonMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.tonSensorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.tSensorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.MOVETOTARGET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld._MOVETOTARGET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.TARGETDECISION</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld._TARGETDECISION</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.WAITFORSENSOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld._WAITFORSENSOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld._EJECT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld._RESETEJECTOR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld._RETURNTOLOADING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld._WAIT_RETURN</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_MoveToDestOld._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_MoveToDestOld.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_MoveToDestOld.wTarget</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_MoveToDestOld.bDone</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
 			<Name Decoration="10000000" Crc32="2767018831" LastChange="2020-03-03T17:20:35">PRG_SafetyProgram</Name>
 			<PrgInfo>
 				<CodeIndex>288</CodeIndex>
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="1008E00E" Crc32="2668549809" LastChange="2020-03-03T17:20:35">PRG_Sorting</Name>
+			<Name Decoration="1008E00E" Crc32="4260252086" LastChange="2020-03-03T17:29:43">PRG_Sorting</Name>
 			<PrgInfo>
 				<CodeIndex>289</CodeIndex>
 				<ActionInfo>
@@ -7127,161 +6310,57 @@
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="100D3A24" Crc32="1546275024" LastChange="2020-03-03T17:20:35">PRG_Sorting_example</Name>
+			<Name Decoration="100308F3" Crc32="2316825346" LastChange="2020-03-03T17:25:31">PRG_Emptying</Name>
 			<PrgInfo>
-				<CodeIndex>293</CodeIndex>
+				<CodeIndex>280</CodeIndex>
 				<Symbol>
-					<Name>PRG_Sorting_example.bInitDone</Name>
+					<Name PrgParameter="Input">PRG_Emptying.bReset</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Sorting_example.SFCReset</Name>
+					<Name PrgParameter="Output">PRG_Emptying.bStopOK</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_Sorting_example.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Sorting_example._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Sorting_example.WAITFORRESET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Sorting_example._WAITFORRESET</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Sorting_example.TODO_IMPLEMENTYOURSEQUENCE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Sorting_example._TODO_IMPLEMENTYOURSEQUENCE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Sorting_example.RESETSFC</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_Sorting_example._RESETSFC</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Sorting_example.bReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_Sorting_example.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_Sorting_example.bDone</Name>
+					<Name PrgParameter="Output">PRG_Emptying.bDone</Name>
 				</Symbol>
 			</PrgInfo>
 		</Program>
 		<Program>
-			<Name Decoration="101467B5" Crc32="0567204885" LastChange="2020-03-03T17:20:35">PRG_ToColourSensor</Name>
+			<Name Decoration="100A2B53" Crc32="3402917244" LastChange="2020-03-03T17:39:45">PRG_Manual</Name>
 			<PrgInfo>
-				<CodeIndex>294</CodeIndex>
+				<CodeIndex>284</CodeIndex>
+				<ActionInfo>
+					<Name>actUpdateIO</Name>
+					<CodeIndex>285</CodeIndex>
+				</ActionInfo>
 				<Symbol>
-					<Name>PRG_ToColourSensor.tonMoveDelay</Name>
+					<Name PrgParameter="Input">PRG_Manual.bReset</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.SFCReset</Name>
+					<Name PrgParameter="Input">PRG_Manual.bInitDone</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.tMoveDelay</Name>
+					<Name PrgParameter="Input">PRG_Manual.bUpPipe_Req</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.INIT</Name>
+					<Name PrgParameter="Input">PRG_Manual.bMidPipe_Req</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor._INIT</Name>
+					<Name PrgParameter="Input">PRG_Manual.bLowPipe_Req</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.WAITRESET</Name>
+					<Name PrgParameter="Input">PRG_Manual.bSorterGate_Req</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor._WAITRESET</Name>
+					<Name PrgParameter="Input">PRG_Manual.bSorterLift_Req</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.PROCESS</Name>
+					<Name PrgParameter="Input">PRG_Manual.bEjector_Req</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor._PROCESS</Name>
+					<Name PrgParameter="Output">PRG_Manual.bDone</Name>
 				</Symbol>
 				<Symbol>
-					<Name>PRG_ToColourSensor.MOVETOCOLOUR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor._MOVETOCOLOUR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor.RESETING</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor._RESETING</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_ToColourSensor.bReset</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_ToColourSensor.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Output">PRG_ToColourSensor.bDone</Name>
-				</Symbol>
-			</PrgInfo>
-		</Program>
-		<Program>
-			<Name Decoration="100E716F" Crc32="4216748953" LastChange="2020-03-03T17:20:35">PRG_ToColourSensor2</Name>
-			<PrgInfo>
-				<CodeIndex>295</CodeIndex>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.tonMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.tonEjectDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.tMoveDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.tEjectorDelay</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2._INIT</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.MOVETOCOLOUR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2._MOVETOCOLOUR</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2._WAIT_ARRIVE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2.DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name>PRG_ToColourSensor2._DONE</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_ToColourSensor2.bExecute</Name>
-				</Symbol>
-				<Symbol>
-					<Name PrgParameter="Input">PRG_ToColourSensor2.bDone</Name>
+					<Name PrgParameter="Output">PRG_Manual.bStopOk</Name>
 				</Symbol>
 			</PrgInfo>
 		</Program>
@@ -7463,33 +6542,6 @@
 			</Comment>
 			<IGroup>16448</IGroup>
 			<IOffset>883</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Emptying.bReset</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Reset Program]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1520</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Emptying.bStopOK</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1521</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Emptying.bDone</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Program operations done]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1522</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -7714,78 +6766,6 @@
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
-			<Name>PRG_Manual.bReset</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Reset Program]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1730</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Manual.bUpPipe_Req</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1731</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Manual.bMidPipe_Req</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1732</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Manual.bLowPipe_Req</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1733</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Manual.bSorterGate_Req</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Manual SorterLift Control Requests]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1734</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Manual.bSorterLift_Req</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1735</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Manual.bEjector_Req</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1736</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Manual.bDone</Name>
-			<Type>BOOL</Type>
-			<Comment>
-				<![CDATA[Program operations done]]>
-			</Comment>
-			<IGroup>16448</IGroup>
-			<IOffset>1737</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
-			<Name TaskPrio="1">PRG_Manual.bStopOk</Name>
-			<Type>BOOL</Type>
-			<IGroup>16448</IGroup>
-			<IOffset>1738</IOffset>
-			<BitSize>8</BitSize>
-		</Symbol>
-		<Symbol>
 			<Name TaskPrio="1">PRG_MoveToDest.tonMoveDelay</Name>
 			<Type Decoration="10060D24">TON</Type>
 			<IGroup>16448</IGroup>
@@ -7898,6 +6878,118 @@
 			</Comment>
 			<IGroup>16448</IGroup>
 			<IOffset>2194</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Emptying.bReset</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Reset Program]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1520</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Emptying.bStopOK</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Program Ok to Stop after completing operations]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1521</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Emptying.bDone</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Program operations done]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1522</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name>PRG_Manual.bReset</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Reset Program]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1730</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Manual.bInitDone</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Manual Gate Control Requests]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1788</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Manual.bUpPipe_Req</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>1731</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Manual.bMidPipe_Req</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>1732</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Manual.bLowPipe_Req</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>1733</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Manual.bSorterGate_Req</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Manual SorterLift Control Requests]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1734</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Manual.bSorterLift_Req</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>1735</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Manual.bEjector_Req</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>1736</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Manual.bDone</Name>
+			<Type>BOOL</Type>
+			<Comment>
+				<![CDATA[Program operations done]]>
+			</Comment>
+			<IGroup>16448</IGroup>
+			<IOffset>1737</IOffset>
+			<BitSize>8</BitSize>
+		</Symbol>
+		<Symbol>
+			<Name TaskPrio="1">PRG_Manual.bStopOk</Name>
+			<Type>BOOL</Type>
+			<IGroup>16448</IGroup>
+			<IOffset>1738</IOffset>
 			<BitSize>8</BitSize>
 		</Symbol>
 		<Symbol>
@@ -9525,7 +8617,7 @@
 			</Properties>
 		</Symbol>
 		<Symbol>
-			<Name Static="Input" TaskPrio="1">.IRun</Name>
+			<Name Static="Input">.IRun</Name>
 			<Type>BOOL</Type>
 			<Comment>
 				<![CDATA[Run switch]]>
